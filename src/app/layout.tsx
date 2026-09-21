@@ -16,7 +16,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Škrijelj Fatih — Architecture Portfolio",
   description:
-    "Portfolio of Škrijelj Fatih, third-year architecture student from Sarajevo specializing in minimalist residential, commercial, and interior design.",
+    "Portfolio of Škrijelj Fatih, fourth-year architecture student from Sarajevo specializing in minimalist residential, commercial, and interior design.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
