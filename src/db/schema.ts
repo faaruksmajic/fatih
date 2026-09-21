@@ -19,3 +19,9 @@ export const projectImages = pgTable("project_images", {
   imageUrl: text("image_url").notNull(),
   position: integer("position").notNull().default(0),
 });
+
+export const siteSettings = pgTable("site_settings", {
+  id: integer("id").primaryKey().default(1),
+  cvUrl: text("cv_url"),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});

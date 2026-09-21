@@ -1,6 +1,6 @@
 import { asc, eq, inArray } from "drizzle-orm";
 import { db } from "./client";
-import { projectImages, projects } from "./schema";
+import { projectImages, projects, siteSettings } from "./schema";
 import type { ProjectFormInput } from "@/lib/validation";
 
 export type ProjectWithImages = {
@@ -121,4 +121,28 @@ export async function updateProject(id: string, input: ProjectFormInput): Promis
 
 export async function deleteProject(id: string): Promise<void> {
   await db.delete(projects).where(eq(projects.id, id));
+}
+
+export async function getCvUrl(): Promise<string | null> {
+  const [row] = await db.select().from(siteSettings).where(eq(siteSettings.id, 1));
+  return row?.cvUrl ?? null;
+}
+
+export async function getCvUrlSafe(): Promise<string | null> {
+  try {
+    return await getCvUrl();
+  } catch (error) {
+    console.error("Failed to load CV URL:", error);
+    return null;
+  }
+}
+
+export async function setCvUrl(url: string): Promise<void> {
+  await db
+    .insert(siteSettings)
+    .values({ id: 1, cvUrl: url })
+    .onConflictDoUpdate({
+      target: siteSettings.id,
+      set: { cvUrl: url, updatedAt: new Date() },
+    });
 }

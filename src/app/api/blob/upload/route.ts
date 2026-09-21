@@ -21,7 +21,7 @@ export async function POST(request: Request): Promise<NextResponse> {
         }
 
         return {
-          allowedContentTypes: ["image/jpeg", "image/png", "image/webp"],
+          allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "application/pdf"],
           addRandomSuffix: true,
         };
       },

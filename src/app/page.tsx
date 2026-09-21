@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TechPrograms } from "@/components/TechPrograms";
-import { getProjectsSafe } from "@/db/queries";
+import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
 
 export const revalidate = 3600;
 
@@ -26,7 +26,7 @@ const SKILLS = [
 ];
 
 export default async function Home() {
-  const projects = await getProjectsSafe();
+  const [projects, cvUrl] = await Promise.all([getProjectsSafe(), getCvUrlSafe()]);
   return (
     <main className="flex flex-col">
       {/* NAV */}
@@ -50,49 +50,52 @@ export default async function Home() {
       </header>
 
       {/* HERO */}
-      <section id="top" className="bg-charcoal text-paper pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="font-display text-[15vw] md:text-[6.5vw] leading-[0.85] mb-8">
-              MY
-              <br />
-              PORT
-              <br />
-              FOLIO
-            </h1>
-            <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
-            <p className="max-w-md text-paper/80 leading-relaxed">
-              As a fourth-year architecture student with a four-year background as an
-              architectural technician, I have spent the past eight years immersed in design
-              and construction. With over ten built projects and strong skills in
-              visualization and digital tools, I approach every project with precision,
-              curiosity, and a commitment to creating meaningful spaces.
-            </p>
-            <div className="flex flex-wrap gap-4 mt-8">
+      <section
+        id="top"
+        className="relative overflow-hidden text-paper pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-12"
+      >
+        <Image
+          src="/images/hero-portrait.jpg"
+          alt="Portrait of Škrijelj Fatih"
+          fill
+          priority
+          className="object-cover grayscale"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-charcoal/70" />
+        <div className="relative max-w-7xl mx-auto">
+          <h1 className="font-display text-[15vw] md:text-[6.5vw] leading-[0.85] mb-8">
+            MY
+            <br />
+            PORT
+            <br />
+            FOLIO
+          </h1>
+          <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
+          <p className="max-w-md text-paper/80 leading-relaxed">
+            As a fourth-year architecture student with a four-year background as an
+            architectural technician, I have spent the past eight years immersed in design
+            and construction. With over ten built projects and strong skills in
+            visualization and digital tools, I approach every project with precision,
+            curiosity, and a commitment to creating meaningful spaces.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-8">
+            <a
+              href="#contact"
+              className="inline-block bg-paper text-ink font-semibold px-6 py-3 hover:bg-paper/80 transition-colors"
+            >
+              Let&apos;s connect
+            </a>
+            {cvUrl && (
               <a
-                href="#contact"
-                className="inline-block bg-paper text-ink font-semibold px-6 py-3 hover:bg-paper/80 transition-colors"
-              >
-                Let&apos;s connect
-              </a>
-              <a
-                href="/cv/fatih-skrijelj-cv.pdf"
-                download
+                href={cvUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-block border border-paper text-paper font-semibold px-6 py-3 hover:bg-paper hover:text-ink transition-colors"
               >
                 Download CV
               </a>
-            </div>
-          </div>
-          <div className="relative aspect-[2/3] w-full max-w-md mx-auto md:ml-auto">
-            <Image
-              src="/images/hero-portrait.jpg"
-              alt="Portrait of Škrijelj Fatih"
-              fill
-              priority
-              className="object-cover grayscale"
-              sizes="(min-width: 768px) 400px, 80vw"
-            />
+            )}
           </div>
         </div>
       </section>

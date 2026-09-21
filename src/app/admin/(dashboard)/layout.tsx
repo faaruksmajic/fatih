@@ -8,11 +8,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <Link href="/admin" className="font-display text-lg">
           FATIH ADMIN
         </Link>
-        <form action={logoutAction}>
-          <button type="submit" className="text-sm underline">
-            Log out
-          </button>
-        </form>
+        <div className="flex items-center gap-6">
+          <Link href="/admin/cv" className="text-sm underline">
+            CV
+          </Link>
+          <form action={logoutAction}>
+            <button type="submit" className="text-sm underline">
+              Log out
+            </button>
+          </form>
+        </div>
       </header>
       <div className="px-6 py-8 max-w-5xl mx-auto">{children}</div>
     </div>
