@@ -105,16 +105,16 @@ export const TECH_PROGRAMS = [
 
 export function TechPrograms() {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+    <div className="flex flex-nowrap gap-2 md:gap-3 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0 pb-2 md:pb-0 snap-x snap-mandatory md:snap-none">
       {TECH_PROGRAMS.map(({ name, Icon }) => (
         <div
           key={name}
-          className="group flex flex-col items-center gap-4 border border-ink/15 px-4 py-8 hover:border-ink/40 transition-colors"
+          className="group flex flex-1 shrink-0 basis-20 md:basis-0 snap-start flex-col items-center gap-2 border border-ink/15 px-2 py-4 hover:border-ink/40 transition-colors"
         >
-          <div className="w-12 h-12 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
+          <div className="w-6 h-6 grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300">
             <Icon />
           </div>
-          <span className="text-xs md:text-sm font-medium uppercase tracking-wide text-center">
+          <span className="text-[10px] font-medium uppercase tracking-wide text-center whitespace-nowrap">
             {name}
           </span>
         </div>
