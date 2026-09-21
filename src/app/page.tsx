@@ -263,7 +263,7 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-charcoal text-paper/60 py-8 px-6 md:px-12 text-sm flex flex-col sm:flex-row gap-2 justify-between items-center">
+      <footer className="bg-paper text-ink/60 py-8 px-6 md:px-12 text-sm flex flex-col sm:flex-row gap-2 justify-between items-center border-t border-ink/10">
         <p>© {new Date().getFullYear()} Škrijelj Fatih. All rights reserved.</p>
         <p>Built with precision and a clear creative vision.</p>
       </footer>
