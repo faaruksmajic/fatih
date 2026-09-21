@@ -91,7 +91,7 @@ export default function Home() {
             </h1>
             <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
             <p className="max-w-md text-paper/80 leading-relaxed">
-              As a third-year architecture student with a four-year background as an
+              As a fourth-year architecture student with a four-year background as an
               architectural technician, I have spent the past eight years immersed in design
               and construction. With over ten built projects and strong skills in
               visualization and digital tools, I approach every project with precision,
@@ -122,7 +122,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div className="order-2 md:order-1">
             <p className="leading-relaxed text-ink/80 mb-10 max-w-md">
-              I&apos;m a 23-year-old architecture student from Sarajevo, currently in my third
+              I&apos;m a 23-year-old architecture student from Sarajevo, currently in my fourth
               year of studies. With eight years in the field — from technical high school to
               university — I&apos;ve worked on residential, commercial, and urban design
               projects, gaining seven months of studio experience and strong skills in
