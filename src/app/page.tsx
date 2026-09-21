@@ -66,12 +66,21 @@ export default async function Home() {
               visualization and digital tools, I approach every project with precision,
               curiosity, and a commitment to creating meaningful spaces.
             </p>
-            <a
-              href="#contact"
-              className="inline-block mt-8 bg-paper text-ink font-semibold px-6 py-3 hover:bg-paper/80 transition-colors"
-            >
-              Let&apos;s connect
-            </a>
+            <div className="flex flex-wrap gap-4 mt-8">
+              <a
+                href="#contact"
+                className="inline-block bg-paper text-ink font-semibold px-6 py-3 hover:bg-paper/80 transition-colors"
+              >
+                Let&apos;s connect
+              </a>
+              <a
+                href="/cv/fatih-skrijelj-cv.pdf"
+                download
+                className="inline-block border border-paper text-paper font-semibold px-6 py-3 hover:bg-paper hover:text-ink transition-colors"
+              >
+                Download CV
+              </a>
+            </div>
           </div>
           <div className="relative aspect-[2/3] w-full max-w-md mx-auto md:ml-auto">
             <Image
