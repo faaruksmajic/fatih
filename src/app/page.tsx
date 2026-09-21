@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { TechPrograms } from "@/components/TechPrograms";
+import { getProjectsSafe } from "@/db/queries";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
-  { href: "#notable", label: "Notable" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -23,40 +23,8 @@ const SKILLS = [
   },
 ];
 
-const FEATURED_PROJECTS = [
-  {
-    tag: "First Project",
-    title: "ATAL Group Office Building",
-    image: "/images/project-atal-group.jpg",
-    description:
-      "A five-story mixed-use building combining functionality and modern minimalism in an urban setting. The first four floors are flexible office space with abundant natural light, while the top two floors hold two luxurious penthouses with private terraces. A sleek black-and-white facade with black-framed windows creates a contemporary, high-contrast identity, supported by a large front parking area for tenants and residents alike.",
-    align: "right" as const,
-  },
-  {
-    tag: "Second Project",
-    title: "Private Residence, Brčko",
-    image: "/images/project-brcko-house.jpg",
-    description:
-      "A single-story modern house in Brčko, BiH spanning over 300 m². Built with American walls beneath a four-sloped roof, finished with anthracite windows and a matching gate. The garage fits up to four cars, the backyard includes a pool and terrace, and the attic is designed as a home gym — a comfortable, stylish family home built on contemporary aesthetics.",
-    align: "left" as const,
-  },
-  {
-    tag: "Third Project",
-    title: "Modern Kitchen Interior",
-    image: "/images/project-kitchen.jpg",
-    description:
-      "An interior study of a modern kitchen finished in wood and matte black. A central island anchors the space, balancing aesthetics and functionality — every detail, from cabinetry to material choice, reflects a thoughtful design approach aimed at a sleek, highly functional result.",
-    align: "right" as const,
-  },
-];
-
-const NOTABLE_PROJECTS = [
-  { image: "/images/notable-01.jpg", label: "Project 01" },
-  { image: "/images/notable-02.jpg", label: "Project 02" },
-  { image: "/images/notable-03.jpg", label: "Project 03" },
-];
-
-export default function Home() {
+export default async function Home() {
+  const projects = await getProjectsSafe();
   return (
     <main className="flex flex-col">
       {/* NAV */}
@@ -170,75 +138,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
-      <section id="work" className="bg-paper text-ink">
-        {FEATURED_PROJECTS.map((project, i) => (
-          <div
-            key={project.title}
-            className={`py-20 md:py-28 px-6 md:px-12 ${i % 2 === 1 ? "bg-ink text-paper" : ""}`}
-          >
-            <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-              <div
-                className={`relative aspect-[4/3] w-full ${
-                  project.align === "left" ? "md:order-2" : ""
-                }`}
-              >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover grayscale"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-              </div>
-              <div className={project.align === "left" ? "md:order-1" : ""}>
-                <p
-                  className={`uppercase text-sm tracking-wide mb-2 ${
-                    i % 2 === 1 ? "text-paper/60" : "text-ink/60"
-                  }`}
-                >
-                  {project.tag}
-                </p>
-                <h3 className="font-display text-[10vw] md:text-[3.5vw] leading-[0.9] mb-6">
-                  {project.title}
-                </h3>
-                <p
-                  className={`leading-relaxed max-w-md ${
-                    i % 2 === 1 ? "text-paper/75" : "text-ink/75"
-                  }`}
-                >
-                  {project.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* NOTABLE PROJECTS */}
-      <section id="notable" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
+      {/* PROJECTS */}
+      <section id="work" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
-            NOTABLE
-            <br />
             PROJECTS
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {NOTABLE_PROJECTS.map((project) => (
-              <div key={project.label}>
-                <div className="relative aspect-[4/3] w-full mb-3">
-                  <Image
-                    src={project.image}
-                    alt={project.label}
-                    fill
-                    className="object-cover grayscale"
-                    sizes="(min-width: 768px) 33vw, 100vw"
-                  />
-                </div>
-                <p className="font-semibold">{project.label}</p>
-              </div>
-            ))}
-          </div>
+          {projects.length === 0 ? (
+            <p className="text-ink/60">Projects coming soon.</p>
+          ) : (
+            <div className="grid md:grid-cols-2 gap-16">
+              {projects.map((project) => (
+                <article key={project.id} className="flex flex-col gap-4">
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image
+                      src={project.coverImage}
+                      alt={project.title}
+                      fill
+                      className="object-cover grayscale"
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                    />
+                  </div>
+                  <p className="uppercase text-sm tracking-wide text-ink/60">{project.category}</p>
+                  <h3 className="font-display text-2xl md:text-3xl leading-[0.9]">{project.title}</h3>
+                  <p className="leading-relaxed text-ink/75 max-w-md">{project.description}</p>
+                  {project.images.length > 0 && (
+                    <div className="flex gap-2 mt-2">
+                      {project.images.map((image) => (
+                        <div key={image.id} className="relative w-16 h-16 shrink-0">
+                          <Image
+                            src={image.imageUrl}
+                            alt=""
+                            fill
+                            className="object-cover grayscale"
+                            sizes="64px"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
