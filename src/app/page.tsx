@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { TechPrograms } from "@/components/TechPrograms";
+import { SketchHeading } from "@/components/SketchHeading";
 import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
 
 export const revalidate = 3600;
@@ -64,13 +65,12 @@ export default async function Home() {
         />
         <div className="absolute inset-0 bg-charcoal/80" />
         <div className="relative max-w-7xl mx-auto">
-          <h1 className="font-display text-[15vw] md:text-[6.5vw] leading-[0.85] mb-8">
-            MY
-            <br />
-            PORT
-            <br />
-            FOLIO
-          </h1>
+          <SketchHeading
+            as="h1"
+            lines={["MY", "PORT", "FOLIO"]}
+            headingClassName="text-[15vw] md:text-[6.5vw] leading-[0.85]"
+            wrapperClassName="mb-8"
+          />
           <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
           <p className="max-w-2xl text-paper/80 leading-relaxed">
             As a fourth-year architecture student with a four-year background as an
@@ -113,10 +113,10 @@ export default async function Home() {
               interior and exterior design, I approach every project with precision,
               dedication, and a clear creative vision.
             </p>
-            <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85]">
-              WHO
-              <br />I AM
-            </h2>
+            <SketchHeading
+              lines={["WHO", "I AM"]}
+              headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+            />
           </div>
           <div className="relative aspect-[2/3] w-full max-w-md order-1 md:order-2">
             <Image
@@ -136,11 +136,11 @@ export default async function Home() {
           <p className="uppercase text-sm tracking-wide text-paper/60 mb-2">
             What I Bring to the Table
           </p>
-          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
-            PERSONAL
-            <br />
-            SKILLS
-          </h2>
+          <SketchHeading
+            lines={["PERSONAL", "SKILLS"]}
+            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+            wrapperClassName="mb-14"
+          />
           <div className="grid md:grid-cols-3 gap-10">
             {SKILLS.map((skill) => (
               <div key={skill.title} className="border-t border-paper/20 pt-6">
@@ -155,9 +155,11 @@ export default async function Home() {
       {/* PROJECTS */}
       <section id="work" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
-            PROJECTS
-          </h2>
+          <SketchHeading
+            lines={["PROJECTS"]}
+            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+            wrapperClassName="mb-14"
+          />
           {projects.length === 0 ? (
             <p className="text-ink/60">Projects coming soon.</p>
           ) : (
@@ -211,11 +213,10 @@ export default async function Home() {
             practice, leading a team to create large-scale, innovative projects that
             reflect my vision and design values.
           </p>
-          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85]">
-            WHAT&apos;S
-            <br />
-            NEXT?
-          </h2>
+          <SketchHeading
+            lines={["WHAT’S", "NEXT?"]}
+            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+          />
         </div>
       </section>
 
@@ -223,10 +224,11 @@ export default async function Home() {
       <section id="tools" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <p className="uppercase text-sm tracking-wide text-ink/60 mb-2">What I Work With</p>
-          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
-            SOFTWARE
-            <br />& TOOLS
-          </h2>
+          <SketchHeading
+            lines={["SOFTWARE", "& TOOLS"]}
+            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+            wrapperClassName="mb-14"
+          />
           <TechPrograms />
         </div>
       </section>
@@ -234,11 +236,11 @@ export default async function Home() {
       {/* CONTACT */}
       <section id="contact" className="bg-charcoal text-paper py-20 md:py-28 px-6 md:px-12 border-t border-paper/10">
         <div className="max-w-7xl mx-auto">
-          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
-            LET&apos;S
-            <br />
-            CONNECT
-          </h2>
+          <SketchHeading
+            lines={["LET’S", "CONNECT"]}
+            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+            wrapperClassName="mb-14"
+          />
           <div className="grid sm:grid-cols-3 gap-8 max-w-3xl">
             <a
               href="tel:+38762504287"
