@@ -232,7 +232,7 @@ export default async function Home() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12 border-t border-ink/10">
+      <section id="contact" className="bg-charcoal text-paper py-20 md:py-28 px-6 md:px-12 border-t border-paper/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
             LET&apos;S
@@ -242,20 +242,20 @@ export default async function Home() {
           <div className="grid sm:grid-cols-3 gap-8 max-w-3xl">
             <a
               href="tel:+38762504287"
-              className="flex flex-col gap-2 border-t border-ink/20 pt-4 hover:opacity-60 transition-opacity"
+              className="flex flex-col gap-2 border-t border-paper/20 pt-4 hover:opacity-60 transition-opacity"
             >
-              <span className="text-xs uppercase tracking-wide text-ink/50">Phone</span>
+              <span className="text-xs uppercase tracking-wide text-paper/50">Phone</span>
               <span className="font-medium">+387 62 504 287</span>
             </a>
             <a
               href="mailto:skrijeljfatih3@gmail.com"
-              className="flex flex-col gap-2 border-t border-ink/20 pt-4 hover:opacity-60 transition-opacity"
+              className="flex flex-col gap-2 border-t border-paper/20 pt-4 hover:opacity-60 transition-opacity"
             >
-              <span className="text-xs uppercase tracking-wide text-ink/50">Email</span>
+              <span className="text-xs uppercase tracking-wide text-paper/50">Email</span>
               <span className="font-medium break-all">skrijeljfatih3@gmail.com</span>
             </a>
-            <div className="flex flex-col gap-2 border-t border-ink/20 pt-4">
-              <span className="text-xs uppercase tracking-wide text-ink/50">Location</span>
+            <div className="flex flex-col gap-2 border-t border-paper/20 pt-4">
+              <span className="text-xs uppercase tracking-wide text-paper/50">Location</span>
               <span className="font-medium">Sarajevo, Bosnia and Herzegovina</span>
             </div>
           </div>
@@ -263,7 +263,7 @@ export default async function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-paper text-ink/60 py-8 px-6 md:px-12 text-sm flex flex-col sm:flex-row gap-2 justify-between items-center border-t border-ink/10">
+      <footer className="bg-charcoal text-paper/60 py-8 px-6 md:px-12 text-sm flex flex-col sm:flex-row gap-2 justify-between items-center border-t border-paper/10">
         <p>© {new Date().getFullYear()} Škrijelj Fatih. All rights reserved.</p>
         <p>Built with precision and a clear creative vision.</p>
       </footer>
