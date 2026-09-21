@@ -31,23 +31,26 @@ export default async function Home() {
   return (
     <main className="flex flex-col">
       {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 bg-paper/90 backdrop-blur-sm border-b border-ink/10">
-        <a href="#top" className="font-display text-lg tracking-tight">
-          FATIH ŠKRIJELJ
-        </a>
-        <nav className="hidden md:flex gap-8 text-sm font-medium">
-          {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="hover:opacity-60 transition-opacity">
-              {link.label}
-            </a>
-          ))}
-        </nav>
-        <a
-          href="mailto:skrijeljfatih3@gmail.com"
-          className="text-sm font-semibold border border-ink px-4 py-2 hover:bg-ink hover:text-paper transition-colors"
-        >
-          Get in touch
-        </a>
+      <header className="fixed top-0 left-0 right-0 z-50 bg-paper/90 backdrop-blur-sm">
+        <div className="flex items-center justify-between px-6 md:px-12 py-5">
+          <a href="#top" className="font-display text-lg tracking-tight">
+            FATIH ŠKRIJELJ
+          </a>
+          <nav className="hidden md:flex gap-8 text-sm font-medium">
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="hover:opacity-60 transition-opacity">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <a
+            href="mailto:skrijeljfatih3@gmail.com"
+            className="text-sm font-semibold border border-ink px-4 py-2 hover:bg-ink hover:text-paper transition-colors"
+          >
+            Get in touch
+          </a>
+        </div>
+        <span className="sketch-rule mx-6 md:mx-12" />
       </header>
 
       {/* HERO */}

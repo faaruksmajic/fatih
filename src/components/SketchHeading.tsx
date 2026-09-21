@@ -18,6 +18,7 @@ export function SketchHeading({
 
   return (
     <div className={`sketch-heading ${wrapperClassName}`}>
+      <span className="sketch-rule mb-5" />
       <Tag className={`font-display ${headingClassName}`}>
         <span className="sketch-letter">{firstChar}</span>
         {restOfFirstLine}
@@ -28,6 +29,7 @@ export function SketchHeading({
           </span>
         ))}
       </Tag>
+      <span className="sketch-rule mt-5" />
     </div>
   );
 }
