@@ -511,7 +511,7 @@ Expected: `projects table readable, row count: 0`
 - [ ] **Step 6: Commit**
 
 ```bash
-git add src/db/schema.ts src/db/client.ts drizzle.config.ts drizzle
+git add src/db/schema.ts src/db/client.ts drizzle.config.ts
 git commit -m "feat: add drizzle schema and Neon client"
 ```
 
