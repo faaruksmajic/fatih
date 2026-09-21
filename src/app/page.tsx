@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TechPrograms } from "@/components/TechPrograms";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -262,8 +263,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TECH PROGRAMS */}
+      <section id="tools" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <p className="uppercase text-sm tracking-wide text-ink/60 mb-2">What I Work With</p>
+          <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
+            SOFTWARE
+            <br />& TOOLS
+          </h2>
+          <TechPrograms />
+        </div>
+      </section>
+
       {/* CONTACT */}
-      <section id="contact" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
+      <section id="contact" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12 border-t border-ink/10">
         <div className="max-w-7xl mx-auto">
           <h2 className="font-display text-[13vw] md:text-[5vw] leading-[0.85] mb-14">
             LET&apos;S
