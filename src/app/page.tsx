@@ -2,6 +2,8 @@ import Image from "next/image";
 import { TechPrograms } from "@/components/TechPrograms";
 import { getProjectsSafe } from "@/db/queries";
 
+export const revalidate = 3600;
+
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },

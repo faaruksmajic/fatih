@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProjects } from "@/db/queries";
 import { deleteProjectAction } from "./actions";
+import { DeleteProjectButton } from "./DeleteProjectButton";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminProjectsPage() {
   const allProjects = await getProjects();
@@ -32,11 +35,7 @@ export default async function AdminProjectsPage() {
                 <Link href={`/admin/projects/${project.id}/edit`} className="text-sm underline">
                   Edit
                 </Link>
-                <form action={deleteThisProject}>
-                  <button type="submit" className="text-sm text-red-600 underline">
-                    Delete
-                  </button>
-                </form>
+                <DeleteProjectButton action={deleteThisProject} projectTitle={project.title} />
               </li>
             );
           })}

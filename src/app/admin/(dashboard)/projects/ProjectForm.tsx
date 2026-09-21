@@ -66,24 +66,28 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
     setSubmitting(true);
     setError(null);
 
-    const result = await saveProjectAction({
-      id: project?.id,
-      title,
-      description,
-      category,
-      coverImage,
-      images,
-    });
+    try {
+      const result = await saveProjectAction({
+        id: project?.id,
+        title,
+        description,
+        category,
+        coverImage,
+        images,
+      });
 
-    setSubmitting(false);
+      if (!result.valid) {
+        setError(Object.values(result.errors)[0]);
+        return;
+      }
 
-    if (!result.valid) {
-      setError(Object.values(result.errors)[0]);
-      return;
+      router.push("/admin");
+      router.refresh();
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
     }
-
-    router.push("/admin");
-    router.refresh();
   }
 
   return (
