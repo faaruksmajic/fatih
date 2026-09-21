@@ -62,7 +62,7 @@ export default async function Home() {
           className="object-cover grayscale"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-charcoal/70" />
+        <div className="absolute inset-0 bg-charcoal/80" />
         <div className="relative max-w-7xl mx-auto">
           <h1 className="font-display text-[15vw] md:text-[6.5vw] leading-[0.85] mb-8">
             MY
@@ -72,7 +72,7 @@ export default async function Home() {
             FOLIO
           </h1>
           <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
-          <p className="max-w-md text-paper/80 leading-relaxed">
+          <p className="max-w-2xl text-paper/80 leading-relaxed">
             As a fourth-year architecture student with a four-year background as an
             architectural technician, I have spent the past eight years immersed in design
             and construction. With over ten built projects and strong skills in
