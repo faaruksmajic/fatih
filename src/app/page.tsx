@@ -5,6 +5,21 @@ import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
 
 export const revalidate = 3600;
 
+// Birth date (DD.MM.) — age is computed from this so it stays correct
+// automatically around the birthday; update the year field manually.
+const BIRTH_DATE = new Date("2002-06-04T00:00:00");
+
+function computedAge(): number {
+  const today = new Date();
+  let age = today.getFullYear() - BIRTH_DATE.getFullYear();
+  const hasHadBirthdayThisYear =
+    today.getMonth() > BIRTH_DATE.getMonth() ||
+    (today.getMonth() === BIRTH_DATE.getMonth() &&
+      today.getDate() >= BIRTH_DATE.getDate());
+  if (!hasHadBirthdayThisYear) age -= 1;
+  return age;
+}
+
 const NAV_LINKS = [
   { href: "#about", label: "About" },
   { href: "#work", label: "Work" },
@@ -59,11 +74,11 @@ export default async function Home() {
         className="relative overflow-hidden text-paper pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-12"
       >
         <Image
-          src="/images/hero-portrait.jpg"
-          alt="Portrait of Škrijelj Fatih"
+          src="/images/hero-bg.png"
+          alt="Hero background"
           fill
           priority
-          className="object-cover grayscale"
+          className="object-cover"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-charcoal/80" />
@@ -108,7 +123,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
           <div className="order-2 md:order-1">
             <p className="leading-relaxed text-ink/80 mb-10 max-w-md">
-              I&apos;m a 23-year-old architecture student from Sarajevo, currently in my fourth
+              I&apos;m a {computedAge()}-year-old architecture student from Sarajevo, currently in my fourth
               year of studies. With eight years in the field — from technical high school to
               university — I&apos;ve worked on residential, commercial, and urban design
               projects, gaining seven months of studio experience and strong skills in
