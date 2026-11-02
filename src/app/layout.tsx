@@ -18,6 +18,9 @@ const sans = Inter({
 const OG_IMAGE = "https://fatih-gray.vercel.app/images/logo.png";
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "/images/logo.png",
+  },
   title: "Fatih Škrijelj — Architecture & Interior Design",
   description:
     "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo: architecture, interior design and 3D visualization.",
