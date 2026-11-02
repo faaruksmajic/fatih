@@ -184,7 +184,7 @@ export default async function Home() {
             alt="Fatih Škrijelj portrait"
             fill
             priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="200px"
             className="object-cover"
             style={{ objectPosition: "50% 50%" }}
           />
