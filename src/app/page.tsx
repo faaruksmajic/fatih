@@ -8,7 +8,6 @@ import {
   getProjectsSafe,
   type ProjectWithImages,
 } from "@/db/queries";
-import { TOOLS, getToolEmoji } from "@/lib/tools-sonnet";
 
 export const revalidate = 3600;
 
