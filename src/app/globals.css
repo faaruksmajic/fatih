@@ -34,11 +34,19 @@ body {
   font-feature-settings: "tnum" 1, "liga" 1;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  opacity: 0.92;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
 }
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  opacity: 0.94;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 /* ───────────── Site ───────────── */
@@ -157,11 +165,17 @@ body {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(29, 32, 36, 0.92);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 .nav.is-solid {
-  background: rgba(29, 32, 36, 0.96);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(29, 32, 36, 0.98);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.nav:hover {
+  background: rgba(29, 32, 36, 0.95);
 }
 .nav-inner {
   display: flex;
@@ -176,7 +190,7 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
-  color: var(--text);
+  color: rgba(242, 239, 233, 0.95);
 }
 .logo-mark {
   position: relative;
@@ -186,6 +200,12 @@ body {
   overflow: hidden;
   flex-shrink: 0;
   background: var(--panel-2);
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+.logo-mark:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .logo-text {
   display: flex;
@@ -222,9 +242,26 @@ body {
   letter-spacing: 0.02em;
   transition: color 0.2s ease, background-color 0.2s ease;
 }
+.nav-links a {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(242, 239, 233, 0.9);
+  transition: all 0.3s ease;
+  opacity: 0.92;
+}
 .nav-links a:hover {
   color: var(--accent);
   background: rgba(255, 255, 255, 0.05);
+  opacity: 1;
+}
+.nav-links a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 .nav-contact-mobile {
   display: none !important;
@@ -232,6 +269,7 @@ body {
 .nav-cta {
   min-height: 44px;
   padding: 0 22px;
+  opacity: 0.95;
 }
 .nav-toggle {
   display: none;
@@ -241,19 +279,25 @@ body {
   justify-content: center;
   align-items: center;
   gap: 7px;
+  opacity: 0.9;
 }
 .nav-toggle span {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: var(--text);
-  transition: transform 0.25s var(--ease);
+  background: rgba(242, 239, 233, 0.95);
+  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+.nav-toggle:hover span {
+  background: var(--accent);
 }
 .nav-toggle[aria-expanded="true"] span:first-child {
   transform: translateY(4.25px) rotate(45deg);
+  background: var(--accent);
 }
 .nav-toggle[aria-expanded="true"] span:last-child {
   transform: translateY(-4.25px) rotate(-45deg);
+  background: var(--accent);
 }
 
 /* Hero */

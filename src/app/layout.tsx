@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Righteous, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({
+const display = Righteous({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: "400",
+  style: ["normal"],
 });
 
-const sans = Inter({
+const sans = Source_Code_Pro({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500"],
+  style: ["normal"],
 });
 
 const OG_IMAGE = "https://fatih-gray.vercel.app/images/logo.png";
