@@ -179,6 +179,7 @@ body {
   color: var(--text);
 }
 .logo-mark {
+  position: relative;
   width: 46px;
   height: 46px;
   border-radius: 50%;
