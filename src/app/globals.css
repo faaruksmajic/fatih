@@ -338,10 +338,12 @@ body {
 .about-img img,
 .project-img img,
 .tools-img img {
-  transition: transform 1s var(--ease);
+  transition: transform 1s var(--ease), filter 0.55s var(--ease);
+  filter: grayscale(1);
 }
 .about-img:hover img {
   transform: scale(1.03);
+  filter: grayscale(0);
 }
 
 /* Stats */
@@ -456,6 +458,7 @@ body {
 }
 .project-btn:hover .project-img img {
   transform: scale(1.05);
+  filter: grayscale(0);
 }
 .project-card {
   position: relative;
@@ -511,6 +514,51 @@ body {
 .dialog-img {
   position: relative;
   min-height: 420px;
+}
+.dialog-img img {
+  transition: filter 0.45s var(--ease);
+}
+.dialog-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(242, 239, 233, 0.7);
+  background: rgba(10, 12, 15, 0.55);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    background-color 0.25s var(--ease),
+    transform 0.25s var(--ease),
+    opacity 0.25s var(--ease);
+}
+.dialog-nav:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+  transform: translateY(-50%) scale(1.08);
+}
+.dialog-nav-prev {
+  left: 16px;
+}
+.dialog-nav-next {
+  right: 16px;
+}
+.dialog-counter {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(10, 12, 15, 0.6);
+  padding: 6px 10px;
+  border-radius: 4px;
 }
 .dialog-text {
   padding: clamp(24px, 3vw, 40px);
