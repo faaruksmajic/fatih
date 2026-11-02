@@ -8,6 +8,7 @@ import {
   getProjectsSafe,
   type ProjectWithImages,
 } from "@/db/queries";
+import { TOOLS, getToolEmoji } from "@/lib/tools-sonnet";
 
 export const revalidate = 3600;
 
@@ -54,7 +55,7 @@ const SERVICES = [
   },
 ];
 
-const TOOLS = [
+const USER_TOOLS = [
   "AutoCAD",
   "Revit",
   "ArchiCAD",
@@ -64,7 +65,17 @@ const TOOLS = [
   "Lumion",
   "Photoshop",
   "Illustrator",
-];
+] as const;
+
+const getRandomEmoji = () => {
+  const emojis = ["🔲", "🏗️", "📐", "🏠", "🦒", "✨", "🌅", "🖼️", "✒️"];
+  return emojis[Math.floor(Math.random() * emojis.length)];
+};
+
+const TOOLS = USER_TOOLS.map(tool => ({
+  name: tool,
+  emoji: getRandomEmoji(),
+}));
 
 // Shown only in local development when the database is not reachable.
 const LOCAL_SAMPLE: ProjectWithImages[] = [
@@ -278,8 +289,11 @@ export default async function Home() {
             digital workflow.
           </p>
           <ul className="tool-list">
-            {TOOLS.map((t) => (
-              <li key={t}>{t}</li>
+            {TOOLS.map((tool) => (
+              <li key={tool.name} className="tool-item" data-emoji={tool.emoji}>
+                <span className="tool-emoji">{tool.emoji}</span>
+                {tool.name}
+              </li>
             ))}
           </ul>
           <p className="tools-next">
