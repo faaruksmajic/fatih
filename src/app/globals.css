@@ -497,108 +497,122 @@ body {
 /* Project dialog */
 .project-dialog {
   margin: auto;
-  width: min(1100px, calc(100vw - 32px));
-  max-height: calc(100svh - 32px);
+  width: 95vw;
+  max-width: 1600px;
+  height: 90vh;
   padding: 0;
   background: var(--panel);
   color: var(--text);
   border: 0;
+  overflow: hidden;
 }
 .project-dialog::backdrop {
-  background: rgba(10, 12, 15, 0.8);
+  background: rgba(10, 12, 15, 0.9);
 }
 .dialog-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr 400px;
+  height: 100%;
+  gap: 0;
 }
 .dialog-img {
   position: relative;
-  min-height: 420px;
-  aspect-ratio: 16 / 10;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  overflow: hidden;
 }
 .dialog-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: left center;
+  object-fit: contain;
   transition: filter 0.45s var(--ease);
 }
 .dialog-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  border: 1px solid rgba(242, 239, 233, 0.7);
-  background: rgba(10, 12, 15, 0.55);
-  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
   cursor: pointer;
   display: grid;
   place-items: center;
-  transition:
-    background-color 0.25s var(--ease),
-    transform 0.25s var(--ease),
-    opacity 0.25s var(--ease);
+  transition: all 0.3s var(--ease);
+  z-index: 10;
 }
 .dialog-nav:hover {
   background: var(--accent);
   color: var(--accent-ink);
-  transform: translateY(-50%) scale(1.08);
+  border-color: var(--accent);
 }
 .dialog-nav-prev {
-  left: 12px;
+  left: 24px;
 }
 .dialog-nav-next {
-  right: 12px;
+  right: 24px;
 }
 .dialog-counter {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 24px;
+  left: 24px;
   font-family: var(--font-sans);
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text);
-  background: rgba(10, 12, 15, 0.6);
-  padding: 6px 10px;
-  border-radius: 4px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 14px;
+  backdrop-filter: blur(4px);
+  z-index: 10;
 }
 .dialog-text {
-  padding: clamp(24px, 3vw, 40px);
+  padding: 48px 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
+  gap: 24px;
+  overflow-y: auto;
+  background: var(--panel);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 .dialog-text h3 {
   font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.1;
 }
 .dialog-text p:not(.eyebrow) {
-  color: #d3d0ca;
+  color: #ccc;
+  line-height: 1.6;
 }
 .dialog-thumbs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 10px;
 }
 .dialog-thumbs button {
   position: relative;
-  width: 64px;
+  width: 72px;
   aspect-ratio: 1;
   overflow: hidden;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+  opacity: 0.4;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
-.dialog-thumbs button[aria-pressed="true"],
-.dialog-thumbs button:hover {
+.dialog-thumbs button[aria-pressed="true"] {
   opacity: 1;
-  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+.dialog-thumbs button:hover {
+  opacity: 0.8;
 }
 .dialog-text .btn {
   margin-top: auto;
+  width: 100%;
 }
 
 /* Tools */
