@@ -20,7 +20,12 @@ const OG_IMAGE = "https://fatih-gray.vercel.app/images/logo.png";
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/images/logo.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/images/logo.png", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
   },
   title: "Fatih Škrijelj — Architecture & Interior Design",
   description:
