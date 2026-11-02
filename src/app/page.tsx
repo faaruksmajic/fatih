@@ -4,11 +4,9 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
-import {
-  getCvUrlSafe,
-  getProjectsSafe,
-  type ProjectWithImages,
-} from "@/db/queries";
+import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
+import { withLocalSample } from "@/lib/sample-projects";
+import { EMAIL, PHONE, PHONE_HREF } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -26,9 +24,6 @@ function computedAge(): number {
   return age;
 }
 
-const EMAIL = "skrijeljfatih3@gmail.com";
-const PHONE = "+387 62 504 287";
-const PHONE_HREF = "tel:+38762504287";
 
 const STATS = [
   { value: "8", label: "Years in design & construction" },
@@ -54,42 +49,6 @@ const SERVICES = [
     icon: "render" as const,
   },
 ];
-
-// Shown only in local development when the database is not reachable.
-const LOCAL_SAMPLE: ProjectWithImages[] = [
-  [
-    "project-atal-group.jpg",
-    "ATAL Group Office Building",
-    "Commercial",
-    "A five-storey mixed-use building: four floors of flexible offices with abundant daylight, two penthouses with private terraces on top, and a black-and-white facade with black-framed windows.",
-  ],
-  [
-    "project-brcko-house.jpg",
-    "Private Residence, Brčko",
-    "Residential",
-    "A single-storey family house of over 300 m² under a four-sloped roof, with anthracite windows, a four-car garage, a pool and terrace, and a home gym in the attic.",
-  ],
-  [
-    "project-kitchen.jpg",
-    "Modern Kitchen Interior",
-    "Interior",
-    "A kitchen in wood and matte black, anchored by a central island, where every cabinet and material is chosen for a sleek and highly functional result.",
-  ],
-  [
-    "notable-01.jpg",
-    "Walk-in Closet and Bedroom",
-    "Interior",
-    "A walk-in closet and bedroom suite finished in dark wood veneer and soft, layered textiles.",
-  ],
-].map(([file, title, category, description], i) => ({
-  id: `sample-${i}`,
-  title,
-  category,
-  description,
-  coverImage: `/images/${file}`,
-  position: i,
-  images: [],
-}));
 
 function ServiceIcon({ kind }: { kind: "building" | "interior" | "render" }) {
   const paths = {
@@ -120,10 +79,7 @@ export default async function Home() {
     getProjectsSafe(),
     getCvUrlSafe(),
   ]);
-  const projects =
-    dbProjects.length === 0 && process.env.NODE_ENV === "development"
-      ? LOCAL_SAMPLE
-      : dbProjects;
+  const projects = withLocalSample(dbProjects);
 
   return (
     <main className="site">

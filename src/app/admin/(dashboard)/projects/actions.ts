@@ -22,6 +22,7 @@ export async function saveProjectAction(input: SaveProjectInput): Promise<SavePr
     }
 
     revalidatePath("/");
+    revalidatePath("/projects/[id]", "page");
     revalidatePath("/admin");
     return { valid: true };
   } catch (error) {

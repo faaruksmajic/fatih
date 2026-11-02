@@ -1,14 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { href: "#top", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#projects", label: "Projects" },
-  { href: "#tools", label: "Tools" },
+  { href: "/#top", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#services", label: "Services" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#tools", label: "Tools" },
 ];
 
 export function SiteNav({ email }: { email: string }) {
@@ -25,7 +26,7 @@ export function SiteNav({ email }: { email: string }) {
   return (
     <header className={`nav ${solid || open ? "is-solid" : ""}`}>
       <div className="nav-inner">
-        <a href="#top" className="logo" aria-label="Fatih Škrijelj, home">
+        <Link href="/#top" className="logo" aria-label="Fatih Škrijelj, home">
           <span className="logo-mark">
             <Image
               src="/images/logo.png"
@@ -39,21 +40,25 @@ export function SiteNav({ email }: { email: string }) {
             <span className="logo-name">Fatih Škrijelj</span>
             <span className="logo-sub">Architecture</span>
           </span>
-        </a>
+        </Link>
 
         <nav aria-label="Main" className={`nav-links ${open ? "is-open" : ""}`}>
           {LINKS.map((link) => (
-            <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+            >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="nav-contact-mobile"
             onClick={() => setOpen(false)}
           >
             Contact
-          </a>
+          </Link>
         </nav>
 
         <a

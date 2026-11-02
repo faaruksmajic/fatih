@@ -16,5 +16,6 @@ export async function deleteProjectAction(id: string) {
   await requireAdminSession();
   await deleteProject(id);
   revalidatePath("/");
+  revalidatePath("/projects/[id]", "page");
   revalidatePath("/admin");
 }
