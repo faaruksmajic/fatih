@@ -186,7 +186,7 @@ export default async function Home() {
             priority
             sizes="200px"
             className="object-cover"
-            style={{ opacity: 0.6, objectPosition: "50% 50%" }}
+            style={{ objectPosition: "50% 50%" }}
           />
         </div>
       </section>

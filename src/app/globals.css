@@ -381,23 +381,27 @@ body {
   margin-top: 12px;
 }
 .about-img {
-  grid-column: 6 / 13;
+  grid-column: 7 / 12;
   grid-row: 1;
   position: relative;
-  aspect-ratio: 3 / 4;
-  margin-top: -48px;
+  width: 340px;
+  height: 450px;
+  margin: 0 0 0 auto;
   overflow: hidden;
   border-radius: 4px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 .about-img img,
 .project-img img,
 .tools-img img {
-  transition: transform 1s var(--ease), filter 0.55s var(--ease);
+  transition: transform 1s var(--ease), filter 0.55s var(--ease), opacity 0.5s var(--ease);
   filter: grayscale(1);
+  opacity: 0.7;
 }
 .about-img:hover img {
   transform: scale(1.03);
   filter: grayscale(0);
+  opacity: 1;
 }
 
 /* Stats */
@@ -831,7 +835,11 @@ body {
   }
   .about-img {
     order: -1;
-    aspect-ratio: 4 / 3;
+    width: 280px;
+    height: 370px;
+    margin: 0 auto 24px;
+    grid-column: 1;
+    grid-row: auto;
   }
   .about-panel,
   .tools-panel {
