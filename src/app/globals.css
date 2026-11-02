@@ -15,7 +15,7 @@
   --accent: #c9a682;
   --accent-ink: #1d2024;
 
-  --container: 1240px;
+  --container: 1480px;
   --gutter: clamp(20px, 4vw, 48px);
   --section: clamp(88px, 10vw, 140px);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -166,7 +166,7 @@ body {
   display: flex;
   align-items: center;
   gap: 24px;
-  max-width: 1360px;
+  max-width: 1560px;
   margin: 0 auto;
   padding: 0 var(--gutter);
   height: 88px;
@@ -332,7 +332,6 @@ body {
   overflow: hidden;
 }
 .about-img img,
-.service-img img,
 .project-img img,
 .tools-img img {
   transition: transform 1s var(--ease);
@@ -370,46 +369,57 @@ body {
   color: var(--muted);
 }
 
-/* Services */
+/* Services: a full-width band, text only, different from the image-led projects */
+.services-band {
+  margin-top: var(--section);
+  padding-block: clamp(72px, 8vw, 120px);
+  background: var(--panel);
+}
+.services-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: end;
+  margin-bottom: clamp(40px, 5vw, 72px);
+}
+.services-head > p {
+  color: #d3d0ca;
+  max-width: 46ch;
+  justify-self: end;
+}
 .services {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
 }
 .service {
-  background: var(--panel);
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.35s var(--ease), background-color 0.35s ease;
+  padding: 8px clamp(24px, 3vw, 48px) 8px;
+  border-left: 1px solid rgba(201, 166, 130, 0.35);
+  transition: transform 0.35s var(--ease);
+}
+.service:first-child {
+  padding-left: 0;
+  border-left: 0;
 }
 .service:hover {
   transform: translateY(-4px);
-  background: var(--panel-2);
 }
-.service:hover .service-img img {
-  transform: scale(1.05);
+.service-icon {
+  width: 52px;
+  height: 52px;
+  color: var(--accent);
+  margin-bottom: 24px;
+  transition: transform 0.35s var(--ease);
 }
-.service-img {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  overflow: hidden;
+.service:hover .service-icon {
+  transform: scale(1.08);
 }
-.service-body {
-  padding: 28px 28px 30px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
+.service h3 {
+  font-size: clamp(20px, 1.6vw, 24px);
+  margin-bottom: 12px;
 }
-.service-body h3 {
-  font-size: 19px;
-}
-.service-body p {
+.service p {
   color: #d3d0ca;
-  font-size: 15px;
-  flex: 1;
+  max-width: 38ch;
 }
 
 /* Projects */
@@ -417,6 +427,15 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 40px 28px;
+}
+.project:first-child {
+  grid-column: 1 / -1;
+}
+.project:first-child .project-img {
+  aspect-ratio: 21 / 9;
+}
+.project:first-child .project-card {
+  width: min(560px, 84%);
 }
 .project-btn {
   display: block;
@@ -693,8 +712,19 @@ body {
   }
   .services {
     grid-template-columns: minmax(0, 1fr);
-    max-width: 560px;
-    margin-inline: auto;
+    gap: 40px;
+  }
+  .service,
+  .service:first-child {
+    padding: 0;
+    border-left: 0;
+  }
+  .services-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .services-head > p {
+    justify-self: start;
   }
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -722,6 +752,9 @@ body {
   .project-card {
     width: 90%;
     margin-top: -40px;
+  }
+  .project:first-child .project-img {
+    aspect-ratio: 4 / 3;
   }
   .about-panel,
   .tools-panel {

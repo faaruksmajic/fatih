@@ -40,17 +40,17 @@ const SERVICES = [
   {
     title: "Architectural Design",
     body: "Homes, offices and mixed-use buildings designed from the first sketch to a buildable plan.",
-    image: "/images/project-atal-group.jpg",
+    icon: "building" as const,
   },
   {
     title: "Interior Design",
     body: "Kitchens, bedrooms and living spaces that are comfortable, functional and built around the client.",
-    image: "/images/project-kitchen.jpg",
+    icon: "interior" as const,
   },
   {
     title: "3D Visualization",
     body: "Photoreal renders that show the light, materials and mood of a project before it is built.",
-    image: "/images/notable-02.jpg",
+    icon: "render" as const,
   },
 ];
 
@@ -101,6 +101,28 @@ const LOCAL_SAMPLE: ProjectWithImages[] = [
   position: i,
   images: [],
 }));
+
+function ServiceIcon({ kind }: { kind: "building" | "interior" | "render" }) {
+  const paths = {
+    building:
+      "M8 40 V14 L22 8 V40 M22 16 H38 V40 M4 40 H44 M13 18 V20 M13 25 V27 M13 32 V34 M28 22 V24 M33 22 V24 M28 29 V31 M33 29 V31",
+    interior:
+      "M6 30 V24 Q6 20 10 20 H38 Q42 20 42 24 V30 M10 20 V14 Q10 10 14 10 H34 Q38 10 38 14 V20 M4 30 H44 V36 H4 Z M8 36 V40 M40 36 V40",
+    render:
+      "M24 6 L41 15 V33 L24 42 L7 33 V15 Z M7 15 L24 24 L41 15 M24 24 V42",
+  };
+  return (
+    <svg viewBox="0 0 48 48" aria-hidden className="service-icon">
+      <path
+        d={paths[kind]}
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 const d = (i: number) => ({ ["--i" as string]: i });
 
@@ -181,34 +203,34 @@ export default async function Home() {
       {/* SERVICES */}
       <section
         id="services"
-        className="section container"
+        className="services-band"
         aria-labelledby="services-title"
       >
-        <div className="section-head" data-reveal>
-          <p className="eyebrow">What I do</p>
-          <h2 id="services-title">My Services</h2>
-        </div>
-        <div className="services">
-          {SERVICES.map((s, i) => (
-            <article key={s.title} className="service" data-reveal style={d(i)}>
-              <div className="service-img">
-                <Image
-                  src={s.image}
-                  alt=""
-                  fill
-                  sizes="(min-width: 768px) 30vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <div className="service-body">
+        <div className="container">
+          <div className="services-head">
+            <div data-reveal>
+              <p className="eyebrow">What I do</p>
+              <h2 id="services-title">My Services</h2>
+            </div>
+            <p data-reveal style={d(1)}>
+              From the first sketch to the final render, I cover the whole
+              design process for homes, offices and interiors.
+            </p>
+          </div>
+          <div className="services">
+            {SERVICES.map((s, i) => (
+              <article
+                key={s.title}
+                className="service"
+                data-reveal
+                style={d(i)}
+              >
+                <ServiceIcon kind={s.icon} />
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
-                <a href="#projects" className="text-link">
-                  Explore <Arrow />
-                </a>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
