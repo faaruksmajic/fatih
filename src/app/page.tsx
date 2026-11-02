@@ -181,11 +181,12 @@ export default async function Home() {
         <div className="about-img" data-reveal style={d(1)}>
           <Image
             src="/images/about-portrait1.jpg"
-            alt="Fatih Škrijelj in a pinstripe suit on a balcony walkway"
+            alt="Fatih Škrijelj portrait"
             fill
+            priority
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover"
-            style={{ objectPosition: "50% 25%" }}
+            style={{ objectPosition: "50% 50%" }}
           />
         </div>
       </section>
