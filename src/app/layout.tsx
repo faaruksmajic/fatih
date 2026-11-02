@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Figtree, Oswald } from "next/font/google";
+import { Instrument_Serif, Manrope } from "next/font/google";
 import "./globals.css";
 
-const display = Oswald({
+const display = Instrument_Serif({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
-  weight: ["300", "500"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
-const sans = Figtree({
+const sans = Manrope({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
 });
