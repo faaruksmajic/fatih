@@ -395,7 +395,7 @@ body {
 }
 .about-img img,
 .project-img img {
-  transition: transform 1s var(--ease), filter 0.55s var(--ease), opacity 0.5s var(--ease);
+  transition: transform 1.2s var(--ease), filter 0.6s var(--ease), opacity 0.6s var(--ease);
   filter: grayscale(1);
   opacity: 0.7;
   width: 100%;
@@ -491,58 +491,115 @@ body {
   max-width: 38ch;
 }
 
-/* Projects */
+/* Projects: one featured work beside two smaller ones; the rest open on demand */
 .projects {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 40px 28px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: clamp(170px, 14.5vw, 225px);
+  gap: clamp(14px, 1.4vw, 20px);
 }
-.project:first-child {
-  grid-column: 1 / -1;
+.project {
+  grid-column: span 4;
 }
-.project:first-child .project-img {
-  aspect-ratio: 21 / 9;
+.project:nth-child(1) {
+  grid-column: 1 / 8;
+  grid-row: span 2;
 }
-.project:first-child .project-card {
-  width: min(560px, 84%);
+.project:nth-child(2),
+.project:nth-child(3) {
+  grid-column: 8 / 13;
 }
 .project-btn {
+  position: relative;
   display: block;
   width: 100%;
-  text-align: center;
+  height: 100%;
+  overflow: hidden;
+  text-align: left;
   cursor: pointer;
+  background: #15171a;
+  isolation: isolate;
 }
 .project-img {
-  position: relative;
+  position: absolute;
+  inset: 0;
   display: block;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
 }
-.project-btn:hover .project-img img {
-  transform: scale(1.05);
+.project-btn:hover .project-img img,
+.project-btn:focus-visible .project-img img {
+  transform: scale(1.06);
   filter: grayscale(0);
+  opacity: 1;
 }
-.project-card {
-  position: relative;
+.project-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(14, 15, 18, 0.88) 0%, rgba(14, 15, 18, 0.25) 45%, transparent 70%),
+    linear-gradient(to bottom, rgba(14, 15, 18, 0.45), transparent 30%);
+  transition: opacity 0.6s var(--ease);
+}
+.project-btn:hover .project-shade {
+  opacity: 0.85;
+}
+/* a thin drawn frame that closes in on hover */
+.project-frame {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(201, 166, 130, 0);
+  transition:
+    inset 0.6s var(--ease),
+    border-color 0.6s var(--ease);
+  pointer-events: none;
+}
+.project-btn:hover .project-frame,
+.project-btn:focus-visible .project-frame {
+  inset: 12px;
+  border-color: rgba(201, 166, 130, 0.85);
+}
+.project-top {
+  position: absolute;
+  top: clamp(18px, 2vw, 28px);
+  left: clamp(20px, 2.2vw, 32px);
+  right: clamp(20px, 2.2vw, 32px);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.project-no {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--accent);
+}
+.project-cat {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 239, 233, 0.85);
+}
+.project-bottom {
+  position: absolute;
+  left: clamp(20px, 2.2vw, 32px);
+  right: clamp(20px, 2.2vw, 32px);
+  bottom: clamp(18px, 2vw, 28px);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 84%;
-  margin: -64px auto 0;
-  padding: 24px 20px 22px;
-  background: var(--panel);
-  transition: background-color 0.3s ease;
-}
-.project-btn:hover .project-card {
-  background: var(--panel-2);
+  align-items: flex-start;
+  gap: 10px;
 }
 .project-title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(24px, 2.2vw, 32px);
+  font-size: clamp(20px, 1.7vw, 26px);
   letter-spacing: -0.01em;
-  line-height: 1.1;
+  line-height: 1.15;
+  color: var(--text);
+  text-wrap: balance;
+}
+.project:nth-child(1) .project-title {
+  font-size: clamp(26px, 2.6vw, 38px);
 }
 .project-link {
   display: inline-flex;
@@ -550,10 +607,36 @@ body {
   gap: 8px;
   font-family: var(--font-sans);
   font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.14em;
+  font-size: 11px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent);
+  opacity: 0;
+  transform: translateY(8px);
+  max-height: 0;
+  transition:
+    opacity 0.45s var(--ease),
+    transform 0.45s var(--ease),
+    max-height 0.45s var(--ease);
+}
+.project-btn:hover .project-link,
+.project-btn:focus-visible .project-link {
+  opacity: 1;
+  transform: none;
+  max-height: 20px;
+}
+/* touch screens have no hover: keep the link visible */
+@media (hover: none) {
+  .project-link {
+    opacity: 1;
+    transform: none;
+    max-height: none;
+  }
+}
+.projects-more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 3vw, 40px);
 }
 
 /* Project dialog */
@@ -754,24 +837,22 @@ body {
   color: var(--muted);
 }
 .tool-drawing {
-  width: clamp(56px, 6vw, 84px);
-  height: auto;
-  margin-bottom: 18px;
+  width: auto;
+  height: clamp(52px, 5vw, 68px);
+  max-width: 76px;
+  margin-bottom: 20px;
   overflow: visible;
   color: var(--text);
-  transition: color 0.35s var(--ease), transform 0.5s var(--ease);
+  transition: transform 0.5s var(--ease);
 }
 .tool-drawing .ln {
-  fill: none;
+  fill: transparent;
   stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
+  stroke-width: var(--sw, 0.42);
   stroke-linejoin: round;
-}
-.tool-drawing .ln-guide {
-  stroke: var(--accent);
-  stroke-width: 1.1;
-  opacity: 0.75;
+  transition:
+    fill 0.45s var(--ease),
+    stroke 0.45s var(--ease);
 }
 .tool-name {
   font-family: var(--font-display);
@@ -787,33 +868,33 @@ body {
   text-transform: uppercase;
   color: var(--muted);
 }
+
+/* Hover: the outline takes the tool's own brand colour */
 .tool-cell:hover {
-  background-color: rgba(201, 166, 130, 0.08);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 .tool-cell:hover .tool-drawing {
-  color: var(--accent);
   transform: translateY(-3px);
 }
+.tool-cell:hover .ln-shape {
+  fill: var(--brand);
+  stroke: var(--brand);
+}
+.tool-cell:hover .ln-knock {
+  fill: #fff;
+  stroke: #fff;
+}
 
-/* Drawing-in: only when JS has armed the reveal, so lines always show without it */
+/* Drawing-in: only when JS has armed the reveal, so logos always show without it */
 .reveal-ready .tool-sheet .ln {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.4s var(--ease);
-  transition-delay: calc(var(--n, 0) * 140ms + 250ms);
-}
-.reveal-ready .tool-sheet .ln-guide {
-  stroke-dasharray: 1;
+  transition:
+    stroke-dashoffset 1.8s var(--ease) calc(var(--n, 0) * 140ms + 250ms),
+    fill 0.45s var(--ease),
+    stroke 0.45s var(--ease);
 }
 .reveal-ready .tool-sheet.is-in .ln {
-  stroke-dashoffset: 0;
-}
-/* once drawn, guide lines turn into dashed construction lines */
-.tool-sheet .ln-guide {
-  stroke-dasharray: 0.03 0.025;
-}
-.reveal-ready .tool-sheet.is-in .ln-guide {
-  stroke-dasharray: 0.03 0.025;
   stroke-dashoffset: 0;
 }
 
@@ -987,14 +1068,37 @@ body {
     top: 72px;
   }
   .projects {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: auto;
+    gap: 10px;
   }
-  .project-card {
-    width: 90%;
-    margin-top: -40px;
+  .project,
+  .project:nth-child(2),
+  .project:nth-child(3) {
+    grid-column: span 1;
+    aspect-ratio: 1 / 1;
   }
-  .project:first-child .project-img {
+  .project:nth-child(1) {
+    grid-column: 1 / -1;
+    grid-row: auto;
     aspect-ratio: 4 / 3;
+  }
+  .project-title {
+    font-size: 17px;
+  }
+  .project:nth-child(1) .project-title {
+    font-size: 26px;
+  }
+  .project-top,
+  .project-bottom {
+    left: 14px;
+    right: 14px;
+  }
+  .project-top {
+    top: 12px;
+  }
+  .project-bottom {
+    bottom: 14px;
   }
   .about-panel {
     width: 100%;
