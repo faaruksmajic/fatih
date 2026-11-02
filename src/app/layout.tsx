@@ -1,30 +1,27 @@
 import type { Metadata } from "next";
-import { Anton, Inter } from "next/font/google";
+import { Figtree, Oswald } from "next/font/google";
 import "./globals.css";
 
-const anton = Anton({
+const display = Oswald({
   variable: "--font-display",
-  subsets: ["latin"],
-  weight: "400",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "500"],
 });
 
-const inter = Inter({
+const sans = Figtree({
   variable: "--font-sans",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
 });
 
 export const metadata: Metadata = {
-  title: "Škrijelj Fatih — Architecture Portfolio",
+  title: "Fatih Škrijelj — Architecture & Interior Design",
   description:
-    "Portfolio of Škrijelj Fatih, fourth-year architecture student from Sarajevo specializing in minimalist residential, commercial, and interior design.",
+    "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo: architecture, interior design and 3D visualization.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${anton.variable} ${inter.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${display.variable} ${sans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-paper text-ink">{children}</body>
     </html>
   );

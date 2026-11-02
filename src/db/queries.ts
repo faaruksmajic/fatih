@@ -38,6 +38,7 @@ export async function getProjects(): Promise<ProjectWithImages[]> {
 }
 
 export async function getProjectsSafe(): Promise<ProjectWithImages[]> {
+  if (!process.env.DATABASE_URL) return [];
   try {
     return await getProjects();
   } catch (error) {
@@ -129,6 +130,7 @@ export async function getCvUrl(): Promise<string | null> {
 }
 
 export async function getCvUrlSafe(): Promise<string | null> {
+  if (!process.env.DATABASE_URL) return null;
   try {
     return await getCvUrl();
   } catch (error) {

@@ -1,12 +1,17 @@
 import Image from "next/image";
-import { TechPrograms } from "@/components/TechPrograms";
-import { SketchHeading } from "@/components/SketchHeading";
-import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
+import { Arrow, Hero } from "@/components/Hero";
+import { ProjectGrid } from "@/components/ProjectGrid";
+import { Reveal } from "@/components/Reveal";
+import { SiteNav } from "@/components/SiteNav";
+import {
+  getCvUrlSafe,
+  getProjectsSafe,
+  type ProjectWithImages,
+} from "@/db/queries";
 
 export const revalidate = 3600;
 
-// Birth date (DD.MM.) — age is computed from this so it stays correct
-// automatically around the birthday; update the year field manually.
+// Age is computed from the birth date so it stays correct after each birthday.
 const BIRTH_DATE = new Date("2002-06-04T00:00:00");
 
 function computedAge(): number {
@@ -20,273 +25,291 @@ function computedAge(): number {
   return age;
 }
 
-const NAV_LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
+const EMAIL = "skrijeljfatih3@gmail.com";
+const PHONE = "+387 62 504 287";
+const PHONE_HREF = "tel:+38762504287";
+
+const STATS = [
+  { value: "8", label: "Years in design & construction" },
+  { value: "10+", label: "Built projects" },
+  { value: "7", label: "Months of studio practice" },
+  { value: "9", label: "Design programs" },
 ];
 
-const SKILLS = [
+const SERVICES = [
   {
-    title: "Visualization & Creative Thinking",
-    body: "Translating concepts into striking, atmospheric renders that communicate a project's mood before it's ever built.",
+    title: "Architectural Design",
+    body: "Homes, offices and mixed-use buildings designed from the first sketch to a buildable plan.",
+    image: "/images/project-atal-group.jpg",
   },
   {
-    title: "Technical Precision & Organization",
-    body: "Well-organized, buildable documentation grounded in eight years of hands-on design and construction experience.",
+    title: "Interior Design",
+    body: "Kitchens, bedrooms and living spaces that are comfortable, functional and built around the client.",
+    image: "/images/project-kitchen.jpg",
   },
   {
-    title: "Software Proficiency",
-    body: "Expert use of architectural and visualization software across the full workflow, from concept to final render.",
+    title: "3D Visualization",
+    body: "Photoreal renders that show the light, materials and mood of a project before it is built.",
+    image: "/images/notable-02.jpg",
   },
 ];
+
+const TOOLS = [
+  "AutoCAD",
+  "Revit",
+  "ArchiCAD",
+  "SketchUp",
+  "Rhino",
+  "V-Ray",
+  "Lumion",
+  "Photoshop",
+  "Illustrator",
+];
+
+// Shown only in local development when the database is not reachable.
+const LOCAL_SAMPLE: ProjectWithImages[] = [
+  [
+    "project-atal-group.jpg",
+    "ATAL Group Office Building",
+    "Commercial",
+    "A five-storey mixed-use building: four floors of flexible offices with abundant daylight, two penthouses with private terraces on top, and a black-and-white facade with black-framed windows.",
+  ],
+  [
+    "project-brcko-house.jpg",
+    "Private Residence, Brčko",
+    "Residential",
+    "A single-storey family house of over 300 m² under a four-sloped roof, with anthracite windows, a four-car garage, a pool and terrace, and a home gym in the attic.",
+  ],
+  [
+    "project-kitchen.jpg",
+    "Modern Kitchen Interior",
+    "Interior",
+    "A kitchen in wood and matte black, anchored by a central island, where every cabinet and material is chosen for a sleek and highly functional result.",
+  ],
+  [
+    "notable-01.jpg",
+    "Walk-in Closet and Bedroom",
+    "Interior",
+    "A walk-in closet and bedroom suite finished in dark wood veneer and soft, layered textiles.",
+  ],
+].map(([file, title, category, description], i) => ({
+  id: `sample-${i}`,
+  title,
+  category,
+  description,
+  coverImage: `/images/${file}`,
+  position: i,
+  images: [],
+}));
+
+const d = (i: number) => ({ ["--i" as string]: i });
 
 export default async function Home() {
-  const [projects, cvUrl] = await Promise.all([getProjectsSafe(), getCvUrlSafe()]);
-  return (
-    <main className="flex flex-col">
-      {/* NAV */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-paper/90 backdrop-blur-sm">
-        <div className="flex items-center justify-between px-6 md:px-12 py-5">
-          <a href="#top" className="font-display text-lg tracking-tight">
-            FATIH ŠKRIJELJ
-          </a>
-          <nav className="hidden md:flex gap-8 text-sm font-medium">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="hover:opacity-60 transition-opacity">
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <a
-            href="mailto:skrijeljfatih3@gmail.com"
-            className="text-sm font-semibold border border-ink px-4 py-2 hover:bg-ink hover:text-paper transition-colors"
-          >
-            Get in touch
-          </a>
-        </div>
-        <span className="sketch-rule mx-6 md:mx-12" />
-      </header>
+  const [dbProjects, cvUrl] = await Promise.all([
+    getProjectsSafe(),
+    getCvUrlSafe(),
+  ]);
+  const projects =
+    dbProjects.length === 0 && process.env.NODE_ENV === "development"
+      ? LOCAL_SAMPLE
+      : dbProjects;
 
-      {/* HERO */}
-      <section
-        id="top"
-        className="relative overflow-hidden text-paper pt-32 md:pt-40 pb-16 md:pb-24 px-6 md:px-12"
-      >
-        <Image
-          src="/images/hero-bg.png"
-          alt="Hero background"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-charcoal/80" />
-        <div className="relative max-w-7xl mx-auto">
-          <SketchHeading
-            as="h1"
-            lines={["MY", "PORT", "FOLIO"]}
-            headingClassName="text-[15vw] md:text-[6.5vw] leading-[0.85]"
-            wrapperClassName="mb-8"
-          />
-          <p className="uppercase text-sm tracking-wide mb-4 text-paper/70">By Škrijelj Fatih</p>
-          <p className="max-w-2xl text-paper/80 leading-relaxed">
-            As a fourth-year architecture student with a four-year background as an
-            architectural technician, I have spent the past eight years immersed in design
-            and construction. With over ten built projects and strong skills in
-            visualization and digital tools, I approach every project with precision,
-            curiosity, and a commitment to creating meaningful spaces.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-8">
-            <a
-              href="#contact"
-              className="inline-block bg-paper text-ink font-semibold px-6 py-3 hover:bg-paper/80 transition-colors"
-            >
-              Let&apos;s connect
-            </a>
-            {cvUrl && (
-              <a
-                href={cvUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-block border border-paper text-paper font-semibold px-6 py-3 hover:bg-paper hover:text-ink transition-colors"
-              >
-                Download CV
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
+  return (
+    <main className="site">
+      <Reveal />
+      <SiteNav email={EMAIL} />
+      <Hero />
 
       {/* ABOUT */}
-      <section id="about" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-          <div className="order-2 md:order-1">
-            <p className="leading-relaxed text-ink/80 mb-10 max-w-md">
-              I&apos;m a {computedAge()}-year-old architecture student from Sarajevo, currently in my fourth
-              year of studies. With eight years in the field — from technical high school to
-              university — I&apos;ve worked on residential, commercial, and urban design
-              projects, gaining seven months of studio experience and strong skills in
-              visualization and architectural software. Passionate about minimalism and both
-              interior and exterior design, I approach every project with precision,
-              dedication, and a clear creative vision.
-            </p>
-            <SketchHeading
-              lines={["WHO", "I AM"]}
-              headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
-            />
-          </div>
-          <div className="relative aspect-[2/3] w-full max-w-md order-1 md:order-2">
-            <Image
-              src="/images/about-portrait.jpg"
-              alt="Škrijelj Fatih on a balcony"
-              fill
-              className="object-cover grayscale"
-              sizes="(min-width: 768px) 400px, 80vw"
-            />
-          </div>
+      <section
+        id="about"
+        className="section about container"
+        aria-labelledby="about-title"
+      >
+        <div className="about-panel" data-reveal>
+          <p className="eyebrow">Get to know me</p>
+          <h2 id="about-title">About Fatih</h2>
+          <p>
+            I&apos;m {computedAge()}, an architecture student from Sarajevo in
+            my fourth year of studies. Before university I trained and worked as
+            an architectural technician, so I learned how buildings are put
+            together before I learned how to design them.
+          </p>
+          <p>
+            I&apos;ve worked on residential, commercial and urban projects,
+            spent seven months in a design studio and seen more than ten of my
+            projects built. I approach every project with precision, curiosity
+            and a commitment to meaningful spaces.
+          </p>
+          {cvUrl ? (
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-solid"
+            >
+              Download CV <Arrow />
+            </a>
+          ) : (
+            <a href="#contact" className="btn btn-solid">
+              Get in touch <Arrow />
+            </a>
+          )}
+        </div>
+        <div className="about-img" data-reveal style={d(1)}>
+          <Image
+            src="/images/about-portrait.jpg"
+            alt="Fatih Škrijelj in a pinstripe suit on a balcony walkway"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+            style={{ objectPosition: "50% 25%" }}
+          />
         </div>
       </section>
 
-      {/* SKILLS */}
-      <section className="bg-charcoal text-paper py-20 md:py-28 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <p className="uppercase text-sm tracking-wide text-paper/60 mb-2">
-            What I Bring to the Table
-          </p>
-          <SketchHeading
-            lines={["PERSONAL", "SKILLS"]}
-            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
-            wrapperClassName="mb-14"
-          />
-          <div className="grid md:grid-cols-3 gap-10">
-            {SKILLS.map((skill) => (
-              <div key={skill.title} className="border-t border-paper/20 pt-6">
-                <h3 className="font-semibold text-lg mb-3">{skill.title}</h3>
-                <p className="text-paper/70 leading-relaxed">{skill.body}</p>
-              </div>
-            ))}
+      {/* STATS */}
+      <section className="stats container" aria-label="In numbers">
+        {STATS.map((s, i) => (
+          <div key={s.label} className="stat" data-reveal style={d(i)}>
+            <p className="stat-value">{s.value}</p>
+            <p className="stat-label">{s.label}</p>
           </div>
+        ))}
+      </section>
+
+      {/* SERVICES */}
+      <section
+        id="services"
+        className="section container"
+        aria-labelledby="services-title"
+      >
+        <div className="section-head" data-reveal>
+          <p className="eyebrow">What I do</p>
+          <h2 id="services-title">My Services</h2>
+        </div>
+        <div className="services">
+          {SERVICES.map((s, i) => (
+            <article key={s.title} className="service" data-reveal style={d(i)}>
+              <div className="service-img">
+                <Image
+                  src={s.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 768px) 30vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="service-body">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+                <a href="#projects" className="text-link">
+                  Explore <Arrow />
+                </a>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="work" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <SketchHeading
-            lines={["PROJECTS"]}
-            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
-            wrapperClassName="mb-14"
-          />
-          {projects.length === 0 ? (
-            <p className="text-ink/60">Projects coming soon.</p>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-16">
-              {projects.map((project) => (
-                <article key={project.id} className="flex flex-col gap-4">
-                  <div className="relative aspect-[4/3] w-full">
-                    <Image
-                      src={project.coverImage}
-                      alt={project.title}
-                      fill
-                      className="object-cover grayscale"
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                  <p className="uppercase text-sm tracking-wide text-ink/60">{project.category}</p>
-                  <h3 className="font-display text-2xl md:text-3xl leading-[0.9]">{project.title}</h3>
-                  <p className="leading-relaxed text-ink/75 max-w-md">{project.description}</p>
-                  {project.images.length > 0 && (
-                    <div className="flex gap-2 mt-2">
-                      {project.images.map((image) => (
-                        <div key={image.id} className="relative w-16 h-16 shrink-0">
-                          <Image
-                            src={image.imageUrl}
-                            alt=""
-                            fill
-                            className="object-cover grayscale"
-                            sizes="64px"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
-          )}
+      <section
+        id="projects"
+        className="section container"
+        aria-labelledby="projects-title"
+      >
+        <div className="section-head" data-reveal>
+          <p className="eyebrow">What I have done</p>
+          <h2 id="projects-title">My Projects</h2>
+          <span className="head-rule" />
         </div>
+        {projects.length === 0 ? (
+          <p className="text-center text-[var(--muted)]">
+            New projects are coming soon.
+          </p>
+        ) : (
+          <ProjectGrid projects={projects} />
+        )}
       </section>
 
-      {/* WHAT'S NEXT */}
-      <section className="bg-charcoal text-paper py-20 md:py-28 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <p className="uppercase text-sm tracking-wide text-paper/60 mb-2">
-            Upcoming Projects
-          </p>
-          <p className="max-w-md text-paper/80 leading-relaxed mb-10">
-            Looking ahead, my short-term goal is to complete my architectural studies and
-            gain professional experience in a reputable firm, learning as much as possible
-            from each project. Long-term, I aspire to establish my own architectural
-            practice, leading a team to create large-scale, innovative projects that
-            reflect my vision and design values.
-          </p>
-          <SketchHeading
-            lines={["WHAT’S", "NEXT?"]}
-            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
+      {/* TOOLS */}
+      <section
+        id="tools"
+        className="section tools container"
+        aria-labelledby="tools-title"
+      >
+        <div className="tools-img" data-reveal>
+          <Image
+            src="/images/notable-03.jpg"
+            alt="Render of a living room around a floating media console"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
           />
         </div>
-      </section>
-
-      {/* TECH PROGRAMS */}
-      <section id="tools" className="bg-paper text-ink py-20 md:py-28 px-6 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <p className="uppercase text-sm tracking-wide text-ink/60 mb-2">What I Work With</p>
-          <SketchHeading
-            lines={["SOFTWARE", "& TOOLS"]}
-            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
-            wrapperClassName="mb-14"
-          />
-          <TechPrograms />
+        <div className="tools-panel" data-reveal style={d(1)}>
+          <p className="eyebrow">Software</p>
+          <h2 id="tools-title">Tools I Work With</h2>
+          <p>
+            From construction drawings to final renders, I work across the full
+            digital workflow.
+          </p>
+          <ul className="tool-list">
+            {TOOLS.map((t) => (
+              <li key={t}>{t}</li>
+            ))}
+          </ul>
+          <p className="tools-next">
+            <strong>What&apos;s next:</strong> finish my studies, gain
+            experience in a respected firm, and one day lead a practice of my
+            own.
+          </p>
         </div>
       </section>
 
       {/* CONTACT */}
-      <section id="contact" className="bg-charcoal text-paper py-20 md:py-28 px-6 md:px-12 border-t border-paper/10">
-        <div className="max-w-7xl mx-auto">
-          <SketchHeading
-            lines={["LET’S", "CONNECT"]}
-            headingClassName="text-[13vw] md:text-[5vw] leading-[0.85]"
-            wrapperClassName="mb-14"
-          />
-          <div className="grid sm:grid-cols-3 gap-8 max-w-3xl">
-            <a
-              href="tel:+38762504287"
-              className="flex flex-col gap-2 border-t border-paper/20 pt-4 hover:opacity-60 transition-opacity"
-            >
-              <span className="text-xs uppercase tracking-wide text-paper/50">Phone</span>
-              <span className="font-medium">+387 62 504 287</span>
-            </a>
-            <a
-              href="mailto:skrijeljfatih3@gmail.com"
-              className="flex flex-col gap-2 border-t border-paper/20 pt-4 hover:opacity-60 transition-opacity"
-            >
-              <span className="text-xs uppercase tracking-wide text-paper/50">Email</span>
-              <span className="font-medium break-all">skrijeljfatih3@gmail.com</span>
-            </a>
-            <div className="flex flex-col gap-2 border-t border-paper/20 pt-4">
-              <span className="text-xs uppercase tracking-wide text-paper/50">Location</span>
-              <span className="font-medium">Sarajevo, Bosnia and Herzegovina</span>
-            </div>
-          </div>
+      <section id="contact" className="contact" aria-labelledby="contact-title">
+        <Image
+          src="/images/project-brcko-house.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="contact-shade" />
+        <div className="contact-content container">
+          <p className="eyebrow" data-reveal>
+            Let&apos;s talk
+          </p>
+          <h2 id="contact-title" data-reveal style={d(1)}>
+            About Your Project
+          </h2>
+          <a
+            href={`mailto:${EMAIL}?subject=Project%20enquiry`}
+            className="btn btn-solid"
+            data-reveal
+            style={d(2)}
+          >
+            Get in touch <Arrow />
+          </a>
+
+          <h3 className="contact-subtitle" data-reveal style={d(3)}>
+            Contact Info
+          </h3>
+          <ul className="contact-list" data-reveal style={d(4)}>
+            <li>Location: Sarajevo, Bosnia and Herzegovina</li>
+            <li>
+              Telephone: <a href={PHONE_HREF}>{PHONE}</a>
+            </li>
+            <li>
+              Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </li>
+          </ul>
+          <p className="copyright">
+            © {new Date().getFullYear()} Fatih Škrijelj. All rights reserved.
+          </p>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="bg-charcoal text-paper/60 py-8 px-6 md:px-12 text-sm flex flex-col sm:flex-row gap-2 justify-between items-center border-t border-paper/10">
-        <p>© {new Date().getFullYear()} Škrijelj Fatih. All rights reserved.</p>
-        <p>Built with precision and a clear creative vision.</p>
-      </footer>
     </main>
   );
 }
