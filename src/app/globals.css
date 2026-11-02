@@ -384,9 +384,10 @@ body {
   grid-column: 7 / 12;
   grid-row: 1;
   position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 0 0 auto;
+  align-self: stretch;
+  height: 100%;
+  aspect-ratio: 3 / 4;
+  margin: 0;
   overflow: hidden;
   border-radius: 4px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -397,6 +398,9 @@ body {
   transition: transform 1s var(--ease), filter 0.55s var(--ease), opacity 0.5s var(--ease);
   filter: grayscale(1);
   opacity: 0.7;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .about-img:hover img {
   transform: scale(1.03);
@@ -835,8 +839,8 @@ body {
   }
   .about-img {
     order: -1;
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: 280px;
     margin: 0 auto 24px;
     grid-column: 1;
     grid-row: auto;
