@@ -394,8 +394,7 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 .about-img img,
-.project-img img,
-.tools-img img {
+.project-img img {
   transition: transform 1s var(--ease), filter 0.55s var(--ease), opacity 0.5s var(--ease);
   filter: grayscale(1);
   opacity: 0.7;
@@ -678,86 +677,144 @@ body {
   width: 100%;
 }
 
-/* Tools */
+/* Tools: a drawing sheet of the software, each tool sketched by what it does */
 .tools {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: center;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
   margin-top: var(--section);
 }
-.tools-img {
-  grid-column: 1 / 8;
-  grid-row: 1;
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-}
-.tools-panel {
-  grid-column: 6 / 13;
-  grid-row: 1;
-  position: relative;
-  z-index: 1;
-  background: var(--panel);
-  padding: clamp(28px, 4vw, 56px);
+.tools-head {
+  grid-column: 1 / 5;
+  position: sticky;
+  top: 120px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   gap: 14px;
-  border-left: 4px solid var(--accent);
-  margin-left: -4px;
 }
-.tools-panel > p {
+.tools-head h2 {
+  text-wrap: balance;
+}
+.tools-head > p {
   color: #d3d0ca;
-}
-.tool-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.tool-list li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border: 1px solid rgba(201, 166, 130, 0.5);
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 14px;
-  color: var(--text);
-  transition: all 0.3s var(--ease);
-  position: relative;
-  overflow: hidden;
-}
-.tool-list li::before {
-  content: attr(data-emoji);
-  font-size: 16px;
-  margin-right: 6px;
-}
-.tool-list li:hover {
-  background: var(--accent);
-  color: var(--accent-ink);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(201, 166, 130, 0.3);
-}
-.tool-emoji {
-  font-size: 16px;
-  line-height: 1;
-}
-.tool-list li:hover {
-  background: var(--accent);
-  color: var(--accent-ink);
+  max-width: 42ch;
 }
 .tools-next {
-  margin-top: 8px;
+  margin-top: 12px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(201, 166, 130, 0.35);
   font-style: italic;
 }
 .tools-next strong {
   font-style: normal;
   color: var(--accent);
+}
+
+.tool-sheet {
+  grid-column: 5 / 13;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(201, 166, 130, 0.45);
+  background-color: var(--panel);
+  /* graph paper */
+  background-image:
+    linear-gradient(rgba(242, 239, 233, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 239, 233, 0.045) 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: -1px -1px;
+}
+.tool-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(22px, 2.6vw, 36px) 12px clamp(18px, 2vw, 26px);
+  border-right: 1px solid rgba(201, 166, 130, 0.22);
+  border-bottom: 1px solid rgba(201, 166, 130, 0.22);
+  transition: background-color 0.35s var(--ease);
+}
+.tool-cell:nth-child(3n) {
+  border-right: 0;
+}
+.tool-cell:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+.tool-no {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.tool-drawing {
+  width: clamp(56px, 6vw, 84px);
+  height: auto;
+  margin-bottom: 18px;
+  overflow: visible;
+  color: var(--text);
+  transition: color 0.35s var(--ease), transform 0.5s var(--ease);
+}
+.tool-drawing .ln {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tool-drawing .ln-guide {
+  stroke: var(--accent);
+  stroke-width: 1.1;
+  opacity: 0.75;
+}
+.tool-name {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.15;
+  color: var(--text);
+}
+.tool-use {
+  margin-top: 6px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tool-cell:hover {
+  background-color: rgba(201, 166, 130, 0.08);
+}
+.tool-cell:hover .tool-drawing {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Drawing-in: only when JS has armed the reveal, so lines always show without it */
+.reveal-ready .tool-sheet .ln {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.4s var(--ease);
+  transition-delay: calc(var(--n, 0) * 140ms + 250ms);
+}
+.reveal-ready .tool-sheet .ln-guide {
+  stroke-dasharray: 1;
+}
+.reveal-ready .tool-sheet.is-in .ln {
+  stroke-dashoffset: 0;
+}
+/* once drawn, guide lines turn into dashed construction lines */
+.tool-sheet .ln-guide {
+  stroke-dasharray: 0.03 0.025;
+}
+.reveal-ready .tool-sheet.is-in .ln-guide {
+  stroke-dasharray: 0.03 0.025;
+  stroke-dashoffset: 0;
 }
 
 /* Contact */
@@ -854,14 +911,19 @@ body {
     display: flex !important;
     color: var(--accent);
   }
-  .about,
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .tools {
     grid-template-columns: minmax(0, 1fr);
   }
+  .tools-head,
+  .tool-sheet {
+    grid-column: 1;
+    position: static;
+  }
   .about-panel,
-  .about-img,
-  .tools-img,
-  .tools-panel {
+  .about-img {
     grid-column: 1;
     grid-row: auto;
     margin-top: 0;
@@ -874,8 +936,7 @@ body {
     grid-column: 1;
     grid-row: auto;
   }
-  .about-panel,
-  .tools-panel {
+  .about-panel {
     width: 92%;
     margin: -56px auto 0;
   }
@@ -935,8 +996,7 @@ body {
   .project:first-child .project-img {
     aspect-ratio: 4 / 3;
   }
-  .about-panel,
-  .tools-panel {
+  .about-panel {
     width: 100%;
     margin-top: 0;
   }

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Arrow, Hero } from "@/components/Hero";
 import { ProjectGrid } from "@/components/ProjectGrid";
+import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import {
@@ -53,28 +54,6 @@ const SERVICES = [
     icon: "render" as const,
   },
 ];
-
-const USER_TOOLS = [
-  "AutoCAD",
-  "Revit",
-  "ArchiCAD",
-  "SketchUp",
-  "Rhino",
-  "V-Ray",
-  "Lumion",
-  "Photoshop",
-  "Illustrator",
-] as const;
-
-const getRandomEmoji = () => {
-  const emojis = ["🔲", "🏗️", "📐", "🏠", "🦒", "✨", "🌅", "🖼️", "✒️"];
-  return emojis[Math.floor(Math.random() * emojis.length)];
-};
-
-const TOOLS = USER_TOOLS.map(tool => ({
-  name: tool,
-  emoji: getRandomEmoji(),
-}));
 
 // Shown only in local development when the database is not reachable.
 const LOCAL_SAMPLE: ProjectWithImages[] = [
@@ -271,36 +250,20 @@ export default async function Home() {
         className="section tools container"
         aria-labelledby="tools-title"
       >
-        <div className="tools-img" data-reveal>
-          <Image
-            src="/images/notable-03.jpg"
-            alt="Render of a living room around a floating media console"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="tools-panel" data-reveal style={d(1)}>
+        <div className="tools-head" data-reveal>
           <p className="eyebrow">Software</p>
           <h2 id="tools-title">Tools I Work With</h2>
           <p>
             From construction drawings to final renders, I work across the full
-            digital workflow.
+            digital workflow, from the first line to the finished image.
           </p>
-          <ul className="tool-list">
-            {TOOLS.map((tool) => (
-              <li key={tool.name} className="tool-item" data-emoji={tool.emoji}>
-                <span className="tool-emoji">{tool.emoji}</span>
-                {tool.name}
-              </li>
-            ))}
-          </ul>
           <p className="tools-next">
             <strong>What&apos;s next:</strong> finish my studies, gain
             experience in a respected firm, and one day lead a practice of my
             own.
           </p>
         </div>
+        <ToolSheet />
       </section>
 
       {/* CONTACT */}
