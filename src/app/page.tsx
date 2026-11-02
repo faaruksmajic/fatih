@@ -293,7 +293,7 @@ export default async function Home() {
       <section id="contact" className="contact" aria-labelledby="contact-title">
         <Image
           src="/images/project-brcko-house.jpg"
-          alt=""
+          alt="Exterior view of a private residential building in Brčko with contemporary architecture design"
           fill
           sizes="100vw"
           className="object-cover"
