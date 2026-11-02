@@ -384,8 +384,8 @@ body {
   grid-column: 7 / 12;
   grid-row: 1;
   position: relative;
-  width: 340px;
-  height: 450px;
+  width: 200px;
+  height: 200px;
   margin: 0 0 0 auto;
   overflow: hidden;
   border-radius: 4px;
@@ -835,8 +835,8 @@ body {
   }
   .about-img {
     order: -1;
-    width: 280px;
-    height: 370px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto 24px;
     grid-column: 1;
     grid-row: auto;
