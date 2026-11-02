@@ -1,24 +1,50 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Manrope } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
 
-const display = Instrument_Serif({
+const display = Fraunces({
   variable: "--font-display",
   subsets: ["latin", "latin-ext"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
 });
 
-const sans = Manrope({
+const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
 });
 
+const OG_IMAGE = "https://fatih-gray.vercel.app/images/logo.png";
+
 export const metadata: Metadata = {
   title: "Fatih Škrijelj — Architecture & Interior Design",
   description:
     "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo: architecture, interior design and 3D visualization.",
+  openGraph: {
+    title: "Fatih Škrijelj — Architecture & Interior Design",
+    description:
+      "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo: architecture, interior design and 3D visualization.",
+    url: "https://fatih-gray.vercel.app",
+    siteName: "Fatih Škrijelj",
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 1200,
+        alt: "Fatih Škrijelj",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fatih Škrijelj — Architecture & Interior Design",
+    description:
+      "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo.",
+    images: [OG_IMAGE],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

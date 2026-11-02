@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const LINKS = [
@@ -25,26 +26,15 @@ export function SiteNav({ email }: { email: string }) {
     <header className={`nav ${solid || open ? "is-solid" : ""}`}>
       <div className="nav-inner">
         <a href="#top" className="logo" aria-label="Fatih Škrijelj, home">
-          <svg viewBox="0 0 32 32" aria-hidden className="logo-mark">
-            <path
-              d="M4 15 L16 5 L28 15"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
+          <span className="logo-mark">
+            <Image
+              src="/images/logo.png"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 46px, 36px"
+              priority
             />
-            <path
-              d="M8 13 V27 H24 V13"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            />
-            <path
-              d="M14 27 V19 H18 V27"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-            />
-          </svg>
+          </span>
           <span className="logo-text">
             <span className="logo-name">Fatih Škrijelj</span>
             <span className="logo-sub">Architecture</span>
