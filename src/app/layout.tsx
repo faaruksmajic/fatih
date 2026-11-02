@@ -12,6 +12,7 @@ const display = Instrument_Serif({
 const sans = Manrope({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
