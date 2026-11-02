@@ -180,7 +180,7 @@ export default async function Home() {
         </div>
         <div className="about-img" data-reveal style={d(1)}>
           <Image
-            src="/images/about-portrait.jpg"
+            src="/images/about-portrait1.jpg"
             alt="Fatih Škrijelj in a pinstripe suit on a balcony walkway"
             fill
             sizes="(min-width: 1024px) 50vw, 100vw"

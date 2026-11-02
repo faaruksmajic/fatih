@@ -250,13 +250,14 @@ body {
   font-weight: 600;
   font-size: 14px;
   letter-spacing: 0.02em;
-  color: rgba(242, 239, 233, 0.9);
+  color: rgba(242, 239, 233, 0.95);
   transition: all 0.3s ease;
-  opacity: 0.92;
+  opacity: 0.9;
+  text-transform: uppercase;
 }
 .nav-links a:hover {
   color: var(--accent);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
   opacity: 1;
 }
 .nav-links a:focus-visible {
@@ -269,7 +270,10 @@ body {
 .nav-cta {
   min-height: 44px;
   padding: 0 22px;
-  opacity: 0.95;
+  opacity: 0.98;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
 }
 .nav-toggle {
   display: none;
@@ -279,14 +283,15 @@ body {
   justify-content: center;
   align-items: center;
   gap: 7px;
-  opacity: 0.9;
+  opacity: 1;
+  z-index: 60;
 }
 .nav-toggle span {
   display: block;
   width: 24px;
   height: 1.5px;
-  background: rgba(242, 239, 233, 0.95);
-  transition: transform 0.25s var(--ease), background-color 0.25s var(--ease);
+  background: rgba(242, 239, 233, 0.9);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .nav-toggle:hover span {
   background: var(--accent);
@@ -379,9 +384,10 @@ body {
   grid-column: 6 / 13;
   grid-row: 1;
   position: relative;
-  aspect-ratio: 4 / 3.6;
+  aspect-ratio: 3 / 4;
   margin-top: -48px;
   overflow: hidden;
+  border-radius: 4px;
 }
 .about-img img,
 .project-img img,
