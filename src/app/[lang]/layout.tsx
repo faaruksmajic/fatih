@@ -52,14 +52,6 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(SITE_URL),
-    icons: {
-      icon: [
-        { url: "/favicon.ico", sizes: "any" },
-        { url: "/favicon.svg", type: "image/svg+xml" },
-        { url: "/images/logo.png", type: "image/png" },
-      ],
-      apple: "/apple-touch-icon.png",
-    },
     title: meta.title,
     description: meta.description,
     alternates: languageAlternates("/", lang),
