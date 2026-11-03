@@ -18,6 +18,8 @@ type Logo = {
   shape: string[];
   /** filled white on hover (marks set on a brand-coloured tile) */
   knockout?: string[];
+  /** when set, render the logo as a full-colour image instead of an outline */
+  image?: string;
 };
 
 const LOGOS: Logo[] = [
@@ -134,12 +136,8 @@ const LOGOS: Logo[] = [
     brand: "#0052FF",
     viewBox: "0 0 24 24",
     stroke: 0.42,
-    shape: [
-      "M24.00 24.00 c6.92 4.57 4.35 3.89 2.16 2.72 9.22 4.44 8.22 3.78 7.77 3.41 8.12 3.37 7.10 1.76 6.77 0.00 9.69 4.28 9.69 3.17 9.77 2.71 10.10 2.99 11.11 1.37 12.72 0.03 10.22 4.37 11.33 3.63 11.88 3.34 11.79 3.67 14.20 3.00 16.85 2.78 10.46 4.68 12.14 4.68 12.83 4.74 13.90 5.08 17.46 6.53 19.73 8.81 10.42 5.39 11.09 6.35 11.44 7.13 10.92 7.30 10.31 10.11 8.10 12.34 7.55 6.99 4.03 8.45 0.00 8.80 9.01 4.80 7.69 4.83 7.02 4.79",
-    ],
-    knockout: [
-      "M23.74 17.15 l8.43 4.29 9.77 2.60 9.77 2.59 12.52 5.67 12.52 5.66 9.77 5.96 9.77 5.96 8.43 5.19 c9.04 4.99 8.40 5.19 8.36 5.19 9.73 4.74 9.10 4.54 8.36 4.29",
-    ],
+    shape: [],
+    image: "/images/d5logo.svg",
   },
   {
     name: "Chaos Corona",
@@ -164,25 +162,34 @@ export function ToolSheet() {
           style={{ ["--n" as string]: i, ["--brand" as string]: logo.brand }}
         >
           <span className="tool-no">T-{String(i + 1).padStart(2, "0")}</span>
-          <svg
-            viewBox={logo.viewBox}
-            aria-hidden
-            className="tool-drawing"
-            style={{ ["--sw" as string]: logo.stroke }}
-          >
-            {logo.shape.map((d) => (
-              <path
-                key={d}
-                d={d}
-                pathLength={1}
-                className="ln ln-shape"
-                fillRule="evenodd"
-              />
-            ))}
-            {logo.knockout?.map((d) => (
-              <path key={d} d={d} pathLength={1} className="ln ln-knock" />
-            ))}
-          </svg>
+          {logo.image ? (
+            <img
+              src={logo.image}
+              alt={logo.name}
+              className="tool-drawing tool-drawing-img"
+              loading="lazy"
+            />
+          ) : (
+            <svg
+              viewBox={logo.viewBox}
+              aria-hidden
+              className="tool-drawing"
+              style={{ ["--sw" as string]: logo.stroke }}
+            >
+              {logo.shape.map((d) => (
+                <path
+                  key={d}
+                  d={d}
+                  pathLength={1}
+                  className="ln ln-shape"
+                  fillRule="evenodd"
+                />
+              ))}
+              {logo.knockout?.map((d) => (
+                <path key={d} d={d} pathLength={1} className="ln ln-knock" />
+              ))}
+            </svg>
+          )}
           <span className="tool-name">{logo.name}</span>
           <span className="tool-use">{logo.use}</span>
         </li>
