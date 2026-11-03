@@ -1354,3 +1354,132 @@ body {
     margin-top: 0;
   }
 }
+
+/* ───────────── Page loader ─────────────
+   A building elevation drafts itself in, then the sheet lifts away.
+   Total on screen: 2.6s (PageLoader.LOADER_MS), then a 0.6s fade. */
+
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(242, 239, 233, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 239, 233, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  color: var(--text);
+  animation: pl-out 0.6s var(--ease) 2.6s forwards;
+}
+.page-loader-sheet {
+  width: min(360px, 100%);
+  text-align: center;
+}
+.page-loader-drawing {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.pl-ln {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pl-draw 0.9s var(--ease) var(--at, 0s) forwards;
+}
+.pl-thin {
+  stroke-width: 0.7;
+}
+.pl-dim {
+  stroke: var(--accent);
+  stroke-width: 0.6;
+}
+.pl-dim-label {
+  fill: var(--accent);
+  font-family: var(--font-sans);
+  font-size: 6px;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  opacity: 0;
+  animation: pl-fade 0.5s var(--ease) 1.8s forwards;
+}
+.pl-glass {
+  fill: var(--accent);
+  opacity: 0;
+  animation: pl-glass 0.8s var(--ease) 1.5s forwards;
+}
+.page-loader-name,
+.page-loader-role {
+  opacity: 0;
+  animation: pl-rise 0.6s var(--ease) forwards;
+}
+.page-loader-name {
+  margin-top: 28px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 3vw, 26px);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  animation-delay: 1.5s;
+}
+.page-loader-role {
+  margin-top: 4px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation-delay: 1.7s;
+}
+
+@keyframes pl-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes pl-fade {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes pl-glass {
+  to {
+    opacity: 0.12;
+  }
+}
+@keyframes pl-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pl-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Reduced motion: show the finished drawing, then fade straight out. */
+@media (prefers-reduced-motion: reduce) {
+  .page-loader {
+    animation-delay: 0.8s;
+  }
+  .pl-ln,
+  .pl-dim-label,
+  .pl-glass,
+  .page-loader-name,
+  .page-loader-role {
+    animation-duration: 0s;
+    animation-delay: 0s;
+  }
+}

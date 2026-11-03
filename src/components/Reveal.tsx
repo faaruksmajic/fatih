@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { LOADER_MS } from "./PageLoader";
 
 /** Adds a staggered entrance to every [data-reveal] element. Content stays visible without JS. */
 export function Reveal() {
@@ -22,8 +23,18 @@ export function Reveal() {
       { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
     );
     root.classList.add("reveal-ready");
-    items.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    // Hold the entrances until the page loader has lifted, so they play in view.
+    const loaderUp =
+      document.querySelector(".page-loader") &&
+      performance.now() < LOADER_MS;
+    const start = window.setTimeout(
+      () => items.forEach((el) => observer.observe(el)),
+      loaderUp ? LOADER_MS - performance.now() : 0,
+    );
+    return () => {
+      window.clearTimeout(start);
+      observer.disconnect();
+    };
   }, []);
   return null;
 }

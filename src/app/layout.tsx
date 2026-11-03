@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Righteous, Source_Code_Pro } from "next/font/google";
 import "./globals.css";
+import { PageLoader } from "@/components/PageLoader";
 
 const display = Righteous({
   variable: "--font-display",
@@ -59,7 +60,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-paper text-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-paper text-ink">
+        <PageLoader />
+        {children}
+      </body>
     </html>
   );
 }
