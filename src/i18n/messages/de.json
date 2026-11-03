@@ -106,6 +106,21 @@
   "contact": {
     "eyebrow": "Lassen Sie uns sprechen",
     "title": "Über Ihr Projekt",
+    "lead": "Sie planen ein Haus, renovieren eine Wohnung oder brauchen Renderings für einen bestehenden Entwurf? Erzählen Sie mir kurz davon, und wir gehen es gemeinsam an.",
+    "steps": [
+      {
+        "title": "Schreiben Sie mir",
+        "body": "Ein paar Zeilen zum Grundstück, zum Umfang und zum Zeitplan."
+      },
+      {
+        "title": "Erstes Gespräch",
+        "body": "Wir besprechen Ihre Ideen, das Budget und was der Raum leisten soll."
+      },
+      {
+        "title": "Entwurf & Visualisierung",
+        "body": "Skizzen, Pläne und Renderings, gemeinsam verfeinert, bis alles stimmt."
+      }
+    ],
     "getInTouch": "Kontakt aufnehmen",
     "mailSubject": "Projektanfrage",
     "location": "Standort",

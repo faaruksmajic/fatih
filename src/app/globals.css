@@ -1081,27 +1081,142 @@ body {
   stroke-dashoffset: 0;
 }
 
-/* Contact */
+/* Contact: photo framed like a drawing, panel with the three-step process */
 .contact {
-  position: relative;
-  margin-top: var(--section);
-  padding-block: clamp(110px, 12vw, 180px);
-  overflow: hidden;
-  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: center;
+  margin-bottom: var(--section);
 }
-.contact-shade {
+.contact-img {
+  grid-column: 1 / 7;
+  grid-row: 1;
+  position: relative;
+  align-self: stretch;
+  min-height: 520px;
+  margin: 0;
+  overflow: hidden;
+}
+.contact-img img {
+  object-fit: cover;
+  transition: transform 1.4s var(--ease);
+}
+.contact-img:hover img {
+  transform: scale(1.03);
+}
+.contact-img::after {
+  content: "";
   position: absolute;
   inset: 0;
-  background: rgba(22, 24, 28, 0.86);
+  background: linear-gradient(180deg, rgba(29, 32, 36, 0) 55%, rgba(29, 32, 36, 0.55));
+  pointer-events: none;
 }
-.contact-content {
+/* Crop marks in two corners, like a sheet trimmed from a drawing */
+.contact-mark {
+  position: absolute;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  border-color: var(--accent);
+  border-style: solid;
+  border-width: 0;
+}
+.contact-mark-ts {
+  inset-block-start: 18px;
+  inset-inline-start: 18px;
+  border-block-start-width: 1px;
+  border-inline-start-width: 1px;
+}
+.contact-mark-bs {
+  inset-block-end: 18px;
+  inset-inline-start: 18px;
+  border-block-end-width: 1px;
+  border-inline-start-width: 1px;
+}
+.contact-panel {
+  grid-column: 6 / 13;
+  grid-row: 1;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  z-index: 1;
+  background-color: var(--panel);
+  background-image:
+    linear-gradient(rgba(201, 166, 130, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 166, 130, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 1px solid rgba(201, 166, 130, 0.35);
+  padding: clamp(28px, 4vw, 60px);
 }
-.contact-content h2 {
-  margin-bottom: 28px;
+.contact-panel h2 {
+  margin-bottom: 18px;
+}
+.contact-lead {
+  color: #dcd9d3;
+  max-width: 54ch;
+}
+.contact-steps {
+  list-style: none;
+  margin: clamp(24px, 3vw, 36px) 0;
+  padding: 0;
+  border-top: 1px solid rgba(201, 166, 130, 0.22);
+}
+.contact-steps li {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 12px;
+  padding-block: 18px;
+  border-bottom: 1px solid rgba(201, 166, 130, 0.22);
+}
+.contact-step-no {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.2;
+  color: var(--accent);
+}
+.contact-steps h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.contact-steps p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.contact-actions .btn-outline {
+  border-color: rgba(201, 166, 130, 0.6);
+}
+.contact-actions .btn-outline:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+@media (max-width: 1023px) {
+  .contact-img {
+    grid-column: 1 / -1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+  .contact-panel {
+    grid-column: 2 / -2;
+    grid-row: 2;
+    margin-top: -80px;
+  }
+}
+@media (max-width: 680px) {
+  .contact-panel {
+    grid-column: 1 / -1;
+    margin-top: -40px;
+    margin-inline: 12px;
+  }
 }
 
 /* Reveal motion: content stays visible without JS */

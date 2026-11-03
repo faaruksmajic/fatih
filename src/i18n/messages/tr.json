@@ -106,6 +106,21 @@
   "contact": {
     "eyebrow": "Konuşalım",
     "title": "Projeniz Hakkında",
+    "lead": "Bir ev mi planlıyorsunuz, daireyi mi yeniliyorsunuz ya da mevcut bir tasarımın görsellerine mi ihtiyacınız var? Bana biraz anlatın, gerisini birlikte planlayalım.",
+    "steps": [
+      {
+        "title": "Bana yazın",
+        "body": "Arsa, işin kapsamı ve zaman planı hakkında birkaç satır."
+      },
+      {
+        "title": "İlk görüşme",
+        "body": "Fikirlerinizi, bütçenizi ve mekânın neye hizmet etmesi gerektiğini konuşuruz."
+      },
+      {
+        "title": "Tasarım ve görselleştirme",
+        "body": "Eskizler, çizimler ve görseller; doğru olana kadar birlikte geliştiririz."
+      }
+    ],
     "getInTouch": "İletişime geçin",
     "mailSubject": "Proje talebi",
     "location": "Konum",

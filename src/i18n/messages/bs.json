@@ -106,6 +106,21 @@
   "contact": {
     "eyebrow": "Razgovarajmo",
     "title": "O vašem projektu",
+    "lead": "Planirate kuću, renovirate stan ili vam trebaju renderi za projekat koji već imate? Napišite mi nekoliko riječi i krećemo od toga.",
+    "steps": [
+      {
+        "title": "Pišite mi",
+        "body": "Par rečenica o lokaciji, obimu posla i rokovima."
+      },
+      {
+        "title": "Prvi razgovor",
+        "body": "Prolazimo kroz vaše ideje, budžet i šta prostor treba da pruži."
+      },
+      {
+        "title": "Projekat i vizualizacija",
+        "body": "Skice, crteži i renderi, koje zajedno doradimo dok ne budu kako treba."
+      }
+    ],
     "getInTouch": "Javite se",
     "mailSubject": "Upit za projekat",
     "location": "Lokacija",

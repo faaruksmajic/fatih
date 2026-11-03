@@ -106,6 +106,21 @@
   "contact": {
     "eyebrow": "Let's talk",
     "title": "About Your Project",
+    "lead": "Planning a house, refitting an apartment or need renders of a design you already have? Tell me a little about it and we'll take it from there.",
+    "steps": [
+      {
+        "title": "Write to me",
+        "body": "A few lines about the site, the scope and your timeline."
+      },
+      {
+        "title": "First conversation",
+        "body": "We go through your ideas, budget and what the space needs to do."
+      },
+      {
+        "title": "Design & visuals",
+        "body": "Sketches, drawings and renders, refined together until they're right."
+      }
+    ],
     "getInTouch": "Get in touch",
     "mailSubject": "Project enquiry",
     "location": "Location",
