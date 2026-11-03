@@ -5,11 +5,21 @@ import Link from "next/link";
 import { useState } from "react";
 import type { ProjectWithImages } from "@/db/queries";
 import { Arrow } from "@/components/Hero";
+import { fmt, localePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 /** How many projects the home page shows before "All projects". */
 const INITIAL = 3;
 
-export function ProjectGrid({ projects }: { projects: ProjectWithImages[] }) {
+export function ProjectGrid({
+  projects,
+  lang,
+  t,
+}: {
+  projects: ProjectWithImages[];
+  lang: Locale;
+  t: Dictionary["projects"];
+}) {
   const [showAll, setShowAll] = useState(false);
   const visible = showAll ? projects : projects.slice(0, INITIAL);
 
@@ -25,11 +35,11 @@ export function ProjectGrid({ projects }: { projects: ProjectWithImages[] }) {
             {...(i < INITIAL ? { "data-reveal": true } : {})}
             style={{ ["--i" as string]: i % INITIAL }}
           >
-            <Link href={`/projects/${project.id}`} className="project-btn">
+            <Link href={localePath(lang, `/projects/${project.id}`)} className="project-btn">
               <span className="project-img">
                 <Image
                   src={project.coverImage}
-                  alt={`Render of ${project.title}`}
+                  alt={fmt(t.renderOf, { title: project.title })}
                   fill
                   sizes={
                     i === 0
@@ -48,9 +58,11 @@ export function ProjectGrid({ projects }: { projects: ProjectWithImages[] }) {
                 <span className="project-cat">{project.category}</span>
               </span>
               <span className="project-bottom">
-                <span className="project-title">{project.title}</span>
+                <span className="project-title" dir="auto">
+                  {project.title}
+                </span>
                 <span className="project-link">
-                  View project <Arrow />
+                  {t.view} <Arrow />
                 </span>
               </span>
             </Link>
@@ -66,7 +78,7 @@ export function ProjectGrid({ projects }: { projects: ProjectWithImages[] }) {
             aria-expanded={showAll}
             onClick={() => setShowAll((v) => !v)}
           >
-            {showAll ? "Show fewer" : `All projects (${projects.length})`}
+            {showAll ? t.fewer : fmt(t.all, { count: projects.length })}
           </button>
         </div>
       )}

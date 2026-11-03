@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Fatih Škrijelj — Architecture & Interior Design",
+    "description": "Portfolio of Fatih Škrijelj, architecture student and former architectural technician from Sarajevo: architecture, interior design and 3D visualization.",
+    "projectNotFound": "Project not found"
+  },
+  "nav": {
+    "main": "Main",
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "tools": "Tools",
+    "contact": "Contact",
+    "logoSub": "Architecture",
+    "homeLabel": "Fatih Škrijelj, home",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "mailSubject": "Hello Fatih"
+  },
+  "loader": {
+    "role": "Architecture & Interior Design"
+  },
+  "hero": {
+    "eyebrow": "Architecture · Interiors · Visualization",
+    "subtitle": "Architecture & Design",
+    "explore": "Explore"
+  },
+  "about": {
+    "eyebrow": "Get to know me",
+    "title": "About Fatih",
+    "p1": "I'm {age}, an architecture student from Sarajevo in my fourth year of studies. Before university I trained and worked as an architectural technician, so I learned how buildings are put together before I learned how to design them.",
+    "p2": "I've worked on residential, commercial and urban projects, spent seven months in a design studio and seen more than ten of my projects built. I approach every project with precision, curiosity and a commitment to meaningful spaces.",
+    "cv": "Download CV",
+    "getInTouch": "Get in touch",
+    "portraitAlt": "Fatih Škrijelj portrait"
+  },
+  "stats": {
+    "label": "In numbers",
+    "items": [
+      "Years in design & construction",
+      "Built projects",
+      "Months of studio practice",
+      "Design programs"
+    ]
+  },
+  "services": {
+    "eyebrow": "What I do",
+    "title": "My Services",
+    "intro": "From the first sketch to the final render, I cover the whole design process for homes, offices and interiors.",
+    "items": [
+      {
+        "title": "Architectural Design",
+        "body": "Homes, offices and mixed-use buildings designed from the first sketch to a buildable plan."
+      },
+      {
+        "title": "Interior Design",
+        "body": "Kitchens, bedrooms and living spaces that are comfortable, functional and built around the client."
+      },
+      {
+        "title": "3D Visualization",
+        "body": "Photoreal renders that show the light, materials and mood of a project before it is built."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "What I have done",
+    "title": "My Projects",
+    "empty": "New projects are coming soon.",
+    "all": "All projects ({count})",
+    "fewer": "Show fewer",
+    "view": "View project",
+    "renderOf": "Render of {title}"
+  },
+  "categories": {
+    "residential": "Residential",
+    "commercial": "Commercial",
+    "interior": "Interior",
+    "urban": "Urban",
+    "public": "Public",
+    "mixed-use": "Mixed-use",
+    "landscape": "Landscape"
+  },
+  "tools": {
+    "eyebrow": "Software",
+    "title": "Tools I Work With",
+    "intro": "From construction drawings to final renders, I work across the full digital workflow, from the first line to the finished image.",
+    "nextLabel": "What's next:",
+    "next": "finish my studies, gain experience in a respected firm, and one day lead a practice of my own.",
+    "uses": {
+      "AutoCAD": "2D drafting",
+      "Revit": "BIM modelling",
+      "ArchiCAD": "Plans & sections",
+      "SketchUp": "Massing",
+      "Rhino": "Free-form surfaces",
+      "V-Ray": "Photoreal rendering",
+      "Lumion": "Scenes & landscape",
+      "Photoshop": "Post-production",
+      "Illustrator": "Diagrams & boards",
+      "3ds Max": "3D modelling",
+      "D5 Render": "Real-time rendering",
+      "Chaos Corona": "Photoreal rendering"
+    }
+  },
+  "contact": {
+    "eyebrow": "Let's talk",
+    "title": "About Your Project",
+    "getInTouch": "Get in touch",
+    "mailSubject": "Project enquiry",
+    "info": "Contact Info",
+    "location": "Location",
+    "locationValue": "Sarajevo, Bosnia and Herzegovina",
+    "phone": "Telephone",
+    "email": "Email",
+    "rights": "All rights reserved.",
+    "imageAlt": "Exterior view of a private residential building in Brčko with contemporary architecture design"
+  },
+  "project": {
+    "back": "All projects",
+    "about": "About the project",
+    "category": "Category",
+    "images": "Images",
+    "designer": "Designer",
+    "similar": "Start a similar project",
+    "similarSubject": "A project like {title}",
+    "galleryEyebrow": "Gallery",
+    "more": "More projects",
+    "prev": "Previous project",
+    "next": "Next project",
+    "getInTouch": "Get in touch"
+  },
+  "gallery": {
+    "open": "Open image {n} of {count}",
+    "imageAlt": "{title}, image {n}",
+    "label": "{title} gallery",
+    "prev": "Previous image",
+    "next": "Next image",
+    "close": "Close"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The page you are looking for does not exist or has moved.",
+    "home": "Back to the home page"
+  }
+}

@@ -10,6 +10,7 @@
 
 type Logo = {
   name: string;
+  /** English label; the page passes the translated one */
   use: string;
   brand: string;
   viewBox: string;
@@ -155,7 +156,7 @@ const LOGOS: Logo[] = [
   },
 ];
 
-export function ToolSheet() {
+export function ToolSheet({ uses }: { uses?: Record<string, string> }) {
   return (
     <ol className="tool-sheet" data-reveal>
       {LOGOS.map((logo, i) => (
@@ -193,8 +194,8 @@ export function ToolSheet() {
               ))}
             </svg>
           )}
-          <span className="tool-name">{logo.name}</span>
-          <span className="tool-use">{logo.use}</span>
+          <span className="tool-name" dir="ltr">{logo.name}</span>
+          <span className="tool-use">{uses?.[logo.name] ?? logo.use}</span>
         </li>
       ))}
     </ol>

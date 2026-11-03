@@ -1,6 +1,7 @@
 import Image from "next/image";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function Hero() {
+export function Hero({ t }: { t: Dictionary["hero"] }) {
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
       <Image
@@ -15,21 +16,20 @@ export function Hero() {
       <div className="hero-shade" />
 
       <div className="hero-content">
-        <p className="eyebrow eyebrow-light">
-          Architecture · Interiors · Visualization
-        </p>
+        <p className="eyebrow eyebrow-light">{t.eyebrow}</p>
         <h1 id="hero-title" className="hero-title">
-          Fatih Škrijelj
-          <span>Architecture &amp; Design</span>
+          <bdi>Fatih Škrijelj</bdi>
+          <span>{t.subtitle}</span>
         </h1>
         <a href="#about" className="btn btn-outline">
-          Explore <Arrow />
+          {t.explore} <Arrow />
         </a>
       </div>
     </section>
   );
 }
 
+/** Points forward in the reading direction (mirrored in right-to-left pages by CSS). */
 export function Arrow() {
   return (
     <svg viewBox="0 0 16 16" aria-hidden className="arrow">

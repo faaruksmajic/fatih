@@ -462,12 +462,12 @@ body {
 }
 .service {
   padding: 8px clamp(24px, 3vw, 48px) 8px;
-  border-left: 1px solid rgba(201, 166, 130, 0.35);
+  border-inline-start: 1px solid rgba(201, 166, 130, 0.35);
   transition: transform 0.35s var(--ease);
 }
 .service:first-child {
-  padding-left: 0;
-  border-left: 0;
+  padding-inline-start: 0;
+  border-inline-start: 0;
 }
 .service:hover {
   transform: translateY(-4px);
@@ -515,7 +515,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  text-align: left;
+  text-align: start;
   cursor: pointer;
   background: #15171a;
   isolation: isolate;
@@ -763,7 +763,7 @@ body {
 }
 .pd-facts dd {
   margin: 0;
-  text-align: right;
+  text-align: end;
   color: var(--text);
 }
 .pd-facts .btn {
@@ -812,7 +812,7 @@ body {
 }
 .gallery-no {
   position: absolute;
-  left: 16px;
+  inset-inline-start: 16px;
   bottom: 14px;
   font-family: var(--font-display);
   font-size: 14px;
@@ -916,8 +916,8 @@ body {
   padding: clamp(20px, 2.4vw, 32px);
 }
 .pd-page-next .pd-page-text {
-  margin-left: auto;
-  text-align: right;
+  margin-inline-start: auto;
+  text-align: end;
   align-items: flex-end;
 }
 .pd-page-label {
@@ -1004,12 +1004,12 @@ body {
   align-items: center;
   text-align: center;
   padding: clamp(22px, 2.6vw, 36px) 12px clamp(18px, 2vw, 26px);
-  border-right: 1px solid rgba(201, 166, 130, 0.22);
+  border-inline-end: 1px solid rgba(201, 166, 130, 0.22);
   border-bottom: 1px solid rgba(201, 166, 130, 0.22);
   transition: background-color 0.35s var(--ease);
 }
 .tool-cell:nth-child(3n) {
-  border-right: 0;
+  border-inline-end: 0;
 }
 .tool-cell:nth-last-child(-n + 3) {
   border-bottom: 0;
@@ -1017,7 +1017,7 @@ body {
 .tool-no {
   position: absolute;
   top: 10px;
-  left: 12px;
+  inset-inline-start: 12px;
   font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: 0.14em;
@@ -1168,7 +1168,9 @@ body {
   }
   .nav-toggle {
     display: flex;
-    margin-left: auto;
+  }
+  .lang-switch {
+    margin-inline-start: auto;
   }
   .nav-links.is-open {
     display: flex;
@@ -1224,7 +1226,7 @@ body {
   .service,
   .service:first-child {
     padding: 0;
-    border-left: 0;
+    border-inline-start: 0;
   }
   .services-head {
     grid-template-columns: minmax(0, 1fr);
@@ -1444,4 +1446,175 @@ body {
     animation-duration: 0s;
     animation-delay: 0s;
   }
+}
+
+/* ───────────── Languages ───────────── */
+
+/* Intro already played this visit (set before first paint by the site layout). */
+.intro-seen .page-loader {
+  display: none;
+}
+
+/* Language menu in the nav */
+.lang-switch {
+  position: relative;
+  flex-shrink: 0;
+}
+.lang-switch summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(242, 239, 233, 0.22);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: rgba(242, 239, 233, 0.95);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  transition:
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+.lang-switch summary::-webkit-details-marker {
+  display: none;
+}
+.lang-switch summary::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s var(--ease);
+}
+.lang-switch[open] summary::after {
+  margin-top: 3px;
+  transform: rotate(225deg);
+}
+.lang-switch summary:hover,
+.lang-switch[open] summary {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.lang-switch summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.lang-globe {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 70;
+  min-width: 250px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: rgba(29, 32, 36, 0.98);
+  border: 1px solid rgba(201, 166, 130, 0.35);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+.lang-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: rgba(242, 239, 233, 0.9);
+  transition:
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+.lang-menu a:hover,
+.lang-menu a:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent);
+  outline: none;
+}
+.lang-menu a[aria-current] {
+  color: var(--accent);
+}
+.lang-code {
+  min-width: 34px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.lang-menu a[aria-current] .lang-code {
+  color: var(--accent);
+}
+@media (max-width: 680px) {
+  .lang-switch summary {
+    padding: 0 10px;
+  }
+  .lang-globe {
+    display: none;
+  }
+}
+
+/* Arabic: Latin text (names, email) stays in the site's typefaces and Arabic
+   script falls through to the Arabic pair. No letter-spacing, which breaks
+   joined script. --font-latin-* are set on <html> by the site layout. */
+html[lang="ar"] {
+  --font-display: var(--font-latin-display), var(--font-arabic-display), sans-serif;
+  --font-sans: var(--font-latin-sans), var(--font-arabic-sans), sans-serif;
+}
+html[lang="ar"] .site *:not([dir="ltr"]):not([dir="ltr"] *) {
+  letter-spacing: 0 !important;
+}
+/* Arabic script has no italic; the slanted accents read as upright text. */
+html[lang="ar"] .site :is(em, i, span, p, strong) {
+  font-style: normal;
+}
+
+/* Right-to-left: arrows point the way the text reads. */
+[dir="rtl"] .arrow,
+[dir="rtl"] .pd-back-arrow,
+[dir="rtl"] .pd-arrow,
+[dir="rtl"] .lightbox-prev,
+[dir="rtl"] .lightbox-next {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+[dir="rtl"] .btn:hover .arrow,
+[dir="rtl"] .text-link:hover .arrow,
+[dir="rtl"] .project-btn:hover .arrow {
+  transform: scaleX(-1) translateX(4px);
+}
+
+/* 404 */
+.not-found {
+  display: grid;
+  flex: 1;
+  min-height: 100vh;
+  place-items: center;
+  text-align: center;
+}
+.not-found-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-block: 80px;
+}
+.not-found h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.1;
+}
+.not-found p:not(.eyebrow) {
+  max-width: 44ch;
+  color: var(--muted);
 }

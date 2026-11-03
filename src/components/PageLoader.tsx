@@ -1,7 +1,3 @@
-"use client";
-
-import { usePathname } from "next/navigation";
-
 /** How long the loader stays up (draw + hold), before it fades out. Keep in sync with globals.css. */
 export const LOADER_MS = 2600;
 
@@ -9,7 +5,7 @@ export const LOADER_MS = 2600;
  * Full-screen intro shown on the first load of the public site: a building
  * elevation draws itself in line by line, like a sheet being drafted, then the
  * overlay fades away. Pure CSS timing, so it also clears without JavaScript.
- * The root layout persists across client navigations, so it plays once per load.
+ * It plays once per visit (see INTRO_ONCE in the site layout).
  */
 
 type Line = { d: string; at: number; kind?: "dim" | "glass" | "thin" };
@@ -40,10 +36,7 @@ const LINES: Line[] = [
 // Glass panes that wash in once the frames are drawn.
 const GLASS = ["M52 94 H104 V140 H52 Z", "M82 52 H192 V68 H82 Z"];
 
-export function PageLoader() {
-  const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) return null;
-
+export function PageLoader({ role }: { role: string }) {
   return (
     <div className="page-loader" aria-hidden>
       <div className="page-loader-sheet">
@@ -67,8 +60,8 @@ export function PageLoader() {
             10.00
           </text>
         </svg>
-        <p className="page-loader-name">Fatih Škrijelj</p>
-        <p className="page-loader-role">Architecture &amp; Interior Design</p>
+        <p className="page-loader-name" dir="ltr">Fatih Škrijelj</p>
+        <p className="page-loader-role">{role}</p>
       </div>
     </div>
   );

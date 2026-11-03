@@ -5,6 +5,9 @@ import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
 import { SiteNav } from "@/components/SiteNav";
 import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
+import { fmt, hasLocale, LOCALES } from "@/i18n/config";
+import { categoryLabel, getDictionary } from "@/i18n/dictionaries";
+import { notFound } from "next/navigation";
 import { withLocalSample } from "@/lib/sample-projects";
 import { EMAIL, PHONE, PHONE_HREF } from "@/lib/site";
 
@@ -25,30 +28,11 @@ function computedAge(): number {
 }
 
 
-const STATS = [
-  { value: "8", label: "Years in design & construction" },
-  { value: "10+", label: "Built projects" },
-  { value: "7", label: "Months of studio practice" },
-  { value: "12", label: "Design programs" },
-];
+/** Figures for the stats row; labels come from the dictionary in the same order. */
+const STAT_VALUES = ["8", "10+", "7", "12"];
 
-const SERVICES = [
-  {
-    title: "Architectural Design",
-    body: "Homes, offices and mixed-use buildings designed from the first sketch to a buildable plan.",
-    icon: "building" as const,
-  },
-  {
-    title: "Interior Design",
-    body: "Kitchens, bedrooms and living spaces that are comfortable, functional and built around the client.",
-    icon: "interior" as const,
-  },
-  {
-    title: "3D Visualization",
-    body: "Photoreal renders that show the light, materials and mood of a project before it is built.",
-    icon: "render" as const,
-  },
-];
+/** Icons for the services, in the dictionary's order. */
+const SERVICE_ICONS = ["building", "interior", "render"] as const;
 
 function ServiceIcon({ kind }: { kind: "building" | "interior" | "render" }) {
   const paths = {
@@ -74,7 +58,14 @@ function ServiceIcon({ kind }: { kind: "building" | "interior" | "render" }) {
 
 const d = (i: number) => ({ ["--i" as string]: i });
 
-export default async function Home() {
+export function generateStaticParams() {
+  return LOCALES.map((lang) => ({ lang }));
+}
+
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const t = await getDictionary(lang);
   const [dbProjects, cvUrl] = await Promise.all([
     getProjectsSafe(),
     getCvUrlSafe(),
@@ -84,8 +75,8 @@ export default async function Home() {
   return (
     <main className="site">
       <Reveal />
-      <SiteNav email={EMAIL} />
-      <Hero />
+      <SiteNav email={EMAIL} lang={lang} t={t.nav} />
+      <Hero t={t.hero} />
 
       {/* ABOUT */}
       <section
@@ -94,20 +85,10 @@ export default async function Home() {
         aria-labelledby="about-title"
       >
         <div className="about-panel" data-reveal>
-          <p className="eyebrow">Get to know me</p>
-          <h2 id="about-title">About Fatih</h2>
-          <p>
-            I&apos;m {computedAge()}, an architecture student from Sarajevo in
-            my fourth year of studies. Before university I trained and worked as
-            an architectural technician, so I learned how buildings are put
-            together before I learned how to design them.
-          </p>
-          <p>
-            I&apos;ve worked on residential, commercial and urban projects,
-            spent seven months in a design studio and seen more than ten of my
-            projects built. I approach every project with precision, curiosity
-            and a commitment to meaningful spaces.
-          </p>
+          <p className="eyebrow">{t.about.eyebrow}</p>
+          <h2 id="about-title">{t.about.title}</h2>
+          <p>{fmt(t.about.p1, { age: computedAge() })}</p>
+          <p>{t.about.p2}</p>
           {cvUrl ? (
             <a
               href={cvUrl}
@@ -115,18 +96,18 @@ export default async function Home() {
               rel="noreferrer"
               className="btn btn-solid"
             >
-              Download CV <Arrow />
+              {t.about.cv} <Arrow />
             </a>
           ) : (
             <a href="#contact" className="btn btn-solid">
-              Get in touch <Arrow />
+              {t.about.getInTouch} <Arrow />
             </a>
           )}
         </div>
         <div className="about-img" data-reveal style={d(1)}>
           <Image
             src="/images/about-portrait1.jpg"
-            alt="Fatih Škrijelj portrait"
+            alt={t.about.portraitAlt}
             fill
             priority
             sizes="200px"
@@ -137,11 +118,11 @@ export default async function Home() {
       </section>
 
       {/* STATS */}
-      <section className="stats container" aria-label="In numbers">
-        {STATS.map((s, i) => (
-          <div key={s.label} className="stat" data-reveal style={d(i)}>
-            <p className="stat-value">{s.value}</p>
-            <p className="stat-label">{s.label}</p>
+      <section className="stats container" aria-label={t.stats.label}>
+        {t.stats.items.map((label, i) => (
+          <div key={i} className="stat" data-reveal style={d(i)}>
+            <p className="stat-value">{STAT_VALUES[i]}</p>
+            <p className="stat-label">{label}</p>
           </div>
         ))}
       </section>
@@ -155,23 +136,22 @@ export default async function Home() {
         <div className="container">
           <div className="services-head">
             <div data-reveal>
-              <p className="eyebrow">What I do</p>
-              <h2 id="services-title">My Services</h2>
+              <p className="eyebrow">{t.services.eyebrow}</p>
+              <h2 id="services-title">{t.services.title}</h2>
             </div>
             <p data-reveal style={d(1)}>
-              From the first sketch to the final render, I cover the whole
-              design process for homes, offices and interiors.
+              {t.services.intro}
             </p>
           </div>
           <div className="services">
-            {SERVICES.map((s, i) => (
+            {t.services.items.map((s, i) => (
               <article
-                key={s.title}
+                key={i}
                 className="service"
                 data-reveal
                 style={d(i)}
               >
-                <ServiceIcon kind={s.icon} />
+                <ServiceIcon kind={SERVICE_ICONS[i]} />
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
               </article>
@@ -187,16 +167,23 @@ export default async function Home() {
         aria-labelledby="projects-title"
       >
         <div className="section-head" data-reveal>
-          <p className="eyebrow">What I have done</p>
-          <h2 id="projects-title">My Projects</h2>
+          <p className="eyebrow">{t.projects.eyebrow}</p>
+          <h2 id="projects-title">{t.projects.title}</h2>
           <span className="head-rule" />
         </div>
         {projects.length === 0 ? (
           <p className="text-center text-[var(--muted)]">
-            New projects are coming soon.
+            {t.projects.empty}
           </p>
         ) : (
-          <ProjectGrid projects={projects} />
+          <ProjectGrid
+            projects={projects.map((p) => ({
+              ...p,
+              category: categoryLabel(t, p.category),
+            }))}
+            lang={lang}
+            t={t.projects}
+          />
         )}
       </section>
 
@@ -207,26 +194,21 @@ export default async function Home() {
         aria-labelledby="tools-title"
       >
         <div className="tools-head" data-reveal>
-          <p className="eyebrow">Software</p>
-          <h2 id="tools-title">Tools I Work With</h2>
-          <p>
-            From construction drawings to final renders, I work across the full
-            digital workflow, from the first line to the finished image.
-          </p>
+          <p className="eyebrow">{t.tools.eyebrow}</p>
+          <h2 id="tools-title">{t.tools.title}</h2>
+          <p>{t.tools.intro}</p>
           <p className="tools-next">
-            <strong>What&apos;s next:</strong> finish my studies, gain
-            experience in a respected firm, and one day lead a practice of my
-            own.
+            <strong>{t.tools.nextLabel}</strong> {t.tools.next}
           </p>
         </div>
-        <ToolSheet />
+        <ToolSheet uses={t.tools.uses} />
       </section>
 
       {/* CONTACT */}
       <section id="contact" className="contact" aria-labelledby="contact-title">
         <Image
           src="/images/project-brcko-house.jpg"
-          alt="Exterior view of a private residential building in Brčko with contemporary architecture design"
+          alt={t.contact.imageAlt}
           fill
           sizes="100vw"
           className="object-cover"
@@ -234,34 +216,42 @@ export default async function Home() {
         <div className="contact-shade" />
         <div className="contact-content container">
           <p className="eyebrow" data-reveal>
-            Let&apos;s talk
+            {t.contact.eyebrow}
           </p>
           <h2 id="contact-title" data-reveal style={d(1)}>
-            About Your Project
+            {t.contact.title}
           </h2>
           <a
-            href={`mailto:${EMAIL}?subject=Project%20enquiry`}
+            href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.contact.mailSubject)}`}
             className="btn btn-solid"
             data-reveal
             style={d(2)}
           >
-            Get in touch <Arrow />
+            {t.contact.getInTouch} <Arrow />
           </a>
 
           <h3 className="contact-subtitle" data-reveal style={d(3)}>
-            Contact Info
+            {t.contact.info}
           </h3>
           <ul className="contact-list" data-reveal style={d(4)}>
-            <li>Location: Sarajevo, Bosnia and Herzegovina</li>
             <li>
-              Telephone: <a href={PHONE_HREF}>{PHONE}</a>
+              {t.contact.location}: {t.contact.locationValue}
             </li>
             <li>
-              Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+              {t.contact.phone}:{" "}
+              <a href={PHONE_HREF} dir="ltr">
+                {PHONE}
+              </a>
+            </li>
+            <li>
+              {t.contact.email}:{" "}
+              <a href={`mailto:${EMAIL}`} dir="ltr">
+                {EMAIL}
+              </a>
             </li>
           </ul>
           <p className="copyright">
-            © {new Date().getFullYear()} Fatih Škrijelj. All rights reserved.
+            © {new Date().getFullYear()} Fatih Škrijelj. {t.contact.rights}
           </p>
         </div>
       </section>
