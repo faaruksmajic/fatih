@@ -14,8 +14,7 @@ const SECTIONS = [
 ] as const;
 
 /**
- * Site footer, drawn as the title block of an architectural sheet: hairline
- * frame on graph paper, numbered fields, and a strip along the bottom.
+ * Site footer: brand, contact details and section links over a closing strip.
  */
 export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
   const href = (path: string) => localePath(lang, path);
@@ -26,7 +25,6 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
       <div className="container">
         <div className="footer-sheet">
           <div className="footer-cell footer-brand">
-            <span className="footer-no">F-01</span>
             <Link href={href("/#top")} className="footer-logo" aria-label={t.nav.homeLabel}>
               <span className="footer-logo-mark">
                 <Image src="/images/logo.png" alt="" fill sizes="56px" />
@@ -45,7 +43,6 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
           </div>
 
           <div className="footer-cell">
-            <span className="footer-no">F-02</span>
             <p className="footer-label">{t.nav.contact}</p>
             <dl className="footer-facts">
               <div>
@@ -72,7 +69,6 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
           </div>
 
           <nav className="footer-cell" aria-label={t.footer.navigate}>
-            <span className="footer-no">F-03</span>
             <p className="footer-label">{t.footer.navigate}</p>
             <ul className="footer-links">
               {SECTIONS.map(([key, anchor]) => (

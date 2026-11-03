@@ -1696,12 +1696,11 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   color: var(--muted);
 }
 
-/* ───────────── Footer: the sheet's title block ───────────── */
+/* ───────────── Footer ───────────── */
 
 .site-footer {
-  background: #191b1f;
   border-top: 1px solid rgba(201, 166, 130, 0.22);
-  padding-block: clamp(56px, 7vw, 96px) clamp(28px, 3vw, 40px);
+  padding-block: clamp(64px, 7vw, 104px) clamp(28px, 3vw, 40px);
   color: var(--muted);
 }
 /* Project pages end on the pager; give it room before the footer rule. */
@@ -1710,34 +1709,13 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 }
 .footer-sheet {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr);
-  border: 1px solid rgba(201, 166, 130, 0.45);
-  background-color: var(--bg);
-  background-image:
-    linear-gradient(rgba(242, 239, 233, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(242, 239, 233, 0.035) 1px, transparent 1px);
-  background-size: 16px 16px;
-  background-position: -1px -1px;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.7fr);
+  gap: clamp(40px, 5vw, 80px);
 }
 .footer-cell {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: clamp(32px, 3.4vw, 48px) clamp(24px, 2.6vw, 40px);
-  border-inline-end: 1px solid rgba(201, 166, 130, 0.22);
-}
-.footer-cell:nth-child(3) {
-  border-inline-end: 0;
-}
-.footer-no {
-  position: absolute;
-  top: 10px;
-  inset-inline-end: 12px;
-  font-family: var(--font-sans);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  color: rgba(179, 176, 170, 0.6);
 }
 .footer-label {
   font-family: var(--font-sans);
@@ -1778,7 +1756,7 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   line-height: 1.8;
 }
 .footer-cta {
-  margin-top: auto;
+  margin-top: 6px;
   width: fit-content;
 }
 
@@ -1838,8 +1816,9 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   align-items: center;
   justify-content: space-between;
   gap: 12px 32px;
-  padding: 16px clamp(24px, 2.6vw, 40px);
-  border-top: 1px solid rgba(201, 166, 130, 0.45);
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: 24px;
+  border-top: 1px solid rgba(242, 239, 233, 0.08);
   font-size: 12px;
   letter-spacing: 0.06em;
 }
@@ -1875,24 +1854,11 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   }
   .footer-brand {
     grid-column: 1 / -1;
-    border-inline-end: 0;
-    border-bottom: 1px solid rgba(201, 166, 130, 0.22);
-  }
-  .footer-cell:nth-child(2) {
-    border-inline-end: 1px solid rgba(201, 166, 130, 0.22);
   }
 }
 @media (max-width: 680px) {
   .footer-sheet {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .footer-cell,
-  .footer-cell:nth-child(2) {
-    border-inline-end: 0;
-    border-bottom: 1px solid rgba(201, 166, 130, 0.22);
-  }
-  .footer-cell:nth-child(3) {
-    border-bottom: 0;
   }
   .footer-strip {
     flex-direction: column;
