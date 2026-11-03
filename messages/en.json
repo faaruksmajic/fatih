@@ -1,0 +1,54 @@
+{
+  "site": {
+    "nav": {
+      "links": [
+        { "href": "/#top", "label": "Home" },
+        { "href": "/#about", "label": "About" },
+        { "href": "/#services", "label": "Services" },
+        { "href": "/#projects", "label": "Projects" },
+        { "href": "/#tools", "label": "Tools" }
+      ],
+      "contact": "Contact"
+    },
+    "hero": {
+      "eyebrow": "Architecture · Interiors · Visualization",
+      "title": "Fatih Škrijelj",
+      "subtitle": "Architecture & Design"
+    },
+    "about": {
+      "eyebrow": "Get to know me",
+      "title": "About Fatih",
+      "description1": "I'm {age}, an architecture student from Sarajevo in my fourth year of studies. Before university I trained and worked as an architectural technician, so I learned how buildings are put together before I learned how to design them.",
+      "description2": "I've worked on residential, commercial and urban projects, spent seven months in a design studio and seen more than ten of my projects built. I approach every project with precision, curiosity and a commitment to meaningful spaces."
+    },
+    "services": {
+      "eyebrow": "What I do",
+      "title": "My Services",
+      "description": "From the first sketch to the final render, I cover the whole design process for homes, offices and interiors.",
+      "items": [
+        { "title": "Architectural Design", "description": "Homes, offices and mixed-use buildings designed from the first sketch to a buildable plan." },
+        { "title": "Interior Design", "description": "Kitchens, bedrooms and living spaces that are comfortable, functional and built around the client." },
+        { "title": "3D Visualization", "description": "Photoreal renders that show the light, materials and mood of a project before it is built." }
+      ]
+    },
+    "projects": {
+      "eyebrow": "What I have done",
+      "title": "My Projects",
+      "allProjects": "All projects ({{count}})",
+      "showFewer": "Show fewer"
+    },
+    "tools": {
+      "eyebrow": "Software",
+      "title": "Tools I Work With",
+      "description": "From construction drawings to final renders, I work across the full digital workflow, from the first line to the finished image.",
+      "next": "What's next: finish my studies, gain experience in a respected firm, and one day lead a practice of my own."
+    },
+    "contact": {
+      "eyebrow": "Let's talk",
+      "title": "About Your Project",
+      "contactInfo": "Contact Info",
+      "location": "Location: Sarajevo, Bosnia and Herzegovina",
+      "copyright": "© {{year}} Fatih Škrijelj. All rights reserved."
+    }
+  }
+}

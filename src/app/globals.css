@@ -162,6 +162,44 @@ body {
 }
 
 /* Nav */
+
+.language-selector {
+  position: relative;
+  margin-left: auto;
+}
+
+.language-selector-dropdown {
+  appearance: none;
+  background-color: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 32px 8px 12px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.language-selector-dropdown:hover {
+  background-color: var(--panel-2);
+}
+
+.language-selector-dropdown:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(201, 166, 130, 0.5);
+}
+
+.language-selector-dropdown::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Nav */
 .nav {
   position: fixed;
   inset: 0 0 auto 0;

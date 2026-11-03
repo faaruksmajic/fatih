@@ -1,0 +1,54 @@
+{
+  "site": {
+    "nav": {
+      "links": [
+        { "href": "/#top", "label": "Početna" },
+        { "href": "/#about", "label": "O meni" },
+        { "href": "/#services", "label": "Usluge" },
+        { "href": "/#projects", "label": "Projekti" },
+        { "href": "/#tools", "label": "Alati" }
+      ],
+      "contact": "Kontakt"
+    },
+    "hero": {
+      "eyebrow": "Arhitektura · Interijeri · Vizualizacija",
+      "title": "Fatih Škrijelj",
+      "subtitle": "Arhitektura & Dizajn"
+    },
+    "about": {
+      "eyebrow": "Upoznajte me",
+      "title": "O Fatihu",
+      "description1": "Imam {age} godina, studiram arhitekturu u Sarajevu, u četvrtom godini studija. Prije studija sam se obučavao i radio kao tehničar arhitekture, pa sam naučio kako se zgrade grade prije nego što sam naučio kako ih dizajnirati.",
+      "description2": "Radio sam na stambenim, poslovnim i urbanim projektima, proveo sedam mjeseci u dizajnerskom studiju i vidio više od deset mojih projekata izgrađenih. Svaki projekt pristupam s preciznošću, znatiželjom i odlučnošću za značenje prostora."
+    },
+    "services": {
+      "eyebrow": "Što radim",
+      "title": "Moje usluge",
+      "description": "Od prve skice do završnog renderiranja, obuhvaćam cijeli proces dizajniranja za kuće, uredske i interijerske projekte.",
+      "items": [
+        { "title": "Arhitektonski dizajn", "description": "Kuće, uredi i objekti mješovite namjene dizajnirani od prve skice do izvodljivog plana." },
+        { "title": "Interijerski dizajn", "description": "Kuhinje, spavaće sobe i dnevni boravci koji su udobni, funkcionalni i dizajnirani oko klienta." },
+        { "title": "3D vizualizacija", "description": "Fotorealističke render animacije koje pokazuju svjetlo, materijale i ambijent projekta prije izgradnje." }
+      ]
+    },
+    "projects": {
+      "eyebrow": "Što sam uradio",
+      "title": "Moji projekti",
+      "allProjects": "Svi projekti ({{count}})",
+      "showFewer": "Prikaži manje"
+    },
+    "tools": {
+      "eyebrow": "Softver",
+      "title": "Alati s kojima radim",
+      "description": "Od konstrukcijskih crteža do završnih render animacija, radim na cijelom digitalnom procesu, od prve linije do završnog slika.",
+      "next": "Što slijedi: završiti studije, steknuti iskustvo u poštovanom uredu i jednog dana voditi vlastitu praksu."
+    },
+    "contact": {
+      "eyebrow": "Hajde da razgovaramo",
+      "title": "O vašem projektu",
+      "contactInfo": "Kontakt informacije",
+      "location": "Lokacija: Sarajevo, Bosna i Hercegovina",
+      "copyright": "© {{year}} Fatih Škrijelj. Sva prava pridržana."
+    }
+  }
+}

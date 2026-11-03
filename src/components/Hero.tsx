@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
+import { useTranslations } from '@/lib/useTranslations';
+import { Arrow } from "./Hero";
 
-export function Hero() {
+export function Hero({ t, age }: { t: any, age: number }) {
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
       <Image
@@ -16,29 +19,15 @@ export function Hero() {
 
       <div className="hero-content">
         <p className="eyebrow eyebrow-light">
-          Architecture · Interiors · Visualization
+          {t('hero.eyebrow')}
         </p>
         <h1 id="hero-title" className="hero-title">
-          Fatih Škrijelj
-          <span>Architecture &amp; Design</span>
+          {t('hero.title')} <span>{t('hero.subtitle')}</span>
         </h1>
         <a href="#about" className="btn btn-outline">
           Explore <Arrow />
         </a>
       </div>
     </section>
-  );
-}
-
-export function Arrow() {
-  return (
-    <svg viewBox="0 0 16 16" aria-hidden className="arrow">
-      <path
-        d="M2 8 H13 M9 4 L13 8 L9 12"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-    </svg>
   );
 }

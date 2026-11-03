@@ -1,8 +1,8 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useTranslations } from '@/lib/useTranslations';
 
 const LINKS = [
   { href: "/#top", label: "Home" },
@@ -12,9 +12,10 @@ const LINKS = [
   { href: "/#tools", label: "Tools" },
 ];
 
-export function SiteNav({ email }: { email: string }) {
+export function SiteNav({ email, locale }: { email: string, locale: string }) {
   const [solid, setSolid] = useState(false);
   const [open, setOpen] = useState(false);
+  const t = useTranslations('site.nav');
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 40);
@@ -49,7 +50,7 @@ export function SiteNav({ email }: { email: string }) {
               href={link.href}
               onClick={() => setOpen(false)}
             >
-              {link.label}
+              {t(link.label)}
             </Link>
           ))}
           <Link
@@ -57,7 +58,7 @@ export function SiteNav({ email }: { email: string }) {
             className="nav-contact-mobile"
             onClick={() => setOpen(false)}
           >
-            Contact
+            {t('contact')}
           </Link>
         </nav>
 
@@ -82,8 +83,20 @@ export function SiteNav({ email }: { email: string }) {
               strokeWidth="1.6"
             />
           </svg>
-          Contact
+          {t('contact')}
         </a>
+
+        <div className="language-selector">
+          <select
+            className="language-selector-dropdown"
+            value={locale}
+            onChange={(e) => window.location.href = `/${e.target.value}${window.location.pathname.split(`/${e.target.value}`)[1]}`}
+          >
+            <option value="en">🇬🇧 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="bs">🇧🇦 Bosanski</option>
+          </select>
+        </div>
 
         <button
           type="button"
