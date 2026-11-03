@@ -10,7 +10,7 @@ import { fmt, hasLocale, LOCALES } from "@/i18n/config";
 import { categoryLabel, getDictionary } from "@/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import { withLocalSample } from "@/lib/sample-projects";
-import { EMAIL, PHONE, PHONE_HREF } from "@/lib/site";
+import { EMAIL } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -203,59 +203,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           </p>
         </div>
         <ToolSheet uses={t.tools.uses} />
-      </section>
-
-      {/* CONTACT */}
-      <section
-        id="contact"
-        className="contact section container"
-        aria-labelledby="contact-title"
-      >
-        <figure className="contact-img" data-reveal>
-          <Image
-            src="/images/project-brcko-house.jpg"
-            alt={t.contact.imageAlt}
-            fill
-            sizes="(max-width: 1023px) 100vw, 50vw"
-          />
-          <span className="contact-mark contact-mark-ts" aria-hidden />
-          <span className="contact-mark contact-mark-bs" aria-hidden />
-        </figure>
-        <div className="contact-panel">
-          <p className="eyebrow" data-reveal>
-            {t.contact.eyebrow}
-          </p>
-          <h2 id="contact-title" data-reveal style={d(1)}>
-            {t.contact.title}
-          </h2>
-          <p className="contact-lead" data-reveal style={d(2)}>
-            {t.contact.lead}
-          </p>
-          <ol className="contact-steps">
-            {t.contact.steps.map((step, i) => (
-              <li key={step.title} data-reveal style={d(3 + i)}>
-                <span className="contact-step-no" dir="ltr">
-                  0{i + 1}
-                </span>
-                <div>
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          <div className="contact-actions" data-reveal style={d(6)}>
-            <a
-              href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.contact.mailSubject)}`}
-              className="btn btn-solid"
-            >
-              {t.contact.getInTouch} <Arrow />
-            </a>
-            <a href={PHONE_HREF} className="btn btn-outline" dir="ltr">
-              {PHONE}
-            </a>
-          </div>
-        </div>
       </section>
 
       <SiteFooter lang={lang} t={t} />
