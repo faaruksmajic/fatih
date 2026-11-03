@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Arrow } from "@/components/Hero";
 import { ProjectGallery } from "@/components/ProjectGallery";
 import { Reveal } from "@/components/Reveal";
+import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { getProjectsSafe, type ProjectWithImages } from "@/db/queries";
 import { withLocalSample } from "@/lib/sample-projects";
@@ -84,7 +85,7 @@ export default async function ProjectPage({
       <SiteNav email={EMAIL} lang={lang} t={t.nav} />
 
       {/* COVER */}
-      <section className="pd-hero" aria-labelledby="pd-title">
+      <section id="top" className="pd-hero" aria-labelledby="pd-title">
         <Image
           src={project.coverImage}
           alt={fmt(t.projects.renderOf, { title: project.title })}
@@ -166,12 +167,7 @@ export default async function ProjectPage({
         </nav>
       )}
 
-      <footer className="pd-footer container">
-        <p>© {new Date().getFullYear()} Fatih Škrijelj</p>
-        <Link href={href("/#contact")} className="text-link">
-          {p.getInTouch} <Arrow />
-        </Link>
-      </footer>
+      <SiteFooter lang={lang} t={t} />
     </main>
   );
 }

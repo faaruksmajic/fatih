@@ -3,13 +3,14 @@ import { Arrow, Hero } from "@/components/Hero";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
+import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
 import { fmt, hasLocale, LOCALES } from "@/i18n/config";
 import { categoryLabel, getDictionary } from "@/i18n/dictionaries";
 import { notFound } from "next/navigation";
 import { withLocalSample } from "@/lib/sample-projects";
-import { EMAIL, PHONE, PHONE_HREF } from "@/lib/site";
+import { EMAIL } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -229,32 +230,10 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           >
             {t.contact.getInTouch} <Arrow />
           </a>
-
-          <h3 className="contact-subtitle" data-reveal style={d(3)}>
-            {t.contact.info}
-          </h3>
-          <ul className="contact-list" data-reveal style={d(4)}>
-            <li>
-              {t.contact.location}: {t.contact.locationValue}
-            </li>
-            <li>
-              {t.contact.phone}:{" "}
-              <a href={PHONE_HREF} dir="ltr">
-                {PHONE}
-              </a>
-            </li>
-            <li>
-              {t.contact.email}:{" "}
-              <a href={`mailto:${EMAIL}`} dir="ltr">
-                {EMAIL}
-              </a>
-            </li>
-          </ul>
-          <p className="copyright">
-            © {new Date().getFullYear()} Fatih Škrijelj. {t.contact.rights}
-          </p>
         </div>
       </section>
+
+      <SiteFooter lang={lang} t={t} />
     </main>
   );
 }

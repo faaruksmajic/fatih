@@ -108,13 +108,16 @@
     "title": "About Your Project",
     "getInTouch": "Get in touch",
     "mailSubject": "Project enquiry",
-    "info": "Contact Info",
     "location": "Location",
     "locationValue": "Sarajevo, Bosnia and Herzegovina",
     "phone": "Telephone",
     "email": "Email",
     "rights": "All rights reserved.",
     "imageAlt": "Exterior view of a private residential building in Brčko with contemporary architecture design"
+  },
+  "footer": {
+    "navigate": "Navigate",
+    "backToTop": "Back to top"
   },
   "project": {
     "back": "All projects",

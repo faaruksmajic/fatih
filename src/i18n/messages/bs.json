@@ -108,13 +108,16 @@
     "title": "O vašem projektu",
     "getInTouch": "Javite se",
     "mailSubject": "Upit za projekat",
-    "info": "Kontakt podaci",
     "location": "Lokacija",
     "locationValue": "Sarajevo, Bosna i Hercegovina",
     "phone": "Telefon",
     "email": "E-mail",
     "rights": "Sva prava zadržana.",
     "imageAlt": "Vanjski izgled privatne stambene zgrade u Brčkom, savremenog arhitektonskog dizajna"
+  },
+  "footer": {
+    "navigate": "Navigacija",
+    "backToTop": "Nazad na vrh"
   },
   "project": {
     "back": "Svi projekti",

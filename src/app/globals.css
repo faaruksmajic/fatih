@@ -934,19 +934,6 @@ body {
   line-height: 1.15;
   color: var(--text);
 }
-.pd-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-top: clamp(40px, 5vw, 64px);
-  border-top: 1px solid rgba(242, 239, 233, 0.1);
-  color: var(--muted);
-  font-size: 14px;
-}
-
 /* Tools: a drawing sheet of the software, each tool sketched by what it does */
 .tools {
   display: grid;
@@ -1098,7 +1085,7 @@ body {
 .contact {
   position: relative;
   margin-top: var(--section);
-  padding-block: clamp(96px, 11vw, 160px) 40px;
+  padding-block: clamp(110px, 12vw, 180px);
   overflow: hidden;
   text-align: center;
 }
@@ -1115,27 +1102,6 @@ body {
 }
 .contact-content h2 {
   margin-bottom: 28px;
-}
-.contact-subtitle {
-  margin-top: 64px;
-  font-size: 30px;
-}
-.contact-list {
-  margin-top: 16px;
-  color: #d3d0ca;
-  font-size: 15px;
-  line-height: 2;
-}
-.contact-list a {
-  transition: color 0.2s ease;
-}
-.contact-list a:hover {
-  color: var(--accent);
-}
-.copyright {
-  margin-top: 72px;
-  font-size: 14px;
-  color: var(--muted);
 }
 
 /* Reveal motion: content stays visible without JS */
@@ -1259,10 +1225,6 @@ body {
   }
   .pd-pager {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .pd-footer {
-    flex-direction: column;
-    align-items: flex-start;
   }
   .nav-inner {
     height: 72px;
@@ -1617,4 +1579,208 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 .not-found p:not(.eyebrow) {
   max-width: 44ch;
   color: var(--muted);
+}
+
+/* ───────────── Footer: the sheet's title block ───────────── */
+
+.site-footer {
+  background: #191b1f;
+  border-top: 1px solid rgba(201, 166, 130, 0.22);
+  padding-block: clamp(56px, 7vw, 96px) clamp(28px, 3vw, 40px);
+  color: var(--muted);
+}
+/* Project pages end on the pager; give it room before the footer rule. */
+.pd-pager + .site-footer {
+  margin-top: clamp(72px, 9vw, 128px);
+}
+.footer-sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr);
+  border: 1px solid rgba(201, 166, 130, 0.45);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(242, 239, 233, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 239, 233, 0.035) 1px, transparent 1px);
+  background-size: 16px 16px;
+  background-position: -1px -1px;
+}
+.footer-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(32px, 3.4vw, 48px) clamp(24px, 2.6vw, 40px);
+  border-inline-end: 1px solid rgba(201, 166, 130, 0.22);
+}
+.footer-cell:nth-child(3) {
+  border-inline-end: 0;
+}
+.footer-no {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 12px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: rgba(179, 176, 170, 0.6);
+}
+.footer-label {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+  color: var(--text);
+}
+.footer-logo-mark {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 166, 130, 0.35);
+  background: var(--panel-2);
+}
+.footer-logo-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.6vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.footer-tagline {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+.footer-cta {
+  margin-top: auto;
+  width: fit-content;
+}
+
+.footer-facts {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+}
+.footer-facts dt {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(179, 176, 170, 0.75);
+}
+.footer-facts dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.footer-facts a,
+.footer-links a {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition:
+    color 0.25s var(--ease),
+    background-size 0.35s var(--ease);
+}
+[dir="rtl"] .footer-facts a,
+[dir="rtl"] .footer-links a {
+  background-position: 100% 100%;
+}
+.footer-facts a:hover,
+.footer-links a:hover {
+  color: var(--accent);
+  background-size: 100% 1px;
+}
+
+.footer-links {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 15px;
+  color: var(--text);
+}
+
+.footer-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 32px;
+  padding: 16px clamp(24px, 2.6vw, 40px);
+  border-top: 1px solid rgba(201, 166, 130, 0.45);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+.footer-coords {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(179, 176, 170, 0.6);
+}
+.footer-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: color 0.2s var(--ease);
+}
+.footer-top span {
+  transition: transform 0.25s var(--ease);
+}
+.footer-top:hover {
+  color: var(--accent-hover);
+}
+.footer-top:hover span {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 1023px) {
+  .footer-sheet {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+    border-inline-end: 0;
+    border-bottom: 1px solid rgba(201, 166, 130, 0.22);
+  }
+  .footer-cell:nth-child(2) {
+    border-inline-end: 1px solid rgba(201, 166, 130, 0.22);
+  }
+}
+@media (max-width: 680px) {
+  .footer-sheet {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .footer-cell,
+  .footer-cell:nth-child(2) {
+    border-inline-end: 0;
+    border-bottom: 1px solid rgba(201, 166, 130, 0.22);
+  }
+  .footer-cell:nth-child(3) {
+    border-bottom: 0;
+  }
+  .footer-strip {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
