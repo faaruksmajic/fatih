@@ -29,7 +29,7 @@ const STATS = [
   { value: "8", label: "Years in design & construction" },
   { value: "10+", label: "Built projects" },
   { value: "7", label: "Months of studio practice" },
-  { value: "9", label: "Design programs" },
+  { value: "12", label: "Design programs" },
 ];
 
 const SERVICES = [
