@@ -25,6 +25,7 @@ export function Reveal() {
     root.classList.add("reveal-ready");
     // Hold the entrances until the page loader has lifted, so they play in view.
     const loaderUp =
+      !root.classList.contains("intro-seen") &&
       document.querySelector(".page-loader") &&
       performance.now() < LOADER_MS;
     const start = window.setTimeout(

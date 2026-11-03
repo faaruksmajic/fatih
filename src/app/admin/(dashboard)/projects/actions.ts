@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { revalidateSite } from "@/lib/revalidate-site";
 import { createProject, updateProject } from "@/db/queries";
 import { validateProjectInput, type ProjectFormInput } from "@/lib/validation";
 import { requireAdminSession } from "@/lib/auth/require-session";
@@ -21,8 +22,7 @@ export async function saveProjectAction(input: SaveProjectInput): Promise<SavePr
       await createProject(input);
     }
 
-    revalidatePath("/");
-    revalidatePath("/projects/[id]", "page");
+    revalidateSite();
     revalidatePath("/admin");
     return { valid: true };
   } catch (error) {

@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Fatih Škrijelj — Mimarlık ve İç Mimarlık",
+    "description": "Saraybosna'dan mimarlık öğrencisi ve eski mimari teknisyen Fatih Škrijelj'in portfolyosu: mimarlık, iç mimarlık ve 3D görselleştirme.",
+    "projectNotFound": "Proje bulunamadı"
+  },
+  "nav": {
+    "main": "Ana menü",
+    "home": "Ana Sayfa",
+    "about": "Hakkımda",
+    "services": "Hizmetler",
+    "projects": "Projeler",
+    "tools": "Araçlar",
+    "contact": "İletişim",
+    "logoSub": "Mimarlık",
+    "homeLabel": "Fatih Škrijelj, ana sayfa",
+    "openMenu": "Menüyü aç",
+    "closeMenu": "Menüyü kapat",
+    "language": "Dil",
+    "mailSubject": "Merhaba Fatih"
+  },
+  "loader": {
+    "role": "Mimarlık ve İç Mimarlık"
+  },
+  "hero": {
+    "eyebrow": "Mimarlık · İç Mekân · Görselleştirme",
+    "subtitle": "Mimarlık ve Tasarım",
+    "explore": "Keşfet"
+  },
+  "about": {
+    "eyebrow": "Beni tanıyın",
+    "title": "Fatih Hakkında",
+    "p1": "{age} yaşındayım, Saraybosna'da mimarlık bölümü dördüncü sınıf öğrencisiyim. Üniversiteden önce mimari teknisyen olarak eğitim aldım ve çalıştım; böylece binaların nasıl tasarlandığını öğrenmeden önce nasıl inşa edildiğini öğrendim.",
+    "p2": "Konut, ticari ve kentsel projelerde çalıştım, bir tasarım ofisinde yedi ay geçirdim ve ondan fazla projemin inşa edildiğini gördüm. Her projeye titizlik, merak ve anlamlı mekânlar yaratma kararlılığıyla yaklaşıyorum.",
+    "cv": "Özgeçmişi indir",
+    "getInTouch": "İletişime geçin",
+    "portraitAlt": "Fatih Škrijelj portresi"
+  },
+  "stats": {
+    "label": "Rakamlarla",
+    "items": [
+      "Yıl tasarım ve inşaat deneyimi",
+      "Hayata geçen proje",
+      "Ay ofis pratiği",
+      "Tasarım programı"
+    ]
+  },
+  "services": {
+    "eyebrow": "Neler yapıyorum",
+    "title": "Hizmetlerim",
+    "intro": "İlk eskizden son görsele kadar konutlar, ofisler ve iç mekânlar için tasarım sürecinin tamamını üstleniyorum.",
+    "items": [
+      {
+        "title": "Mimari Tasarım",
+        "body": "İlk eskizden uygulanabilir projeye kadar tasarlanan konutlar, ofisler ve karma kullanımlı yapılar."
+      },
+      {
+        "title": "İç Mimarlık",
+        "body": "Konforlu, işlevsel ve kullanıcının ihtiyaçlarına göre tasarlanmış mutfaklar, yatak odaları ve yaşam alanları."
+      },
+      {
+        "title": "3D Görselleştirme",
+        "body": "Bir projenin ışığını, malzemelerini ve atmosferini inşa edilmeden önce gösteren fotogerçekçi görseller."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Neler yaptım",
+    "title": "Projelerim",
+    "empty": "Yeni projeler yakında.",
+    "all": "Tüm projeler ({count})",
+    "fewer": "Daha az göster",
+    "view": "Projeyi incele",
+    "renderOf": "{title} görseli"
+  },
+  "categories": {
+    "residential": "Konut",
+    "commercial": "Ticari",
+    "interior": "İç mekân",
+    "urban": "Kentsel",
+    "public": "Kamusal",
+    "mixed-use": "Karma kullanım",
+    "landscape": "Peyzaj"
+  },
+  "tools": {
+    "eyebrow": "Yazılım",
+    "title": "Kullandığım Araçlar",
+    "intro": "Uygulama çizimlerinden son görsellere kadar, ilk çizgiden bitmiş görüntüye tüm dijital süreçte çalışıyorum.",
+    "nextLabel": "Sırada ne var:",
+    "next": "eğitimimi tamamlamak, saygın bir ofiste deneyim kazanmak ve bir gün kendi ofisimi yönetmek.",
+    "uses": {
+      "AutoCAD": "2D çizim",
+      "Revit": "BIM modelleme",
+      "ArchiCAD": "Planlar ve kesitler",
+      "SketchUp": "Kütle çalışması",
+      "Rhino": "Serbest form yüzeyler",
+      "V-Ray": "Fotogerçekçi render",
+      "Lumion": "Sahne ve peyzaj",
+      "Photoshop": "Post prodüksiyon",
+      "Illustrator": "Diyagram ve paftalar",
+      "3ds Max": "3D modelleme",
+      "D5 Render": "Gerçek zamanlı render",
+      "Chaos Corona": "Fotogerçekçi render"
+    }
+  },
+  "contact": {
+    "eyebrow": "Konuşalım",
+    "title": "Projeniz Hakkında",
+    "getInTouch": "İletişime geçin",
+    "mailSubject": "Proje talebi",
+    "info": "İletişim Bilgileri",
+    "location": "Konum",
+    "locationValue": "Saraybosna, Bosna-Hersek",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "rights": "Tüm hakları saklıdır.",
+    "imageAlt": "Brčko'da çağdaş mimari tasarıma sahip özel bir konutun dış görünüşü"
+  },
+  "project": {
+    "back": "Tüm projeler",
+    "about": "Proje hakkında",
+    "category": "Kategori",
+    "images": "Görseller",
+    "designer": "Tasarımcı",
+    "similar": "Benzer bir proje başlatın",
+    "similarSubject": "{title} benzeri bir proje",
+    "galleryEyebrow": "Galeri",
+    "more": "Diğer projeler",
+    "prev": "Önceki proje",
+    "next": "Sonraki proje",
+    "getInTouch": "İletişime geçin"
+  },
+  "gallery": {
+    "open": "{count} görselden {n}. görseli aç",
+    "imageAlt": "{title}, görsel {n}",
+    "label": "{title} galerisi",
+    "prev": "Önceki görsel",
+    "next": "Sonraki görsel",
+    "close": "Kapat"
+  },
+  "notFound": {
+    "title": "Sayfa bulunamadı",
+    "body": "Aradığınız sayfa mevcut değil veya taşınmış.",
+    "home": "Ana sayfaya dön"
+  }
+}

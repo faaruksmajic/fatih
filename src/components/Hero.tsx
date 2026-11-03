@@ -1,9 +1,7 @@
-"use client";
 import Image from "next/image";
-import { useTranslations } from '@/lib/useTranslations';
-import { Arrow } from "./Hero";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function Hero({ t, age }: { t: any, age: number }) {
+export function Hero({ t }: { t: Dictionary["hero"] }) {
   return (
     <section id="top" className="hero" aria-labelledby="hero-title">
       <Image
@@ -18,16 +16,29 @@ export function Hero({ t, age }: { t: any, age: number }) {
       <div className="hero-shade" />
 
       <div className="hero-content">
-        <p className="eyebrow eyebrow-light">
-          {t('hero.eyebrow')}
-        </p>
+        <p className="eyebrow eyebrow-light">{t.eyebrow}</p>
         <h1 id="hero-title" className="hero-title">
-          {t('hero.title')} <span>{t('hero.subtitle')}</span>
+          <bdi>Fatih Škrijelj</bdi>
+          <span>{t.subtitle}</span>
         </h1>
         <a href="#about" className="btn btn-outline">
-          Explore <Arrow />
+          {t.explore} <Arrow />
         </a>
       </div>
     </section>
+  );
+}
+
+/** Points forward in the reading direction (mirrored in right-to-left pages by CSS). */
+export function Arrow() {
+  return (
+    <svg viewBox="0 0 16 16" aria-hidden className="arrow">
+      <path
+        d="M2 8 H13 M9 4 L13 8 L9 12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.4"
+      />
+    </svg>
   );
 }

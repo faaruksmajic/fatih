@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { fmt } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
 /**
  * Every image of a project in an editorial grid. Clicking one opens it full
@@ -10,9 +12,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function ProjectGallery({
   images,
   title,
+  t,
 }: {
   images: string[];
   title: string;
+  t: Dictionary["gallery"];
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
@@ -32,12 +36,14 @@ export function ProjectGallery({
     if (!dialog) return;
     const onKey = (e: KeyboardEvent) => {
       if (!dialog.open) return;
+      // In right-to-left pages the next image is to the left.
+      const forward = document.documentElement.dir === "rtl" ? -1 : 1;
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        step(-1);
+        step(-forward);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        step(1);
+        step(forward);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -53,11 +59,11 @@ export function ProjectGallery({
               type="button"
               className="gallery-btn"
               onClick={() => openAt(i)}
-              aria-label={`Open image ${i + 1} of ${count}`}
+              aria-label={fmt(t.open, { n: i + 1, count })}
             >
               <Image
                 src={src}
-                alt={`${title}, image ${i + 1}`}
+                alt={fmt(t.imageAlt, { title, n: i + 1 })}
                 fill
                 sizes="(min-width: 681px) 50vw, 100vw"
                 className="object-cover"
@@ -73,7 +79,7 @@ export function ProjectGallery({
       <dialog
         ref={dialogRef}
         className="lightbox"
-        aria-label={`${title} gallery`}
+        aria-label={fmt(t.label, { title })}
         onClick={(e) => {
           if (e.target === dialogRef.current) dialogRef.current?.close();
         }}
@@ -81,7 +87,7 @@ export function ProjectGallery({
         <div className="lightbox-img">
           <Image
             src={images[index]}
-            alt={`${title}, image ${index + 1}`}
+            alt={fmt(t.imageAlt, { title, n: index + 1 })}
             fill
             sizes="100vw"
             className="object-contain"
@@ -97,14 +103,16 @@ export function ProjectGallery({
               <button
                 type="button"
                 onClick={() => step(-1)}
-                aria-label="Previous image"
+                aria-label={t.prev}
+                className="lightbox-prev"
               >
                 ←
               </button>
               <button
                 type="button"
                 onClick={() => step(1)}
-                aria-label="Next image"
+                aria-label={t.next}
+                className="lightbox-next"
               >
                 →
               </button>
@@ -115,7 +123,7 @@ export function ProjectGallery({
             className="lightbox-close"
             onClick={() => dialogRef.current?.close()}
           >
-            Close
+            {t.close}
           </button>
         </div>
       </dialog>

@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { revalidateSite } from "@/lib/revalidate-site";
 import { requireAdminSession } from "@/lib/auth/require-session";
 import { setCvUrl } from "@/db/queries";
 
@@ -20,7 +21,7 @@ export async function saveCvUrlAction(url: string): Promise<SaveCvResult> {
     return { ok: false, error: "Something went wrong. Please try again." };
   }
 
-  revalidatePath("/");
+  revalidateSite();
   revalidatePath("/admin/cv");
   return { ok: true };
 }

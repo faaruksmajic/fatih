@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Fatih Škrijelj — Architektur & Innenarchitektur",
+    "description": "Portfolio von Fatih Škrijelj, Architekturstudent und ehemaliger Bautechniker aus Sarajevo: Architektur, Innenarchitektur und 3D-Visualisierung.",
+    "projectNotFound": "Projekt nicht gefunden"
+  },
+  "nav": {
+    "main": "Hauptnavigation",
+    "home": "Start",
+    "about": "Über mich",
+    "services": "Leistungen",
+    "projects": "Projekte",
+    "tools": "Software",
+    "contact": "Kontakt",
+    "logoSub": "Architektur",
+    "homeLabel": "Fatih Škrijelj, Startseite",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache",
+    "mailSubject": "Hallo Fatih"
+  },
+  "loader": {
+    "role": "Architektur & Innenarchitektur"
+  },
+  "hero": {
+    "eyebrow": "Architektur · Innenräume · Visualisierung",
+    "subtitle": "Architektur & Design",
+    "explore": "Entdecken"
+  },
+  "about": {
+    "eyebrow": "Lernen Sie mich kennen",
+    "title": "Über Fatih",
+    "p1": "Ich bin {age} Jahre alt und studiere Architektur in Sarajevo, im vierten Studienjahr. Vor dem Studium habe ich eine Ausbildung zum Bautechniker gemacht und in dem Beruf gearbeitet. So habe ich gelernt, wie Gebäude zusammengesetzt werden, bevor ich gelernt habe, sie zu entwerfen.",
+    "p2": "Ich habe an Wohn-, Gewerbe- und Städtebauprojekten gearbeitet, sieben Monate in einem Architekturbüro verbracht und mehr als zehn meiner Projekte gebaut gesehen. Ich gehe jedes Projekt mit Präzision, Neugier und dem Anspruch an Räume mit Bedeutung an.",
+    "cv": "Lebenslauf herunterladen",
+    "getInTouch": "Kontakt aufnehmen",
+    "portraitAlt": "Porträt von Fatih Škrijelj"
+  },
+  "stats": {
+    "label": "In Zahlen",
+    "items": [
+      "Jahre in Planung & Bau",
+      "Realisierte Projekte",
+      "Monate Büropraxis",
+      "Planungsprogramme"
+    ]
+  },
+  "services": {
+    "eyebrow": "Was ich mache",
+    "title": "Meine Leistungen",
+    "intro": "Von der ersten Skizze bis zum fertigen Rendering decke ich den gesamten Entwurfsprozess für Wohnhäuser, Büros und Innenräume ab.",
+    "items": [
+      {
+        "title": "Architekturentwurf",
+        "body": "Wohnhäuser, Büros und gemischt genutzte Gebäude, von der ersten Skizze bis zum baureifen Plan."
+      },
+      {
+        "title": "Innenarchitektur",
+        "body": "Küchen, Schlaf- und Wohnräume, die komfortabel und funktional sind und sich nach dem Bauherrn richten."
+      },
+      {
+        "title": "3D-Visualisierung",
+        "body": "Fotorealistische Renderings, die Licht, Materialien und Stimmung eines Projekts zeigen, bevor es gebaut wird."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Was ich gemacht habe",
+    "title": "Meine Projekte",
+    "empty": "Neue Projekte folgen in Kürze.",
+    "all": "Alle Projekte ({count})",
+    "fewer": "Weniger anzeigen",
+    "view": "Projekt ansehen",
+    "renderOf": "Rendering von {title}"
+  },
+  "categories": {
+    "residential": "Wohnbau",
+    "commercial": "Gewerbebau",
+    "interior": "Innenraum",
+    "urban": "Städtebau",
+    "public": "Öffentlicher Bau",
+    "mixed-use": "Mischnutzung",
+    "landscape": "Landschaft"
+  },
+  "tools": {
+    "eyebrow": "Software",
+    "title": "Meine Werkzeuge",
+    "intro": "Von Ausführungsplänen bis zu fertigen Renderings arbeite ich im gesamten digitalen Prozess, von der ersten Linie bis zum fertigen Bild.",
+    "nextLabel": "Wie es weitergeht:",
+    "next": "mein Studium abschließen, Erfahrung in einem renommierten Büro sammeln und eines Tages ein eigenes Büro führen.",
+    "uses": {
+      "AutoCAD": "2D-Zeichnung",
+      "Revit": "BIM-Modellierung",
+      "ArchiCAD": "Grundrisse & Schnitte",
+      "SketchUp": "Massenmodelle",
+      "Rhino": "Freiformflächen",
+      "V-Ray": "Fotorealistisches Rendering",
+      "Lumion": "Szenen & Landschaft",
+      "Photoshop": "Nachbearbeitung",
+      "Illustrator": "Diagramme & Tafeln",
+      "3ds Max": "3D-Modellierung",
+      "D5 Render": "Echtzeit-Rendering",
+      "Chaos Corona": "Fotorealistisches Rendering"
+    }
+  },
+  "contact": {
+    "eyebrow": "Lassen Sie uns sprechen",
+    "title": "Über Ihr Projekt",
+    "getInTouch": "Kontakt aufnehmen",
+    "mailSubject": "Projektanfrage",
+    "info": "Kontaktdaten",
+    "location": "Standort",
+    "locationValue": "Sarajevo, Bosnien und Herzegowina",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "rights": "Alle Rechte vorbehalten.",
+    "imageAlt": "Außenansicht eines privaten Wohnhauses in Brčko mit zeitgenössischer Architektur"
+  },
+  "project": {
+    "back": "Alle Projekte",
+    "about": "Über das Projekt",
+    "category": "Kategorie",
+    "images": "Bilder",
+    "designer": "Entwurf",
+    "similar": "Ähnliches Projekt anfragen",
+    "similarSubject": "Ein Projekt wie {title}",
+    "galleryEyebrow": "Galerie",
+    "more": "Weitere Projekte",
+    "prev": "Vorheriges Projekt",
+    "next": "Nächstes Projekt",
+    "getInTouch": "Kontakt aufnehmen"
+  },
+  "gallery": {
+    "open": "Bild {n} von {count} öffnen",
+    "imageAlt": "{title}, Bild {n}",
+    "label": "Galerie: {title}",
+    "prev": "Vorheriges Bild",
+    "next": "Nächstes Bild",
+    "close": "Schließen"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "body": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "home": "Zur Startseite"
+  }
+}

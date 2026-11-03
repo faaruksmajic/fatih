@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "title": "Fatih Škrijelj — Arhitektura i dizajn enterijera",
+    "description": "Portfolio Fatiha Škrijelja, studenta arhitekture i bivšeg arhitektonskog tehničara iz Sarajeva: arhitektura, dizajn enterijera i 3D vizualizacija.",
+    "projectNotFound": "Projekat nije pronađen"
+  },
+  "nav": {
+    "main": "Glavna navigacija",
+    "home": "Početna",
+    "about": "O meni",
+    "services": "Usluge",
+    "projects": "Projekti",
+    "tools": "Alati",
+    "contact": "Kontakt",
+    "logoSub": "Arhitektura",
+    "homeLabel": "Fatih Škrijelj, početna",
+    "openMenu": "Otvori meni",
+    "closeMenu": "Zatvori meni",
+    "language": "Jezik",
+    "mailSubject": "Pozdrav Fatihe"
+  },
+  "loader": {
+    "role": "Arhitektura i dizajn enterijera"
+  },
+  "hero": {
+    "eyebrow": "Arhitektura · Enterijeri · Vizualizacija",
+    "subtitle": "Arhitektura i dizajn",
+    "explore": "Istraži"
+  },
+  "about": {
+    "eyebrow": "Upoznajte me",
+    "title": "O Fatihu",
+    "p1": "Imam {age} godina i student sam četvrte godine arhitekture u Sarajevu. Prije fakulteta školovao sam se i radio kao arhitektonski tehničar, pa sam naučio kako se zgrade grade prije nego što sam naučio kako se projektuju.",
+    "p2": "Radio sam na stambenim, poslovnim i urbanističkim projektima, proveo sedam mjeseci u projektantskom birou i vidio više od deset svojih projekata izgrađenih. Svakom projektu pristupam s preciznošću, radoznalošću i posvećenošću prostorima koji imaju smisao.",
+    "cv": "Preuzmi CV",
+    "getInTouch": "Javite se",
+    "portraitAlt": "Portret Fatiha Škrijelja"
+  },
+  "stats": {
+    "label": "U brojkama",
+    "items": [
+      "Godina u projektovanju i gradnji",
+      "Izgrađenih projekata",
+      "Mjeseci prakse u birou",
+      "Programa za projektovanje"
+    ]
+  },
+  "services": {
+    "eyebrow": "Čime se bavim",
+    "title": "Moje usluge",
+    "intro": "Od prve skice do završnog rendera, pokrivam cijeli proces projektovanja kuća, poslovnih prostora i enterijera.",
+    "items": [
+      {
+        "title": "Arhitektonsko projektovanje",
+        "body": "Kuće, poslovni prostori i objekti mješovite namjene, od prve skice do izvodljivog projekta."
+      },
+      {
+        "title": "Dizajn enterijera",
+        "body": "Kuhinje, spavaće i dnevne sobe koje su udobne, funkcionalne i prilagođene klijentu."
+      },
+      {
+        "title": "3D vizualizacija",
+        "body": "Fotorealistični renderi koji pokazuju svjetlo, materijale i atmosferu projekta prije nego što se izgradi."
+      }
+    ]
+  },
+  "projects": {
+    "eyebrow": "Šta sam uradio",
+    "title": "Moji projekti",
+    "empty": "Novi projekti uskoro.",
+    "all": "Svi projekti ({count})",
+    "fewer": "Prikaži manje",
+    "view": "Pogledaj projekat",
+    "renderOf": "Render projekta {title}"
+  },
+  "categories": {
+    "residential": "Stambeni",
+    "commercial": "Poslovni",
+    "interior": "Enterijer",
+    "urban": "Urbanizam",
+    "public": "Javni",
+    "mixed-use": "Mješovita namjena",
+    "landscape": "Pejzaž"
+  },
+  "tools": {
+    "eyebrow": "Softver",
+    "title": "Alati s kojima radim",
+    "intro": "Od izvedbenih crteža do završnih rendera, radim kroz cijeli digitalni proces, od prve linije do gotove slike.",
+    "nextLabel": "Šta slijedi:",
+    "next": "završiti studij, steći iskustvo u uglednom birou i jednog dana voditi vlastiti.",
+    "uses": {
+      "AutoCAD": "2D crtanje",
+      "Revit": "BIM modeliranje",
+      "ArchiCAD": "Osnove i presjeci",
+      "SketchUp": "Volumetrija",
+      "Rhino": "Slobodne forme",
+      "V-Ray": "Fotorealistični render",
+      "Lumion": "Scene i pejzaž",
+      "Photoshop": "Postprodukcija",
+      "Illustrator": "Dijagrami i panoi",
+      "3ds Max": "3D modeliranje",
+      "D5 Render": "Render u realnom vremenu",
+      "Chaos Corona": "Fotorealistični render"
+    }
+  },
+  "contact": {
+    "eyebrow": "Razgovarajmo",
+    "title": "O vašem projektu",
+    "getInTouch": "Javite se",
+    "mailSubject": "Upit za projekat",
+    "info": "Kontakt podaci",
+    "location": "Lokacija",
+    "locationValue": "Sarajevo, Bosna i Hercegovina",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "rights": "Sva prava zadržana.",
+    "imageAlt": "Vanjski izgled privatne stambene zgrade u Brčkom, savremenog arhitektonskog dizajna"
+  },
+  "project": {
+    "back": "Svi projekti",
+    "about": "O projektu",
+    "category": "Kategorija",
+    "images": "Slike",
+    "designer": "Projektant",
+    "similar": "Započnite sličan projekat",
+    "similarSubject": "Projekat poput: {title}",
+    "galleryEyebrow": "Galerija",
+    "more": "Još projekata",
+    "prev": "Prethodni projekat",
+    "next": "Sljedeći projekat",
+    "getInTouch": "Javite se"
+  },
+  "gallery": {
+    "open": "Otvori sliku {n} od {count}",
+    "imageAlt": "{title}, slika {n}",
+    "label": "Galerija: {title}",
+    "prev": "Prethodna slika",
+    "next": "Sljedeća slika",
+    "close": "Zatvori"
+  },
+  "notFound": {
+    "title": "Stranica nije pronađena",
+    "body": "Stranica koju tražite ne postoji ili je premještena.",
+    "home": "Nazad na početnu"
+  }
+}
