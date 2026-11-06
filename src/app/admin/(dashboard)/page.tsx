@@ -13,7 +13,7 @@ export default async function AdminProjectsPage() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h1 className="font-display text-2xl">PROJECTS</h1>
-        <Link href="/admin/projects/new" className="bg-ink text-paper px-4 py-2 text-sm font-semibold">
+        <Link href="/projects/new" className="bg-ink text-paper px-4 py-2 text-sm font-semibold">
           + New Project
         </Link>
       </div>
@@ -32,7 +32,7 @@ export default async function AdminProjectsPage() {
                   <p className="font-semibold">{project.title}</p>
                   <p className="text-sm text-ink/60">{project.category}</p>
                 </div>
-                <Link href={`/admin/projects/${project.id}/edit`} className="text-sm underline">
+                <Link href={`/projects/${project.id}/edit`} className="text-sm underline">
                   Edit
                 </Link>
                 <DeleteProjectButton action={deleteThisProject} projectTitle={project.title} />

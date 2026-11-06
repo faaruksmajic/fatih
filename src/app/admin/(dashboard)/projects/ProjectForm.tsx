@@ -81,7 +81,7 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
         return;
       }
 
-      router.push("/admin");
+      router.push("/");
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");

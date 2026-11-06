@@ -36,5 +36,5 @@ export async function loginAction(_prevState: LoginState, formData: FormData): P
     maxAge: 60 * 60 * 24 * 7,
   });
 
-  redirect("/admin");
+  redirect("/");
 }

@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "Projects" },
-  { href: "/admin/cv", label: "CV" },
+  { href: "/", label: "Projects" },
+  { href: "/cv", label: "CV" },
 ];
 
 export function Sidebar({ logout }: { logout: React.ReactNode }) {
@@ -14,7 +14,7 @@ export function Sidebar({ logout }: { logout: React.ReactNode }) {
   return (
     <aside className="w-56 shrink-0 min-h-screen bg-charcoal text-paper flex flex-col justify-between px-6 py-8">
       <div className="flex flex-col gap-10">
-        <Link href="/admin" className="font-display text-lg">
+        <Link href="/" className="font-display text-lg">
           FATIH ADMIN
         </Link>
         <nav className="flex flex-col gap-1">
