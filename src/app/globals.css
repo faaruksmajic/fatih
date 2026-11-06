@@ -1986,3 +1986,23 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
     display: none;
   }
 }
+
+/* Phone footer: the footer is tall and narrow, so a full-cover image zooms into a blur.
+   Keep the render to the bottom band, sized so the house reads, fading up into the page. */
+@media (max-width: 680px) {
+  .footer-bg {
+    top: auto;
+    height: min(100%, 420px);
+  }
+  .footer-bg img {
+    object-position: 62% 60% !important;
+  }
+  .footer-bg-shade {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--bg-rgb) / 1) 0%,
+      rgb(var(--bg-rgb) / 0.8) 35%,
+      rgb(var(--bg-rgb) / 0.7) 100%
+    );
+  }
+}
