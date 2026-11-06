@@ -5,11 +5,12 @@ import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
-import { getCvUrlSafe, getProjectsSafe } from "@/db/queries";
+import { getCategoriesSafe, getCvUrlSafe, getProjectsSafe } from "@/db/queries";
 import { fmt, hasLocale, LOCALES } from "@/i18n/config";
-import { categoryLabel, getDictionary } from "@/i18n/dictionaries";
+import { getDictionary } from "@/i18n/dictionaries";
+import { categoryName, projectCategoryLabel } from "@/lib/categories";
 import { notFound } from "next/navigation";
-import { withLocalSample } from "@/lib/sample-projects";
+import { withLocalSample, withLocalSampleCategories } from "@/lib/sample-projects";
 import { EMAIL } from "@/lib/site";
 
 export const revalidate = 3600;
@@ -67,11 +68,16 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const t = await getDictionary(lang);
-  const [dbProjects, cvUrl] = await Promise.all([
+  const [dbProjects, dbCategories, cvUrl] = await Promise.all([
     getProjectsSafe(),
+    getCategoriesSafe(),
     getCvUrlSafe(),
   ]);
   const projects = withLocalSample(dbProjects);
+  // Tabs: categories in their admin order, only those with at least one project.
+  const tabs = withLocalSampleCategories(dbCategories, dbProjects)
+    .filter((c) => projects.some((p) => p.categoryId === c.id))
+    .map((c) => ({ id: c.id, label: categoryName(c.names, lang) }));
 
   return (
     <main className="site">
@@ -179,8 +185,9 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <ProjectGrid
             projects={projects.map((p) => ({
               ...p,
-              category: categoryLabel(t, p.category),
+              category: projectCategoryLabel(p, lang, t),
             }))}
+            tabs={tabs}
             lang={lang}
             t={t.projects}
           />

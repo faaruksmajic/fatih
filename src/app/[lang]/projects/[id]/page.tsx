@@ -17,10 +17,8 @@ import {
   localePath,
   type Locale,
 } from "@/i18n/config";
-import {
-  categoryLabel,
-  getDictionary,
-} from "@/i18n/dictionaries";
+import { getDictionary } from "@/i18n/dictionaries";
+import { projectCategoryLabel } from "@/lib/categories";
 
 export const revalidate = 3600;
 
@@ -103,7 +101,7 @@ export default async function ProjectPage({
             <span className="pd-no">
               {no(index)} / {String(total).padStart(2, "0")}
             </span>
-            <span>{categoryLabel(t, project.category)}</span>
+            <span>{projectCategoryLabel(project, lang, t)}</span>
           </p>
           <h1 id="pd-title" className="pd-title" dir="auto">
             {project.title}
@@ -125,7 +123,7 @@ export default async function ProjectPage({
           <dl>
             <div>
               <dt>{p.category}</dt>
-              <dd>{categoryLabel(t, project.category)}</dd>
+              <dd>{projectCategoryLabel(project, lang, t)}</dd>
             </div>
             <div>
               <dt>{p.images}</dt>

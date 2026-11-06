@@ -1,4 +1,12 @@
-import type { ProjectWithImages } from "@/db/queries";
+import type { CategoryWithCount, ProjectWithImages } from "@/db/queries";
+import type { CategoryNames } from "@/db/schema";
+
+// Categories for the local samples, keyed by the samples' legacy text.
+const SAMPLE_CATEGORIES: Record<string, { id: string; names: CategoryNames }> = {
+  Commercial: { id: "sample-cat-0", names: { bs: "Poslovni", en: "Commercial", de: "Gewerbe", tr: "Ticari", ar: "تجاري" } },
+  Residential: { id: "sample-cat-1", names: { bs: "Stambeni", en: "Residential", de: "Wohnbau", tr: "Konut", ar: "سكني" } },
+  Interior: { id: "sample-cat-2", names: { bs: "Enterijer", en: "Interior", de: "Innenraum", tr: "İç mekân", ar: "تصميم داخلي" } },
+};
 
 // Gallery images for the local samples, so the project page can be checked
 // without a database. Never shown in production.
@@ -39,6 +47,8 @@ const LOCAL_SAMPLE: ProjectWithImages[] = [
   id: `sample-${i}`,
   title,
   category,
+  categoryId: SAMPLE_CATEGORIES[category]?.id ?? null,
+  categoryNames: SAMPLE_CATEGORIES[category]?.names ?? null,
   description,
   coverImage: `/images/${file}`,
   position: i,
@@ -54,4 +64,14 @@ export function withLocalSample(projects: ProjectWithImages[]): ProjectWithImage
   return projects.length === 0 && process.env.NODE_ENV === "development"
     ? LOCAL_SAMPLE
     : projects;
+}
+
+/** The database categories, or the samples' ones when the samples are showing. */
+export function withLocalSampleCategories(
+  categories: CategoryWithCount[],
+  dbProjects: ProjectWithImages[],
+): CategoryWithCount[] {
+  return dbProjects.length === 0 && process.env.NODE_ENV === "development"
+    ? Object.values(SAMPLE_CATEGORIES).map((c, position) => ({ ...c, position, projectCount: 0 }))
+    : categories;
 }

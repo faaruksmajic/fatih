@@ -72,7 +72,9 @@
     "all": "Tüm projeler ({count})",
     "fewer": "Daha az göster",
     "view": "Projeyi incele",
-    "renderOf": "{title} görseli"
+    "renderOf": "{title} görseli",
+    "allTab": "Tümü",
+    "tabsLabel": "Proje kategorileri"
   },
   "categories": {
     "residential": "Konut",

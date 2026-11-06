@@ -72,7 +72,9 @@
     "all": "Svi projekti ({count})",
     "fewer": "Prikaži manje",
     "view": "Pogledaj projekat",
-    "renderOf": "Render projekta {title}"
+    "renderOf": "Render projekta {title}",
+    "allTab": "Sve",
+    "tabsLabel": "Kategorije projekata"
   },
   "categories": {
     "residential": "Stambeni",

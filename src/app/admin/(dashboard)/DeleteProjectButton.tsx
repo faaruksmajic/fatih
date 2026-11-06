@@ -16,7 +16,7 @@ export function DeleteProjectButton({
         }
       }}
     >
-      <button type="submit" className="text-sm text-red-600 underline">
+      <button type="submit" className="text-sm text-red-600 underline min-h-10 px-1">
         Delete
       </button>
     </form>

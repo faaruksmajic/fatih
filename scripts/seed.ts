@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { put } from "@vercel/blob";
 import { createProject } from "../src/db/queries";
+import { ensureCategory, namesFor } from "./migrate-categories";
 
 const SEED_PROJECTS = [
   {
@@ -59,7 +60,7 @@ async function main() {
     const id = await createProject({
       title: seed.title,
       description: seed.description,
-      category: seed.category,
+      categoryId: await ensureCategory(namesFor(seed.category)),
       coverImage: blob.url,
       images: [],
     });

@@ -72,7 +72,9 @@
     "all": "All projects ({count})",
     "fewer": "Show fewer",
     "view": "View project",
-    "renderOf": "Render of {title}"
+    "renderOf": "Render of {title}",
+    "allTab": "All",
+    "tabsLabel": "Project categories"
   },
   "categories": {
     "residential": "Residential",

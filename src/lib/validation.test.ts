@@ -5,7 +5,7 @@ describe("validateProjectInput", () => {
   const valid = {
     title: "ATAL Group",
     description: "A five-story building.",
-    category: "Commercial",
+    categoryId: "7b0c4a52-3f7e-4c55-9d7e-2a1f0f6f1a10",
     coverImage: "https://example.com/cover.jpg",
     images: [] as string[],
   };
@@ -27,9 +27,9 @@ describe("validateProjectInput", () => {
   });
 
   it("rejects a missing category", () => {
-    const result = validateProjectInput({ ...valid, category: "" });
+    const result = validateProjectInput({ ...valid, categoryId: "" });
     expect(result.valid).toBe(false);
-    if (!result.valid) expect(result.errors.category).toBeDefined();
+    if (!result.valid) expect(result.errors.categoryId).toBeDefined();
   });
 
   it("rejects a missing cover image", () => {

@@ -103,6 +103,18 @@ body {
   text-transform: uppercase;
 }
 
+/* ───────────── Admin ───────────── */
+
+/* 16px fields so phones don't zoom in on focus; comfortable touch height. */
+.admin-shell :is(input:not([type="file"]):not([type="hidden"]), select, textarea) {
+  font-size: 16px;
+  min-height: 44px;
+}
+.admin-shell input[type="file"] {
+  font-size: 14px;
+  max-width: 100%;
+}
+
 /* ───────────── Site ───────────── */
 
 .site {
@@ -535,6 +547,57 @@ body {
 }
 
 /* Projects: one featured work beside two smaller ones; the rest open on demand */
+/* Category tabs above the projects: plain labels, the active one underlined like a dimension line */
+.project-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.project-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0;
+  margin-bottom: -1px;
+  border-bottom: 1px solid transparent;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.project-tab:hover {
+  color: var(--text);
+}
+.project-tab[aria-pressed="true"] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.project-tab-count {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.project-tab[aria-pressed="true"] .project-tab-count {
+  color: var(--accent);
+}
+@media (max-width: 680px) {
+  .project-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+  }
+  .project-tab {
+    flex: none;
+  }
+}
+
 .projects {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));

@@ -5,15 +5,21 @@ import Image from "next/image";
 import { upload } from "@vercel/blob/client";
 import { useRouter } from "next/navigation";
 import { saveProjectAction } from "./actions";
+import Link from "next/link";
 import type { ProjectWithImages } from "@/db/queries";
+import type { Category } from "@/lib/categories";
 
-const CATEGORY_SUGGESTIONS = ["Residential", "Commercial", "Interior", "Urban"];
-
-export function ProjectForm({ project }: { project?: ProjectWithImages }) {
+export function ProjectForm({
+  project,
+  categories,
+}: {
+  project?: ProjectWithImages;
+  categories: Category[];
+}) {
   const router = useRouter();
   const [title, setTitle] = useState(project?.title ?? "");
   const [description, setDescription] = useState(project?.description ?? "");
-  const [category, setCategory] = useState(project?.category ?? "");
+  const [categoryId, setCategoryId] = useState(project?.categoryId ?? "");
   const [coverImage, setCoverImage] = useState(project?.coverImage ?? "");
   const [images, setImages] = useState<string[]>(project?.images.map((image) => image.imageUrl) ?? []);
   const [uploading, setUploading] = useState(false);
@@ -71,7 +77,7 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
         id: project?.id,
         title,
         description,
-        category,
+        categoryId,
         coverImage,
         images,
       });
@@ -112,24 +118,30 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
       </label>
       <label className="flex flex-col gap-1 text-sm">
         Category
-        <input
-          list="categories"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-          className="border border-ink/20 px-3 py-2"
-        />
-        <datalist id="categories">
-          {CATEGORY_SUGGESTIONS.map((suggestion) => (
-            <option key={suggestion} value={suggestion} />
+        <select
+          value={categoryId}
+          onChange={(event) => setCategoryId(event.target.value)}
+          className="border border-ink/20 px-3 py-2 bg-paper"
+        >
+          <option value="" disabled>
+            Choose a category
+          </option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.names.bs}
+            </option>
           ))}
-        </datalist>
+        </select>
+        <Link href="/categories/new" className="self-start text-xs underline text-ink/60">
+          + New category
+        </Link>
       </label>
       <label className="flex flex-col gap-1 text-sm">
         Cover image
         <input type="file" accept="image/*" onChange={handleCoverChange} />
       </label>
       {coverImage && (
-        <div className="relative w-40 h-28">
+        <div className="relative w-full max-w-xs aspect-[10/7]">
           <Image src={coverImage} alt="Cover preview" fill className="object-cover" />
         </div>
       )}
@@ -144,7 +156,8 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
             <button
               type="button"
               onClick={() => removeImage(url)}
-              className="absolute -top-2 -right-2 bg-ink text-paper w-5 h-5 text-xs"
+              aria-label="Remove image"
+              className="absolute -top-2 -right-2 bg-ink text-paper w-7 h-7 text-sm"
             >
               ×
             </button>
@@ -154,7 +167,7 @@ export function ProjectForm({ project }: { project?: ProjectWithImages }) {
       <button
         type="submit"
         disabled={uploading || submitting}
-        className="bg-ink text-paper font-semibold px-4 py-2 disabled:opacity-50"
+        className="bg-ink text-paper font-semibold px-4 py-2 min-h-11 disabled:opacity-50 sticky bottom-4 sm:static"
       >
         {submitting ? "Saving..." : uploading ? "Uploading..." : "Save project"}
       </button>

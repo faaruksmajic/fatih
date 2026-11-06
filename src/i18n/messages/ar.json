@@ -72,7 +72,9 @@
     "all": "جميع المشاريع ({count})",
     "fewer": "عرض أقل",
     "view": "عرض المشروع",
-    "renderOf": "تصور لمشروع {title}"
+    "renderOf": "تصور لمشروع {title}",
+    "allTab": "الكل",
+    "tabsLabel": "فئات المشاريع"
   },
   "categories": {
     "residential": "سكني",
