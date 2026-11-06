@@ -37,9 +37,10 @@
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* Site, light: "Paus" — tracing paper, graphite and a deeper sand that holds contrast on paper */
+/* Site, light: "Paus" — tracing paper, graphite and a deeper sand that holds contrast on paper.
+   Follows the device unless the visitor picked a theme (html[data-theme], set by the nav toggle). */
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme="dark"]) {
     color-scheme: light;
     --bg: #f3f0ea;
     --panel: #e8e4dc;
@@ -55,6 +56,22 @@
     --text-rgb: 29 32 36;
     --accent-rgb: 138 102 64;
   }
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f3f0ea;
+  --panel: #e8e4dc;
+  --panel-2: #dfdad0;
+  --panel-deep: #e2ddd3;
+  --text: #1d2024;
+  --text-2: #4a4d52;
+  --muted: #6e6c67;
+  --accent: #8a6640;
+  --accent-hover: #6f5133;
+  --accent-ink: #f3f0ea;
+  --bg-rgb: 243 240 234;
+  --text-rgb: 29 32 36;
+  --accent-rgb: 138 102 64;
 }
 
 /* Anything set over a photograph stays light-on-dark in both themes. */
@@ -1255,7 +1272,8 @@ body {
   .nav-toggle {
     display: flex;
   }
-  .lang-switch {
+  /* The controls group on the end side: the theme toggle leads them. */
+  .theme-toggle {
     margin-inline-start: auto;
   }
   .nav-links.is-open {
@@ -1356,11 +1374,17 @@ body {
   }
   .nav-inner {
     height: 72px;
+    gap: 8px;
+  }
+  .logo {
+    gap: 10px;
+    min-width: 0;
   }
   .logo-mark {
-    width: 44px;
-    height: 29px;
+    width: 40px;
+    height: 27px;
   }
+
   .logo-name {
     font-size: 15px;
     white-space: nowrap;
@@ -1551,6 +1575,48 @@ body {
   position: relative;
   flex-shrink: 0;
 }
+/* Theme toggle: shows the theme you would switch to */
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 1px solid rgb(var(--text-rgb) / 0.22);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  grid-area: 1 / 1;
+}
+/* Dark (default): offer the sun. Light: offer the moon. */
+.theme-moon {
+  display: none;
+}
+:root[data-theme="light"] .theme-sun {
+  display: none;
+}
+:root[data-theme="light"] .theme-moon {
+  display: block;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-sun {
+    display: none;
+  }
+  :root:not([data-theme="dark"]) .theme-moon {
+    display: block;
+  }
+}
+
 .lang-switch summary {
   display: inline-flex;
   align-items: center;
@@ -1648,6 +1714,7 @@ body {
 }
 @media (max-width: 680px) {
   .lang-switch summary {
+    min-height: 40px;
     padding: 0 10px;
   }
   .lang-globe {
@@ -1861,5 +1928,39 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   .footer-coords {
     margin-inline-start: 0;
     flex-basis: 100%;
+  }
+}
+
+/* Phone nav: mark, name and three 40px controls must share one row.
+   Kept last so it wins over the base rules for the toggle and language switch. */
+@media (max-width: 680px) {
+  .theme-toggle,
+  .nav-toggle {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media (max-width: 400px) {
+  .nav-inner {
+    padding-inline: 16px;
+  }
+  .logo-name {
+    font-size: 12px;
+    letter-spacing: 0.03em;
+  }
+  .logo-sub {
+    display: none;
+  }
+  .lang-switch summary {
+    padding: 0 10px;
+  }
+  .lang-switch summary::after {
+    display: none;
+  }
+}
+/* Narrowest phones: the AF mark alone stands for the name. */
+@media (max-width: 350px) {
+  .logo-text {
+    display: none;
   }
 }

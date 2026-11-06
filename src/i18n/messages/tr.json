@@ -17,7 +17,8 @@
     "openMenu": "Menüyü aç",
     "closeMenu": "Menüyü kapat",
     "language": "Dil",
-    "mailSubject": "Merhaba Fatih"
+    "mailSubject": "Merhaba Fatih",
+    "theme": "Açık veya koyu moda geç"
   },
   "loader": {
     "role": "Mimarlık ve İç Mimarlık"

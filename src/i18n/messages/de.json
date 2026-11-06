@@ -17,7 +17,8 @@
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen",
     "language": "Sprache",
-    "mailSubject": "Hallo Fatih"
+    "mailSubject": "Hallo Fatih",
+    "theme": "Hell- oder Dunkelmodus wechseln"
   },
   "loader": {
     "role": "Architektur & Innenarchitektur"

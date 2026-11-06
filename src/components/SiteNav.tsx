@@ -98,6 +98,7 @@ export function SiteNav({
           {t.contact}
         </a>
 
+        <ThemeToggle label={t.theme} />
         <LanguageSwitch lang={lang} label={t.language} />
 
         <button
@@ -112,6 +113,37 @@ export function SiteNav({
         </button>
       </div>
     </header>
+  );
+}
+
+/**
+ * Light / dark toggle. Until it is used the site follows the device; a click
+ * picks the opposite of what is showing and remembers it (see THEME_INIT in
+ * the layout). Which icon shows is decided by CSS, so the server render matches.
+ */
+function ThemeToggle({ label }: { label: string }) {
+  function toggle() {
+    const root = document.documentElement;
+    const current =
+      root.dataset.theme ??
+      (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    const next = current === "light" ? "dark" : "light";
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem("fs-theme", next);
+    } catch {}
+  }
+
+  return (
+    <button type="button" className="theme-toggle" aria-label={label} title={label} onClick={toggle}>
+      <svg viewBox="0 0 24 24" aria-hidden className="theme-sun" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" />
+      </svg>
+      <svg viewBox="0 0 24 24" aria-hidden className="theme-moon" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" />
+      </svg>
+    </button>
   );
 }
 

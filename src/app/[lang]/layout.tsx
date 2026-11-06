@@ -35,6 +35,9 @@ const OG_IMAGE = `${SITE_URL}/images/og.png`;
  */
 const INTRO_ONCE = `try{var s=sessionStorage;if(s.getItem("fs-intro"))document.documentElement.classList.add("intro-seen");else s.setItem("fs-intro","1")}catch(e){}`;
 
+/** Applies a theme the visitor picked with the nav toggle before first paint, so there is no flash. */
+const THEME_INIT = `try{var t=localStorage.getItem("fs-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+
 const firstFamily = (stack: string) => stack.split(",")[0].trim();
 
 export const dynamicParams = false;
@@ -103,7 +106,7 @@ export default async function SiteLayout({
       suppressHydrationWarning
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: INTRO_ONCE }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT + INTRO_ONCE }} />
       </head>
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <PageLoader role={dict.loader.role} />

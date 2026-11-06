@@ -17,7 +17,8 @@
     "openMenu": "Otvori meni",
     "closeMenu": "Zatvori meni",
     "language": "Jezik",
-    "mailSubject": "Pozdrav Fatihe"
+    "mailSubject": "Pozdrav Fatihe",
+    "theme": "Promijeni svijetli ili tamni način"
   },
   "loader": {
     "role": "Arhitektura i dizajn enterijera"

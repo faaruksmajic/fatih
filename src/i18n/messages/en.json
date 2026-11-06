@@ -17,7 +17,8 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language",
-    "mailSubject": "Hello Fatih"
+    "mailSubject": "Hello Fatih",
+    "theme": "Switch light or dark mode"
   },
   "loader": {
     "role": "Architecture & Interior Design"
