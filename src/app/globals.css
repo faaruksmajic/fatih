@@ -577,6 +577,22 @@ body {
   color: var(--text);
   border-bottom-color: var(--accent);
 }
+/* Cards swapped in by a tab fade in briefly instead of waiting for the scroll reveal. */
+.project.is-swapped {
+  animation: project-in 0.35s var(--ease) both;
+  animation-delay: calc(var(--i, 0) * 50ms);
+}
+@keyframes project-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project.is-swapped {
+    animation: none;
+  }
+}
 .project-tab-count {
   font-size: 12px;
   font-variant-numeric: tabular-nums;

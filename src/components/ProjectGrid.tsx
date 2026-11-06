@@ -24,6 +24,9 @@ export function ProjectGrid({
   t: Dictionary["projects"];
 }) {
   const [active, setActive] = useState<string | null>(null);
+  // Once a tab is chosen, cards are swapped in place: the scroll-reveal observer
+  // only knows the cards from the first render, so new ones must not wait for it.
+  const [filtered, setFiltered] = useState(false);
   const [showAll, setShowAll] = useState(false);
   const projects = active
     ? allProjects.filter((p) => p.categoryId === active)
@@ -33,6 +36,7 @@ export function ProjectGrid({
   function choose(id: string | null) {
     setActive(id);
     setShowAll(false);
+    setFiltered(true);
   }
 
   return (
@@ -62,10 +66,10 @@ export function ProjectGrid({
         {visible.map((project, i) => (
           <article
             key={`${active ?? "all"}-${project.id}`}
-            className="project"
-            // Only the first row animates in; projects shown later by the
-            // toggle appear at once (the scroll observer never sees them).
-            {...(i < INITIAL ? { "data-reveal": true } : {})}
+            className={`project ${filtered ? "is-swapped" : ""}`}
+            // Only the first row of the first render animates in on scroll;
+            // cards shown later by the toggle or a tab appear at once.
+            {...(i < INITIAL && !filtered ? { "data-reveal": true } : {})}
             style={{ ["--i" as string]: i % INITIAL }}
           >
             <Link href={localePath(lang, `/projects/${project.id}`)} className="project-btn">
