@@ -19,7 +19,7 @@ Motivi koji to nose (već postoje na siteu, čuvati ih):
 - Na webu se znak koristi **bez kruga i bez pozadine**, direktno na podlozi, u boji akcenta. Uz njega ide ime **velikim slovima**, Archivo raširen: `FATIH ŠKRIJELJ`, ispod sitno `Arhitektura`.
 - **Debljina linija prema veličini:** original (linija 6) od ~200px naviše; navigacija oko 56px → linija 14; footer oko 40px → linija 18.
 - **Favicon** (`src/app/icon.svg`, `src/app/apple-icon.png`) je debela, pojednostavljena verzija, jer se tanke linije na 16px ne vide. Ravna boja pijeska na noćnoj podlozi, pravi uglovi, bez gradijenta.
-- **Slika za dijeljenje linka:** `public/images/og.png` (1200×630): znak, ime, „Arhitektura i dizajn enterijera“ i `fatiharch.online`.
+- **Slika za dijeljenje linka:** `public/images/og-square.png` (600×600): samo znak na noćnoj podlozi. Kvadratna je namjerno, da se u porukama (WhatsApp, Viber, Messenger, X) prikaže kao mala sličica pored naslova, a ne kao veliki baner. Ime i opis dolaze iz naslova i opisa stranice.
 - **Fajlovi za print, PDF i CV** su u ovom folderu (`docs/brand/`):
   - `af-mark-{sand,sand-dark,graphite,white}.svg` i `.png` (2000px, providna pozadina)
   - `lockup-{sand,graphite,white}.png`: znak i ime u jednom redu
