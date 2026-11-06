@@ -27,7 +27,7 @@ const arabicSans = IBM_Plex_Sans_Arabic({
 });
 
 const SITE_URL = "https://fatiharch.online";
-const OG_IMAGE = `${SITE_URL}/images/og.png`;
+const OG_IMAGE = `${SITE_URL}/images/og-square.png`;
 
 /**
  * The drafting intro plays once per visit: later page loads in the same tab
@@ -63,13 +63,13 @@ export async function generateMetadata({
       description: meta.description,
       url: localePath(lang, "/"),
       siteName: "Fatih Škrijelj",
-      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Fatih Škrijelj — Arhitektura i dizajn enterijera" }],
+      images: [{ url: OG_IMAGE, width: 600, height: 600, alt: "Fatih Škrijelj — Arhitektura i dizajn enterijera" }],
       locale: OG_LOCALES[lang],
       alternateLocale: LOCALES.filter((l) => l !== lang).map((l) => OG_LOCALES[l]),
       type: "website",
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: meta.title,
       description: meta.description,
       images: [OG_IMAGE],

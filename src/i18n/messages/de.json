@@ -135,7 +135,9 @@
   },
   "footer": {
     "navigate": "Navigation",
-    "backToTop": "Nach oben"
+    "backToTop": "Nach oben",
+    "social": "Folgen",
+    "soon": "bald"
   },
   "project": {
     "back": "Alle Projekte",

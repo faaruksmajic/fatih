@@ -135,7 +135,9 @@
   },
   "footer": {
     "navigate": "Sayfalar",
-    "backToTop": "Başa dön"
+    "backToTop": "Başa dön",
+    "social": "Takip edin",
+    "soon": "yakında"
   },
   "project": {
     "back": "Tüm projeler",

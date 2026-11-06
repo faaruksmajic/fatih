@@ -135,7 +135,9 @@
   },
   "footer": {
     "navigate": "Navigacija",
-    "backToTop": "Nazad na vrh"
+    "backToTop": "Nazad na vrh",
+    "social": "Pratite me",
+    "soon": "uskoro"
   },
   "project": {
     "back": "Svi projekti",

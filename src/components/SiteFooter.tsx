@@ -4,7 +4,8 @@ import { AfMark } from "@/components/AfMark";
 import { Arrow } from "@/components/Hero";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
-import { EMAIL, PHONE, PHONE_HREF } from "@/lib/site";
+import { EMAIL, PHONE, PHONE_HREF, SOCIAL } from "@/lib/site";
+import { SocialIcon } from "@/components/SocialIcon";
 
 const SECTIONS = [
   ["home", "top"],
@@ -105,6 +106,39 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
                 ))}
               </ul>
             </nav>
+
+            {/* Sits at the bottom of the column, level with the contact buttons. */}
+            <div className="footer-end">
+              <p className="footer-label">{t.footer.social}</p>
+              <ul className="footer-social">
+                {SOCIAL.map((item) => (
+                  <li key={item.id}>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={item.label}
+                        title={item.label}
+                      >
+                        <SocialIcon id={item.id} />
+                      </a>
+                    ) : (
+                      <span
+                        aria-label={`${item.label} (${t.footer.soon})`}
+                        title={`${item.label} · ${t.footer.soon}`}
+                        role="img"
+                      >
+                        <SocialIcon id={item.id} />
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+              <p className="footer-copy">
+                © {year} <bdi>Fatih Škrijelj</bdi>. {t.contact.rights}
+              </p>
+            </div>
           </div>
         </div>
 
@@ -112,9 +146,6 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
           <Link href={href("/#top")} className="footer-logo" aria-label={t.nav.homeLabel}>
             <AfMark className="footer-logo-mark" line={18} />
           </Link>
-          <span className="footer-copy">
-            © {year} <bdi>Fatih Škrijelj</bdi>. {t.contact.rights}
-          </span>
           <span className="footer-coords" dir="ltr">
             43.8563° N · 18.4131° E
           </span>
