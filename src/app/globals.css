@@ -76,6 +76,7 @@
 
 /* Anything set over a photograph stays light-on-dark in both themes. */
 .project-btn,
+.footer-photo,
 .pd-hero,
 .pd-page,
 .gallery-btn,
@@ -1788,55 +1789,88 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 
 /* ───────────── Footer ───────────── */
 
+/* Two halves: the street render as a framed photograph, and the contact content. */
 .site-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 760px;
+  margin-top: var(--section);
+  border-top: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+.footer-photo {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  margin-top: var(--section);
-  border-top: 1px solid var(--line-strong);
-  padding-block: clamp(64px, 7vw, 104px) clamp(28px, 3vw, 40px);
-  color: var(--muted);
+  min-height: 360px;
 }
-.footer-bg {
+.footer-photo img {
+  z-index: -1;
+}
+/* Darkens the foot of the photo so the caption reads. */
+.footer-photo::after {
+  content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
+  background: linear-gradient(180deg, rgb(var(--bg-rgb) / 0) 50%, rgb(var(--bg-rgb) / 0.75) 100%);
 }
-/* Page colour over the render: solid where the footer meets the page, lighter towards the bottom. */
-.footer-bg-shade {
+/* Corner marks, like crop marks on a drawing sheet */
+.footer-tick {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgb(var(--bg-rgb) / 1) 0%,
-    rgb(var(--bg-rgb) / 0.86) 30%,
-    rgb(var(--bg-rgb) / 0.74) 100%
-  );
+  top: 20px;
+  width: 18px;
+  height: 18px;
+  border: 0 solid rgb(var(--text-rgb) / 0.8);
+  border-top-width: 1px;
 }
+.footer-tick-start {
+  inset-inline-start: 20px;
+  border-inline-start-width: 1px;
+}
+.footer-tick-end {
+  inset-inline-end: 20px;
+  border-inline-end-width: 1px;
+}
+.footer-caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 28px clamp(20px, 3vw, 40px);
+}
+
+/* Lines up with the page container on wide screens. */
 .footer-content {
-  position: relative;
-}
-.footer-main {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: clamp(48px, 7vw, 120px);
-}
-.footer-side {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  grid-template-rows: auto 1fr;
-  gap: clamp(32px, 4vw, 56px);
-  padding-top: 8px;
-}
-/* Social icons and the rights line, at the foot of the right column */
-.footer-end {
-  grid-column: 1 / -1;
-  align-self: end;
   display: flex;
   flex-direction: column;
+  padding-block: clamp(48px, 6vw, 96px) clamp(28px, 3vw, 40px);
+  padding-inline: clamp(20px, 4vw, 72px)
+    max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+}
+
+.footer-info {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line-strong);
+}
+
+/* Social icons, rights line and back-to-top at the foot of the column */
+.footer-end {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 16px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+  padding-top: 40px;
 }
 .footer-social {
   display: flex;
@@ -1871,14 +1905,14 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   width: 20px;
   height: 20px;
 }
-.footer-end .footer-copy {
+.footer-copy {
   font-size: 13px;
   color: var(--muted);
 }
 .footer-cell {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 .footer-label {
   font-family: var(--font-mono);
@@ -1901,7 +1935,7 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 
 .footer-facts {
   display: grid;
-  gap: 16px;
+  gap: 12px;
   margin: 0;
 }
 .footer-facts dt {
@@ -1937,7 +1971,7 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 
 .footer-links {
   display: grid;
-  gap: 10px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1947,23 +1981,10 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   color: var(--text);
 }
 
-.footer-strip {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 20px;
-  margin-top: clamp(56px, 7vw, 96px);
-  padding-top: 24px;
-  border-top: 1px solid rgb(var(--text-rgb) / 0.08);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-}
 .footer-coords {
-  margin-inline-start: auto;
   font-size: 11px;
   letter-spacing: 0.14em;
-  color: var(--muted);
+  color: var(--text-2);
 }
 .footer-top {
   display: inline-flex;
@@ -1985,18 +2006,23 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
   transform: translateY(-3px);
 }
 
+/* Tablet and phone: content first, the photo as a band underneath. */
 @media (max-width: 1023px) {
-  .footer-main {
+  .site-footer {
     grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .footer-photo {
+    order: 2;
+    min-height: clamp(280px, 56vw, 480px);
+  }
+  .footer-content {
+    padding-inline: var(--gutter);
   }
 }
 @media (max-width: 680px) {
-  .footer-side {
+  .footer-info {
     grid-template-columns: minmax(0, 1fr);
-  }
-  .footer-coords {
-    margin-inline-start: 0;
-    flex-basis: 100%;
   }
 }
 
@@ -2031,25 +2057,5 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 @media (max-width: 350px) {
   .logo-text {
     display: none;
-  }
-}
-
-/* Phone footer: the footer is tall and narrow, so a full-cover image zooms into a blur.
-   Keep the render to the bottom band, sized so the house reads, fading up into the page. */
-@media (max-width: 680px) {
-  .footer-bg {
-    top: auto;
-    height: min(100%, 420px);
-  }
-  .footer-bg img {
-    object-position: 62% 60% !important;
-  }
-  .footer-bg-shade {
-    background: linear-gradient(
-      180deg,
-      rgb(var(--bg-rgb) / 1) 0%,
-      rgb(var(--bg-rgb) / 0.8) 35%,
-      rgb(var(--bg-rgb) / 0.7) 100%
-    );
   }
 }

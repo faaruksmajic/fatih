@@ -16,8 +16,9 @@ const SECTIONS = [
 ] as const;
 
 /**
- * Closing block shared by every page: the contact pitch with the three-step
- * process, contact details and section links, then the copyright strip.
+ * Closing block shared by every page, split in two: the street render as a
+ * framed photograph on one side; the contact pitch with the three-step process,
+ * contact details, section links and the copyright line on the other.
  */
 export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
   const href = (path: string) => localePath(lang, path);
@@ -25,130 +26,128 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
 
   return (
     <footer id="contact" className="site-footer" aria-labelledby="contact-title">
-      {/* Background render under a scrim in the page colour, so the text reads in both themes. */}
-      <div className="footer-bg" aria-hidden>
+      {/* Left half: the street render, shown as a framed photograph with the coordinates. */}
+      <div className="footer-photo">
         <Image
           src="/images/footer-bg.jpg"
           alt=""
           fill
-          sizes="100vw"
+          sizes="(max-width: 1023px) 100vw, 50vw"
           className="object-cover"
-          style={{ objectPosition: "60% 55%" }}
+          style={{ objectPosition: "58% 60%" }}
         />
-        <div className="footer-bg-shade" />
-      </div>
-      <div className="container footer-content">
-        <div className="footer-main">
-          <div className="footer-intro">
-            <p className="eyebrow">{t.contact.eyebrow}</p>
-            <h2 id="contact-title">{t.contact.title}</h2>
-            <p className="contact-lead">{t.contact.lead}</p>
-            <ol className="contact-steps">
-              {t.contact.steps.map((step, i) => (
-                <li key={step.title}>
-                  <span className="contact-step-no" dir="ltr">
-                    0{i + 1}
-                  </span>
-                  <div>
-                    <h3>{step.title}</h3>
-                    <p>{step.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="contact-actions">
-              <a
-                href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.contact.mailSubject)}`}
-                className="btn btn-solid"
-              >
-                {t.contact.getInTouch} <Arrow />
-              </a>
-              <a href={PHONE_HREF} className="btn btn-outline" dir="ltr">
-                {PHONE}
-              </a>
-            </div>
-          </div>
-
-          <div className="footer-side">
-            <div className="footer-cell">
-              <p className="footer-label">{t.nav.contact}</p>
-              <dl className="footer-facts">
-                <div>
-                  <dt>{t.contact.email}</dt>
-                  <dd>
-                    <a href={`mailto:${EMAIL}`} dir="ltr">
-                      {EMAIL}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t.contact.phone}</dt>
-                  <dd>
-                    <a href={PHONE_HREF} dir="ltr">
-                      {PHONE}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t.contact.location}</dt>
-                  <dd>{t.contact.locationValue}</dd>
-                </div>
-              </dl>
-            </div>
-
-            <nav className="footer-cell" aria-label={t.footer.navigate}>
-              <p className="footer-label">{t.footer.navigate}</p>
-              <ul className="footer-links">
-                {SECTIONS.map(([key, anchor]) => (
-                  <li key={key}>
-                    <Link href={href(`/#${anchor}`)}>{t.nav[key]}</Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* Sits at the bottom of the column, level with the contact buttons. */}
-            <div className="footer-end">
-              <p className="footer-label">{t.footer.social}</p>
-              <ul className="footer-social">
-                {SOCIAL.map((item) => (
-                  <li key={item.id}>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={item.label}
-                        title={item.label}
-                      >
-                        <SocialIcon id={item.id} />
-                      </a>
-                    ) : (
-                      <span
-                        aria-label={`${item.label} (${t.footer.soon})`}
-                        title={`${item.label} · ${t.footer.soon}`}
-                        role="img"
-                      >
-                        <SocialIcon id={item.id} />
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-              <p className="footer-copy">
-                © {year} <bdi>Fatih Škrijelj</bdi>. {t.contact.rights}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-strip">
+        <span className="footer-tick footer-tick-start" aria-hidden />
+        <span className="footer-tick footer-tick-end" aria-hidden />
+        <div className="footer-caption">
           <Link href={href("/#top")} className="footer-logo" aria-label={t.nav.homeLabel}>
             <AfMark className="footer-logo-mark" line={18} />
           </Link>
           <span className="footer-coords" dir="ltr">
             43.8563° N · 18.4131° E
           </span>
+        </div>
+      </div>
+
+      {/* Right half: the contact pitch, details and links, top to bottom. */}
+      <div className="footer-content">
+        <div className="footer-intro">
+          <p className="eyebrow">{t.contact.eyebrow}</p>
+          <h2 id="contact-title">{t.contact.title}</h2>
+          <p className="contact-lead">{t.contact.lead}</p>
+          <ol className="contact-steps">
+            {t.contact.steps.map((step, i) => (
+              <li key={step.title}>
+                <span className="contact-step-no" dir="ltr">
+                  0{i + 1}
+                </span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="contact-actions">
+            <a
+              href={`mailto:${EMAIL}?subject=${encodeURIComponent(t.contact.mailSubject)}`}
+              className="btn btn-solid"
+            >
+              {t.contact.getInTouch} <Arrow />
+            </a>
+            <a href={PHONE_HREF} className="btn btn-outline" dir="ltr">
+              {PHONE}
+            </a>
+          </div>
+        </div>
+
+        <div className="footer-info">
+          <div className="footer-cell">
+            <p className="footer-label">{t.nav.contact}</p>
+            <dl className="footer-facts">
+              <div>
+                <dt>{t.contact.email}</dt>
+                <dd>
+                  <a href={`mailto:${EMAIL}`} dir="ltr">
+                    {EMAIL}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt>{t.contact.phone}</dt>
+                <dd>
+                  <a href={PHONE_HREF} dir="ltr">
+                    {PHONE}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt>{t.contact.location}</dt>
+                <dd>{t.contact.locationValue}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <nav className="footer-cell" aria-label={t.footer.navigate}>
+            <p className="footer-label">{t.footer.navigate}</p>
+            <ul className="footer-links">
+              {SECTIONS.map(([key, anchor]) => (
+                <li key={key}>
+                  <Link href={href(`/#${anchor}`)}>{t.nav[key]}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="footer-end">
+          <ul className="footer-social" aria-label={t.footer.social}>
+            {SOCIAL.map((item) => (
+              <li key={item.id}>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={item.label}
+                    title={item.label}
+                  >
+                    <SocialIcon id={item.id} />
+                  </a>
+                ) : (
+                  <span
+                    aria-label={`${item.label} (${t.footer.soon})`}
+                    title={`${item.label} · ${t.footer.soon}`}
+                    role="img"
+                  >
+                    <SocialIcon id={item.id} />
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          <p className="footer-copy">
+            © {year} <bdi>Fatih Škrijelj</bdi>. {t.contact.rights}
+          </p>
           <a href="#top" className="footer-top">
             {t.footer.backToTop} <span aria-hidden>↑</span>
           </a>
