@@ -1789,10 +1789,32 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 /* ───────────── Footer ───────────── */
 
 .site-footer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   margin-top: var(--section);
   border-top: 1px solid var(--line-strong);
   padding-block: clamp(64px, 7vw, 104px) clamp(28px, 3vw, 40px);
   color: var(--muted);
+}
+.footer-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+/* Page colour over the render: solid where the footer meets the page, lighter towards the bottom. */
+.footer-bg-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--bg-rgb) / 1) 0%,
+    rgb(var(--bg-rgb) / 0.86) 30%,
+    rgb(var(--bg-rgb) / 0.74) 100%
+  );
+}
+.footer-content {
+  position: relative;
 }
 .footer-main {
   display: grid;

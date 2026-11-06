@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { AfMark } from "@/components/AfMark";
 import { Arrow } from "@/components/Hero";
@@ -23,7 +24,19 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
 
   return (
     <footer id="contact" className="site-footer" aria-labelledby="contact-title">
-      <div className="container">
+      {/* Background render under a scrim in the page colour, so the text reads in both themes. */}
+      <div className="footer-bg" aria-hidden>
+        <Image
+          src="/images/footer-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "60% 55%" }}
+        />
+        <div className="footer-bg-shade" />
+      </div>
+      <div className="container footer-content">
         <div className="footer-main">
           <div className="footer-intro">
             <p className="eyebrow">{t.contact.eyebrow}</p>
