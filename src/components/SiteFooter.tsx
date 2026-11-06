@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { AfMark } from "@/components/AfMark";
 import { Arrow } from "@/components/Hero";
 import { localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
@@ -97,9 +97,7 @@ export function SiteFooter({ lang, t }: { lang: Locale; t: Dictionary }) {
 
         <div className="footer-strip">
           <Link href={href("/#top")} className="footer-logo" aria-label={t.nav.homeLabel}>
-            <span className="footer-logo-mark">
-              <Image src="/images/logo.png" alt="" fill sizes="36px" />
-            </span>
+            <AfMark className="footer-logo-mark" line={18} />
           </Link>
           <span className="footer-copy">
             © {year} <bdi>Fatih Škrijelj</bdi>. {t.contact.rights}

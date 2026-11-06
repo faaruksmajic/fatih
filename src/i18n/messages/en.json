@@ -23,15 +23,16 @@
     "role": "Architecture & Interior Design"
   },
   "hero": {
-    "eyebrow": "Architecture · Interiors · Visualization",
-    "subtitle": "Architecture & Design",
-    "explore": "Explore"
+    "subtitle": "Architecture & Interior Design",
+    "explore": "See the projects",
+    "lead": "I design homes and interiors and make the renders, from the first sketch to the build. Sarajevo, Bosnia and Herzegovina.",
+    "contact": "Get in touch"
   },
   "about": {
-    "eyebrow": "Get to know me",
-    "title": "About Fatih",
+    "eyebrow": "01 — About",
+    "title": "I learned to build first",
     "p1": "I'm {age}, an architecture student from Sarajevo in my fourth year of studies. Before university I trained and worked as an architectural technician, so I learned how buildings are put together before I learned how to design them.",
-    "p2": "I've worked on residential, commercial and urban projects, spent seven months in a design studio and seen more than ten of my projects built. I approach every project with precision, curiosity and a commitment to meaningful spaces.",
+    "p2": "I've worked on residential, commercial and urban projects, spent seven months in a design studio, and more than ten of my projects have been built. So I draw with the building site in mind: every detail has to be buildable.",
     "cv": "Download CV",
     "getInTouch": "Get in touch",
     "portraitAlt": "Fatih Škrijelj portrait"
@@ -46,9 +47,9 @@
     ]
   },
   "services": {
-    "eyebrow": "What I do",
-    "title": "My Services",
-    "intro": "From the first sketch to the final render, I cover the whole design process for homes, offices and interiors.",
+    "eyebrow": "02 — Services",
+    "title": "From sketch to build",
+    "intro": "One person through the whole process: concept, technical drawings and renders for homes, offices and interiors.",
     "items": [
       {
         "title": "Architectural Design",
@@ -65,8 +66,8 @@
     ]
   },
   "projects": {
-    "eyebrow": "What I have done",
-    "title": "My Projects",
+    "eyebrow": "03 — Projects",
+    "title": "Selected work",
     "empty": "New projects are coming soon.",
     "all": "All projects ({count})",
     "fewer": "Show fewer",
@@ -83,7 +84,7 @@
     "landscape": "Landscape"
   },
   "tools": {
-    "eyebrow": "Software",
+    "eyebrow": "04 — Tools",
     "title": "Tools I Work With",
     "intro": "From construction drawings to final renders, I work across the full digital workflow, from the first line to the finished image.",
     "nextLabel": "What's next:",
@@ -104,8 +105,8 @@
     }
   },
   "contact": {
-    "eyebrow": "Let's talk",
-    "title": "About Your Project",
+    "eyebrow": "05 — Contact",
+    "title": "Let's talk about your space",
     "lead": "Planning a house, refitting an apartment or need renders of a design you already have? Tell me a little about it and we'll take it from there.",
     "steps": [
       {

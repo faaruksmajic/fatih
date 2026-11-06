@@ -15,15 +15,20 @@ export function Hero({ t }: { t: Dictionary["hero"] }) {
       />
       <div className="hero-shade" />
 
-      <div className="hero-content">
-        <p className="eyebrow eyebrow-light">{t.eyebrow}</p>
+      <div className="hero-content container">
         <h1 id="hero-title" className="hero-title">
           <bdi>Fatih Škrijelj</bdi>
           <span>{t.subtitle}</span>
         </h1>
-        <a href="#about" className="btn btn-outline">
-          {t.explore} <Arrow />
-        </a>
+        <p className="hero-lead">{t.lead}</p>
+        <div className="hero-actions">
+          <a href="#projects" className="btn btn-solid">
+            {t.explore} <Arrow />
+          </a>
+          <a href="#contact" className="text-link">
+            {t.contact}
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import "../globals.css";
-import { display, sans } from "@/app/fonts";
+import { archivo, fontVariables, mono } from "@/app/fonts";
 import { PageLoader } from "@/components/PageLoader";
 import {
   LOCALES,
@@ -26,8 +26,8 @@ const arabicSans = IBM_Plex_Sans_Arabic({
   weight: ["400", "500"],
 });
 
-const SITE_URL = "https://fatih-gray.vercel.app";
-const OG_IMAGE = `${SITE_URL}/images/logo.png`;
+const SITE_URL = "https://fatiharch.online";
+const OG_IMAGE = `${SITE_URL}/images/og.png`;
 
 /**
  * The drafting intro plays once per visit: later page loads in the same tab
@@ -60,7 +60,7 @@ export async function generateMetadata({
       description: meta.description,
       url: localePath(lang, "/"),
       siteName: "Fatih Škrijelj",
-      images: [{ url: OG_IMAGE, width: 1200, height: 1200, alt: "Fatih Škrijelj" }],
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Fatih Škrijelj — Arhitektura i dizajn enterijera" }],
       locale: OG_LOCALES[lang],
       alternateLocale: LOCALES.filter((l) => l !== lang).map((l) => OG_LOCALES[l]),
       type: "website",
@@ -81,15 +81,15 @@ export default async function SiteLayout({
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const dict = await getDictionary(lang);
-  const fonts = [display.variable, sans.variable];
+  const fonts = [fontVariables];
   let fontVars: Record<string, string> | undefined;
   if (lang === "ar") {
     fonts.push(arabicDisplay.variable, arabicSans.variable);
     // Only the webfont itself: its metric-matched fallback is a system font
     // that has Arabic glyphs and would win over the Arabic webfonts.
     fontVars = {
-      "--font-latin-display": firstFamily(display.style.fontFamily),
-      "--font-latin-sans": firstFamily(sans.style.fontFamily),
+      "--font-latin-sans": firstFamily(archivo.style.fontFamily),
+      "--font-latin-mono": firstFamily(mono.style.fontFamily),
     };
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { AfMark } from "@/components/AfMark";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -46,15 +46,7 @@ export function SiteNav({
     <header className={`nav ${solid || open ? "is-solid" : ""}`}>
       <div className="nav-inner">
         <Link href={href("/#top")} className="logo" aria-label={t.homeLabel}>
-          <span className="logo-mark">
-            <Image
-              src="/images/logo.png"
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 46px, 36px"
-              priority
-            />
-          </span>
+          <AfMark className="logo-mark" line={14} />
           <span className="logo-text">
             <span className="logo-name" dir="ltr">
               Fatih Škrijelj

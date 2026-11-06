@@ -1,0 +1,41 @@
+{
+  "name": "Fatih Škrijelj — paleta",
+  "source": "src/app/globals.css (:root i @media (prefers-color-scheme: light))",
+  "themes": {
+    "nocni-nacrt": {
+      "mode": "dark",
+      "bg": "#131a22",
+      "panel": "#1b2430",
+      "panel-2": "#222c3a",
+      "text": "#eef1f4",
+      "text-2": "#bcc5cf",
+      "muted": "#8f9aa6",
+      "accent": "#c9a682",
+      "accent-hover": "#dcc0a1",
+      "accent-ink": "#131a22"
+    },
+    "paus": {
+      "mode": "light",
+      "bg": "#f3f0ea",
+      "panel": "#e8e4dc",
+      "panel-2": "#dfdad0",
+      "text": "#1d2024",
+      "text-2": "#4a4d52",
+      "muted": "#6e6c67",
+      "accent": "#8a6640",
+      "accent-hover": "#6f5133",
+      "accent-ink": "#f3f0ea"
+    }
+  },
+  "logo": {
+    "sand": "#c9a682",
+    "sand-dark": "#8a6640",
+    "graphite": "#1d2024",
+    "white": "#ffffff"
+  },
+  "type": {
+    "display": "Archivo, font-stretch 125%, 200–300, velika slova (H1/H2)",
+    "text": "Archivo, normalna širina, 400, 17px / 1.65",
+    "labels": "Source Code Pro, 500, obična slova, 12–14px"
+  }
+}

@@ -23,15 +23,16 @@
     "role": "Architektur & Innenarchitektur"
   },
   "hero": {
-    "eyebrow": "Architektur · Innenräume · Visualisierung",
-    "subtitle": "Architektur & Design",
-    "explore": "Entdecken"
+    "subtitle": "Architektur & Innenarchitektur",
+    "explore": "Projekte ansehen",
+    "lead": "Ich entwerfe Häuser und Innenräume und erstelle die Renderings, von der ersten Skizze bis zum Bau. Sarajevo, Bosnien und Herzegowina.",
+    "contact": "Kontakt aufnehmen"
   },
   "about": {
-    "eyebrow": "Lernen Sie mich kennen",
-    "title": "Über Fatih",
+    "eyebrow": "01 — Über mich",
+    "title": "Zuerst habe ich bauen gelernt",
     "p1": "Ich bin {age} Jahre alt und studiere Architektur in Sarajevo, im vierten Studienjahr. Vor dem Studium habe ich eine Ausbildung zum Bautechniker gemacht und in dem Beruf gearbeitet. So habe ich gelernt, wie Gebäude zusammengesetzt werden, bevor ich gelernt habe, sie zu entwerfen.",
-    "p2": "Ich habe an Wohn-, Gewerbe- und Städtebauprojekten gearbeitet, sieben Monate in einem Architekturbüro verbracht und mehr als zehn meiner Projekte gebaut gesehen. Ich gehe jedes Projekt mit Präzision, Neugier und dem Anspruch an Räume mit Bedeutung an.",
+    "p2": "Ich habe an Wohn-, Gewerbe- und Stadtplanungsprojekten gearbeitet, sieben Monate in einem Planungsbüro verbracht, und mehr als zehn meiner Projekte wurden gebaut. Deshalb zeichne ich mit der Baustelle im Kopf: Jedes Detail muss umsetzbar sein.",
     "cv": "Lebenslauf herunterladen",
     "getInTouch": "Kontakt aufnehmen",
     "portraitAlt": "Porträt von Fatih Škrijelj"
@@ -46,9 +47,9 @@
     ]
   },
   "services": {
-    "eyebrow": "Was ich mache",
-    "title": "Meine Leistungen",
-    "intro": "Von der ersten Skizze bis zum fertigen Rendering decke ich den gesamten Entwurfsprozess für Wohnhäuser, Büros und Innenräume ab.",
+    "eyebrow": "02 — Leistungen",
+    "title": "Von der Skizze bis zum Bau",
+    "intro": "Eine Person für den ganzen Prozess: Konzept, technische Zeichnungen und Renderings für Häuser, Büros und Innenräume.",
     "items": [
       {
         "title": "Architekturentwurf",
@@ -65,8 +66,8 @@
     ]
   },
   "projects": {
-    "eyebrow": "Was ich gemacht habe",
-    "title": "Meine Projekte",
+    "eyebrow": "03 — Projekte",
+    "title": "Ausgewählte Arbeiten",
     "empty": "Neue Projekte folgen in Kürze.",
     "all": "Alle Projekte ({count})",
     "fewer": "Weniger anzeigen",
@@ -83,7 +84,7 @@
     "landscape": "Landschaft"
   },
   "tools": {
-    "eyebrow": "Software",
+    "eyebrow": "04 — Werkzeuge",
     "title": "Meine Werkzeuge",
     "intro": "Von Ausführungsplänen bis zu fertigen Renderings arbeite ich im gesamten digitalen Prozess, von der ersten Linie bis zum fertigen Bild.",
     "nextLabel": "Wie es weitergeht:",
@@ -104,8 +105,8 @@
     }
   },
   "contact": {
-    "eyebrow": "Lassen Sie uns sprechen",
-    "title": "Über Ihr Projekt",
+    "eyebrow": "05 — Kontakt",
+    "title": "Sprechen wir über Ihren Raum",
     "lead": "Sie planen ein Haus, renovieren eine Wohnung oder brauchen Renderings für einen bestehenden Entwurf? Erzählen Sie mir kurz davon, und wir gehen es gemeinsam an.",
     "steps": [
       {

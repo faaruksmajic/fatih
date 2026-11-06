@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { display, sans } from "@/app/fonts";
+import { fontVariables } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: "404 — Fatih Škrijelj",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 /** URLs that match no route at all (outside any language). English, linking home. */
 export default function GlobalNotFound() {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} h-full antialiased`}>
+    <html lang="en" className={`${fontVariables} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-paper text-ink">
         <main className="site not-found">
           <div className="container not-found-inner">

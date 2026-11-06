@@ -170,7 +170,6 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <div className="section-head" data-reveal>
           <p className="eyebrow">{t.projects.eyebrow}</p>
           <h2 id="projects-title">{t.projects.title}</h2>
-          <span className="head-rule" />
         </div>
         {projects.length === 0 ? (
           <p className="text-center text-[var(--muted)]">

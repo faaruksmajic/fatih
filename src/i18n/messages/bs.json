@@ -23,15 +23,16 @@
     "role": "Arhitektura i dizajn enterijera"
   },
   "hero": {
-    "eyebrow": "Arhitektura · Enterijeri · Vizualizacija",
-    "subtitle": "Arhitektura i dizajn",
-    "explore": "Istraži"
+    "subtitle": "Arhitektura i dizajn enterijera",
+    "explore": "Pogledaj projekte",
+    "lead": "Projektujem kuće i enterijere i pravim rendere, od prve skice do izvedbe. Sarajevo, Bosna i Hercegovina.",
+    "contact": "Javite se"
   },
   "about": {
-    "eyebrow": "Upoznajte me",
-    "title": "O Fatihu",
+    "eyebrow": "01 — O meni",
+    "title": "Prvo sam naučio graditi",
     "p1": "Imam {age} godina i student sam četvrte godine arhitekture u Sarajevu. Prije fakulteta školovao sam se i radio kao arhitektonski tehničar, pa sam naučio kako se zgrade grade prije nego što sam naučio kako se projektuju.",
-    "p2": "Radio sam na stambenim, poslovnim i urbanističkim projektima, proveo sedam mjeseci u projektantskom birou i vidio više od deset svojih projekata izgrađenih. Svakom projektu pristupam s preciznošću, radoznalošću i posvećenošću prostorima koji imaju smisao.",
+    "p2": "Radio sam na stambenim, poslovnim i urbanističkim projektima, proveo sedam mjeseci u projektantskom birou, a više od deset mojih projekata je izgrađeno. Zato crtam misleći na gradilište: svaki detalj mora moći da se izvede.",
     "cv": "Preuzmi CV",
     "getInTouch": "Javite se",
     "portraitAlt": "Portret Fatiha Škrijelja"
@@ -46,9 +47,9 @@
     ]
   },
   "services": {
-    "eyebrow": "Čime se bavim",
-    "title": "Moje usluge",
-    "intro": "Od prve skice do završnog rendera, pokrivam cijeli proces projektovanja kuća, poslovnih prostora i enterijera.",
+    "eyebrow": "02 — Usluge",
+    "title": "Od skice do izvedbe",
+    "intro": "Jedna osoba kroz cijeli proces: koncept, tehnički crteži i renderi za kuće, poslovne prostore i enterijere.",
     "items": [
       {
         "title": "Arhitektonsko projektovanje",
@@ -65,8 +66,8 @@
     ]
   },
   "projects": {
-    "eyebrow": "Šta sam uradio",
-    "title": "Moji projekti",
+    "eyebrow": "03 — Projekti",
+    "title": "Odabrani radovi",
     "empty": "Novi projekti uskoro.",
     "all": "Svi projekti ({count})",
     "fewer": "Prikaži manje",
@@ -83,7 +84,7 @@
     "landscape": "Pejzaž"
   },
   "tools": {
-    "eyebrow": "Softver",
+    "eyebrow": "04 — Alati",
     "title": "Alati s kojima radim",
     "intro": "Od izvedbenih crteža do završnih rendera, radim kroz cijeli digitalni proces, od prve linije do gotove slike.",
     "nextLabel": "Šta slijedi:",
@@ -104,8 +105,8 @@
     }
   },
   "contact": {
-    "eyebrow": "Razgovarajmo",
-    "title": "O vašem projektu",
+    "eyebrow": "05 — Kontakt",
+    "title": "Pričajmo o vašem prostoru",
     "lead": "Planirate kuću, renovirate stan ili vam trebaju renderi za projekat koji već imate? Napišite mi nekoliko riječi i krećemo od toga.",
     "steps": [
       {

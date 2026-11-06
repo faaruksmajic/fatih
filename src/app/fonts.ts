@@ -1,15 +1,22 @@
-import { Righteous, Source_Code_Pro } from "next/font/google";
+import { Archivo, Source_Code_Pro } from "next/font/google";
 
-export const display = Righteous({
-  variable: "--font-display",
+/**
+ * Archivo carries the whole voice: expanded for headings (font-stretch: 125%),
+ * normal width for reading text. The width axis is what makes that possible.
+ */
+export const archivo = Archivo({
+  variable: "--font-archivo",
   subsets: ["latin", "latin-ext"],
-  weight: "400",
+  axes: ["wdth"],
   style: ["normal"],
 });
 
-export const sans = Source_Code_Pro({
-  variable: "--font-sans",
+/** Monospace is kept for annotations only: labels, numbers, buttons — the "dimensions" of the drawing. */
+export const mono = Source_Code_Pro({
+  variable: "--font-mono-face",
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
   style: ["normal"],
 });
+
+export const fontVariables = `${archivo.variable} ${mono.variable}`;

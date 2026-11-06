@@ -23,15 +23,16 @@
     "role": "Mimarlık ve İç Mimarlık"
   },
   "hero": {
-    "eyebrow": "Mimarlık · İç Mekân · Görselleştirme",
-    "subtitle": "Mimarlık ve Tasarım",
-    "explore": "Keşfet"
+    "subtitle": "Mimarlık ve İç Mimarlık",
+    "explore": "Projeleri gör",
+    "lead": "Evler ve iç mekânlar tasarlıyor, görselleştirmelerini hazırlıyorum; ilk eskizden uygulamaya. Saraybosna, Bosna-Hersek.",
+    "contact": "İletişime geç"
   },
   "about": {
-    "eyebrow": "Beni tanıyın",
-    "title": "Fatih Hakkında",
+    "eyebrow": "01 — Hakkımda",
+    "title": "Önce inşa etmeyi öğrendim",
     "p1": "{age} yaşındayım, Saraybosna'da mimarlık bölümü dördüncü sınıf öğrencisiyim. Üniversiteden önce mimari teknisyen olarak eğitim aldım ve çalıştım; böylece binaların nasıl tasarlandığını öğrenmeden önce nasıl inşa edildiğini öğrendim.",
-    "p2": "Konut, ticari ve kentsel projelerde çalıştım, bir tasarım ofisinde yedi ay geçirdim ve ondan fazla projemin inşa edildiğini gördüm. Her projeye titizlik, merak ve anlamlı mekânlar yaratma kararlılığıyla yaklaşıyorum.",
+    "p2": "Konut, ticari ve kentsel projelerde çalıştım, bir tasarım ofisinde yedi ay geçirdim ve ondan fazla projem inşa edildi. Bu yüzden şantiyeyi düşünerek çiziyorum: her detay uygulanabilir olmalı.",
     "cv": "Özgeçmişi indir",
     "getInTouch": "İletişime geçin",
     "portraitAlt": "Fatih Škrijelj portresi"
@@ -46,9 +47,9 @@
     ]
   },
   "services": {
-    "eyebrow": "Neler yapıyorum",
-    "title": "Hizmetlerim",
-    "intro": "İlk eskizden son görsele kadar konutlar, ofisler ve iç mekânlar için tasarım sürecinin tamamını üstleniyorum.",
+    "eyebrow": "02 — Hizmetler",
+    "title": "Eskizden uygulamaya",
+    "intro": "Tüm süreç tek elden: konsept, teknik çizimler ve evler, ofisler ve iç mekânlar için görselleştirmeler.",
     "items": [
       {
         "title": "Mimari Tasarım",
@@ -65,8 +66,8 @@
     ]
   },
   "projects": {
-    "eyebrow": "Neler yaptım",
-    "title": "Projelerim",
+    "eyebrow": "03 — Projeler",
+    "title": "Seçilmiş işler",
     "empty": "Yeni projeler yakında.",
     "all": "Tüm projeler ({count})",
     "fewer": "Daha az göster",
@@ -83,7 +84,7 @@
     "landscape": "Peyzaj"
   },
   "tools": {
-    "eyebrow": "Yazılım",
+    "eyebrow": "04 — Araçlar",
     "title": "Kullandığım Araçlar",
     "intro": "Uygulama çizimlerinden son görsellere kadar, ilk çizgiden bitmiş görüntüye tüm dijital süreçte çalışıyorum.",
     "nextLabel": "Sırada ne var:",
@@ -104,8 +105,8 @@
     }
   },
   "contact": {
-    "eyebrow": "Konuşalım",
-    "title": "Projeniz Hakkında",
+    "eyebrow": "05 — İletişim",
+    "title": "Mekânınız hakkında konuşalım",
     "lead": "Bir ev mi planlıyorsunuz, daireyi mi yeniliyorsunuz ya da mevcut bir tasarımın görsellerine mi ihtiyacınız var? Bana biraz anlatın, gerisini birlikte planlayalım.",
     "steps": [
       {
