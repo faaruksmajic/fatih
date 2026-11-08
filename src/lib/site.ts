@@ -7,7 +7,7 @@ export const PHONE_HREF = "tel:+38762504287";
  * clickable; an empty href shows the icon without a link ("coming soon").
  */
 export const SOCIAL = [
-  { id: "instagram", label: "Instagram", href: "" },
-  { id: "linkedin", label: "LinkedIn", href: "" },
+  { id: "instagram", label: "Instagram", href: "https://www.instagram.com/archfatih?cplk=dTN2ODc0MWtuNzM2" },
+  { id: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/fatih-škrijelj-2641943a6?utm_source=share_via&utm_content=profile&utm_medium=member_ios" },
   { id: "whatsapp", label: "WhatsApp", href: "https://wa.me/38762504287" },
 ] as const;
