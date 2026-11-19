@@ -52,6 +52,7 @@ const LOCAL_SAMPLE: ProjectWithImages[] = [
   description,
   coverImage: `/images/${file}`,
   position: i,
+  updatedAt: new Date("2026-01-01"),
   images: (EXTRA_IMAGES[i] ?? []).map((name, j) => ({
     id: `sample-${i}-${j}`,
     imageUrl: `/images/${name}`,

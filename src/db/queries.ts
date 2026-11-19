@@ -14,6 +14,7 @@ export type ProjectWithImages = {
   categoryNames: CategoryNames | null;
   coverImage: string;
   position: number;
+  updatedAt: Date;
   images: { id: string; imageUrl: string }[];
 };
 
@@ -27,6 +28,7 @@ const projectRow = {
   categoryNames: categories.names,
   coverImage: projects.coverImage,
   position: projects.position,
+  updatedAt: projects.updatedAt,
 };
 
 export async function getProjects(): Promise<ProjectWithImages[]> {

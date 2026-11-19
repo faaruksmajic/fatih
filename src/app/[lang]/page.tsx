@@ -13,6 +13,7 @@ import { categoryName, projectCategoryLabel } from "@/lib/categories";
 import { notFound } from "next/navigation";
 import { withLocalSample, withLocalSampleCategories } from "@/lib/sample-projects";
 import { EMAIL } from "@/lib/site";
+import { jsonLdHtml, personJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -84,6 +85,12 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     <main className="site">
       <Reveal />
       <PointerGlow />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdHtml(personJsonLd(lang, t.hero.subtitle, t.meta.description)),
+        }}
+      />
       <SiteNav email={EMAIL} lang={lang} t={t.nav} />
       <Hero t={t.hero} />
 

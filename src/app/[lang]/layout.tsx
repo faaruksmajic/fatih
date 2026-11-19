@@ -15,6 +15,7 @@ import {
   localePath,
 } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { OG_IMAGE, PERSON_NAME, SITE_URL } from "@/lib/seo";
 
 // Arabic has no glyphs in the Latin display and body fonts, so it gets its own pair.
 const arabicDisplay = Noto_Kufi_Arabic({
@@ -28,8 +29,6 @@ const arabicSans = IBM_Plex_Sans_Arabic({
   weight: ["400", "500"],
 });
 
-const SITE_URL = "https://fatiharch.online";
-const OG_IMAGE = `${SITE_URL}/images/og-square.png`;
 
 /**
  * The drafting intro plays once per visit: later page loads in the same tab
@@ -60,12 +59,23 @@ export async function generateMetadata({
     title: meta.title,
     description: meta.description,
     alternates: languageAlternates("/", lang),
+    authors: [{ name: PERSON_NAME, url: SITE_URL }],
+    creator: PERSON_NAME,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true, "max-image-preview": "large" },
+    },
+    // Set GOOGLE_SITE_VERIFICATION in Vercel if Search Console asks for the HTML tag.
+    verification: process.env.GOOGLE_SITE_VERIFICATION
+      ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+      : undefined,
     openGraph: {
       title: meta.title,
       description: meta.description,
       url: localePath(lang, "/"),
-      siteName: "Fatih Škrijelj",
-      images: [{ url: OG_IMAGE, width: 600, height: 600, alt: "Fatih Škrijelj — Arhitektura i dizajn enterijera" }],
+      siteName: PERSON_NAME,
+      images: [{ url: OG_IMAGE, width: 600, height: 600, alt: meta.title }],
       locale: OG_LOCALES[lang],
       alternateLocale: LOCALES.filter((l) => l !== lang).map((l) => OG_LOCALES[l]),
       type: "website",

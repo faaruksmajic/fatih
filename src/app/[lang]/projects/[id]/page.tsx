@@ -14,11 +14,27 @@ import {
   fmt,
   hasLocale,
   languageAlternates,
+  OG_LOCALES,
   localePath,
   type Locale,
 } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { projectCategoryLabel } from "@/lib/categories";
+import {
+  OG_IMAGE,
+  PERSON_NAME,
+  absoluteUrl,
+  jsonLdHtml,
+  projectJsonLd,
+} from "@/lib/seo";
+
+/** A one-line snippet for search results: whole words, about 155 characters. */
+function snippet(text: string, max = 155) {
+  const flat = text.replace(/\s+/g, " ").trim();
+  if (flat.length <= max) return flat;
+  const cut = flat.slice(0, max);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,.;:]$/, "")}…`;
+}
 
 export const revalidate = 3600;
 
@@ -47,11 +63,34 @@ export async function generateMetadata({
   const data = await load(id);
   if (!data) return { title: `${t.meta.projectNotFound} — Fatih Škrijelj` };
   const { project } = data;
+  const title = `${project.title} — ${PERSON_NAME}`;
+  const category = projectCategoryLabel(project, lang, t);
+  const description = project.description.trim()
+    ? snippet(project.description)
+    : `${project.title}: ${category}. ${t.meta.description}`.slice(0, 160);
+  const url = localePath(lang, `/projects/${id}`);
+  const image = project.coverImage.startsWith("/")
+    ? absoluteUrl(project.coverImage)
+    : project.coverImage;
   return {
-    title: `${project.title} — Fatih Škrijelj`,
-    description: project.description.slice(0, 160),
+    title,
+    description,
     alternates: languageAlternates(`/projects/${id}`, lang),
-    openGraph: { images: [project.coverImage] },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: PERSON_NAME,
+      type: "article",
+      locale: OG_LOCALES[lang],
+      images: [{ url: image, alt: fmt(t.projects.renderOf, { title: project.title }) }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image || OG_IMAGE],
+    },
   };
 }
 
@@ -81,6 +120,25 @@ export default async function ProjectPage({
     <main className="site">
       <Reveal />
       <SiteNav email={EMAIL} lang={lang} t={t.nav} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: jsonLdHtml(
+            projectJsonLd(
+              lang,
+              {
+                id: project.id,
+                title: project.title,
+                description: project.description,
+                images: gallery.map((src) => (src.startsWith("/") ? absoluteUrl(src) : src)),
+                updatedAt: project.updatedAt,
+              },
+              t.nav.home,
+              projectCategoryLabel(project, lang, t),
+            ),
+          ),
+        }}
+      />
 
       {/* COVER */}
       <section id="top" className="pd-hero" aria-labelledby="pd-title">
