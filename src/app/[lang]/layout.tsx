@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { IBM_Plex_Sans_Arabic, Noto_Kufi_Arabic } from "next/font/google";
 import "../globals.css";
+// Apple-style design layer (preview). Remove this line to compare with the original.
+import "../apple.css";
 import { archivo, fontVariables, mono } from "@/app/fonts";
 import { PageLoader } from "@/components/PageLoader";
 import {

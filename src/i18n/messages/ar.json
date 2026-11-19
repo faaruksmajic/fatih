@@ -75,7 +75,9 @@
     "view": "عرض المشروع",
     "renderOf": "تصور لمشروع {title}",
     "allTab": "الكل",
-    "tabsLabel": "فئات المشاريع"
+    "tabsLabel": "فئات المشاريع",
+    "prev": "المشاريع السابقة",
+    "next": "المشاريع التالية"
   },
   "categories": {
     "residential": "سكني",

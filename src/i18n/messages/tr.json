@@ -75,7 +75,9 @@
     "view": "Projeyi incele",
     "renderOf": "{title} görseli",
     "allTab": "Tümü",
-    "tabsLabel": "Proje kategorileri"
+    "tabsLabel": "Proje kategorileri",
+    "prev": "Önceki projeler",
+    "next": "Sonraki projeler"
   },
   "categories": {
     "residential": "Konut",

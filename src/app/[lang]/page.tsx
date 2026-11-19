@@ -3,6 +3,7 @@ import { Arrow, Hero } from "@/components/Hero";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ToolSheet } from "@/components/ToolSheet";
 import { Reveal } from "@/components/Reveal";
+import { PointerGlow } from "@/components/PointerGlow";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { getCategoriesSafe, getCvUrlSafe, getProjectsSafe } from "@/db/queries";
@@ -82,6 +83,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
   return (
     <main className="site">
       <Reveal />
+      <PointerGlow />
       <SiteNav email={EMAIL} lang={lang} t={t.nav} />
       <Hero t={t.hero} />
 
@@ -91,7 +93,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         className="section about container"
         aria-labelledby="about-title"
       >
-        <div className="about-panel" data-reveal>
+        <div className="about-panel" data-reveal data-glow>
           <p className="eyebrow">{t.about.eyebrow}</p>
           <h2 id="about-title">{t.about.title}</h2>
           <p>{fmt(t.about.p1, { age: computedAge() })}</p>
@@ -127,7 +129,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       {/* STATS */}
       <section className="stats container" aria-label={t.stats.label}>
         {t.stats.items.map((label, i) => (
-          <div key={i} className="stat" data-reveal style={d(i)}>
+          <div key={i} className="stat" data-reveal data-glow style={d(i)}>
             <p className="stat-value">{STAT_VALUES[i]}</p>
             <p className="stat-label">{label}</p>
           </div>
@@ -156,6 +158,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                 key={i}
                 className="service"
                 data-reveal
+                data-glow
                 style={d(i)}
               >
                 <ServiceIcon kind={SERVICE_ICONS[i]} />

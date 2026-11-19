@@ -75,7 +75,9 @@
     "view": "Pogledaj projekat",
     "renderOf": "Render projekta {title}",
     "allTab": "Sve",
-    "tabsLabel": "Kategorije projekata"
+    "tabsLabel": "Kategorije projekata",
+    "prev": "Prethodni projekti",
+    "next": "Sljedeći projekti"
   },
   "categories": {
     "residential": "Stambeni",

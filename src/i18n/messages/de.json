@@ -75,7 +75,9 @@
     "view": "Projekt ansehen",
     "renderOf": "Rendering von {title}",
     "allTab": "Alle",
-    "tabsLabel": "Projektkategorien"
+    "tabsLabel": "Projektkategorien",
+    "prev": "Vorherige Projekte",
+    "next": "Nächste Projekte"
   },
   "categories": {
     "residential": "Wohnbau",

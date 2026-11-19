@@ -75,7 +75,9 @@
     "view": "View project",
     "renderOf": "Render of {title}",
     "allTab": "All",
-    "tabsLabel": "Project categories"
+    "tabsLabel": "Project categories",
+    "prev": "Previous projects",
+    "next": "Next projects"
   },
   "categories": {
     "residential": "Residential",

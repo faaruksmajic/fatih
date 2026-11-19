@@ -212,7 +212,20 @@ body {
     transform 0.25s var(--ease);
 }
 .btn:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+  transition-duration: 80ms;
+}
+/* Every control answers the moment it is pressed, not when it is released. */
+.theme-toggle:active,
+.lang-switch summary:active,
+.nav-toggle:active,
+.project-tab:active {
+  transform: scale(0.94);
+  transition-duration: 80ms;
+}
+.project-btn:active .project-img {
+  transform: scale(0.985);
+  transition-duration: 120ms;
 }
 .btn-solid {
   background: var(--accent);
@@ -255,13 +268,54 @@ body {
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 50;
-  background: rgb(var(--bg-rgb) / 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--line);
-  transition: background-color 0.25s var(--ease);
+  background: rgb(var(--bg-rgb) / 0);
+  -webkit-backdrop-filter: blur(0px) saturate(100%);
+  backdrop-filter: blur(0px) saturate(100%);
+  transition:
+    background-color 0.35s var(--ease),
+    backdrop-filter 0.35s var(--ease),
+    -webkit-backdrop-filter 0.35s var(--ease);
+}
+/* Scroll-edge effect instead of a hard divider: a soft line that only exists
+   while content actually runs under the bar. */
+.nav::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--text-rgb) / 0.12) 20%,
+    rgb(var(--text-rgb) / 0.12) 80%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
 }
 .nav.is-solid {
-  background: rgb(var(--bg-rgb) / 0.98);
+  background: rgb(var(--bg-rgb) / 0.72);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+}
+.nav.is-solid::after {
+  opacity: 1;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .nav.is-solid,
+  .nav-links.is-open,
+  .lang-menu {
+    background: var(--bg) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+@media (prefers-contrast: more) {
+  .nav.is-solid {
+    background: var(--bg);
+    border-bottom: 1px solid var(--text);
+  }
 }
 .nav-inner {
   display: flex;
@@ -355,6 +409,7 @@ body {
   align-items: center;
   gap: 8px;
   z-index: 60;
+  transition: transform 0.3s var(--ease);
 }
 .nav-toggle span {
   display: block;
@@ -664,6 +719,7 @@ body {
   position: absolute;
   inset: 0;
   display: block;
+  transition: transform 0.4s var(--ease);
 }
 .project-shade {
   position: absolute;
@@ -951,7 +1007,9 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  background: rgba(10, 12, 15, 0.97);
+  overflow: hidden;
+  /* --dim follows the open/close spring and the pull-down gesture */
+  background: rgb(10 12 15 / calc(0.97 * var(--dim, 1)));
   color: var(--text);
 }
 .lightbox[open] {
@@ -959,14 +1017,35 @@ body {
   flex-direction: column;
 }
 .lightbox::backdrop {
-  background: rgba(10, 12, 15, 0.9);
+  background: transparent;
 }
-.lightbox-img {
+:root[dir="rtl"] .lightbox {
+  --page-dir: -1;
+}
+.lightbox-stage {
   position: relative;
   flex: 1;
   margin: clamp(12px, 3vw, 40px) clamp(12px, 3vw, 40px) 0;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  transform-origin: center;
+  will-change: transform;
+}
+.lightbox-stage:active {
+  cursor: grabbing;
+}
+.lightbox-track,
+.lightbox-slot {
+  position: absolute;
+  inset: 0;
+}
+.lightbox-track {
+  will-change: transform;
 }
 .lightbox-bar {
+  opacity: var(--chrome, 1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -999,6 +1078,11 @@ body {
 .lightbox-close:hover {
   background: var(--text);
   color: var(--bg);
+}
+.lightbox-nav button:active,
+.lightbox-close:active {
+  transform: scale(0.95);
+  transition-duration: 80ms;
 }
 
 .pd-pager {
@@ -1286,11 +1370,42 @@ body {
     right: 0;
     margin: 0;
     padding: 12px var(--gutter) 24px;
-    background: rgb(var(--bg-rgb) / 0.98);
+    /* Same material as the bar it drops out of. */
+    background: rgb(var(--bg-rgb) / 0.82);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 24px 48px rgb(0 0 0 / 0.25);
+    transform-origin: top center;
+    transition:
+      opacity 0.24s var(--ease),
+      transform 0.36s cubic-bezier(0.2, 0.9, 0.25, 1);
+  }
+  @starting-style {
+    .nav-links.is-open {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
   }
   .nav-links.is-open a {
     padding: 14px 0;
+    transition:
+      color 0.2s var(--ease),
+      opacity 0.3s var(--ease),
+      transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1);
+    transition-delay: calc(var(--k, 0) * 30ms);
   }
+  /* Items arrive in the direction the menu opens. */
+  @starting-style {
+    .nav-links.is-open a {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+  .nav-links.is-open a:nth-child(2) { --k: 1; }
+  .nav-links.is-open a:nth-child(3) { --k: 2; }
+  .nav-links.is-open a:nth-child(4) { --k: 3; }
+  .nav-links.is-open a:nth-child(5) { --k: 4; }
+  .nav-links.is-open a:nth-child(6) { --k: 5; }
   .nav-links.is-open .nav-contact-mobile {
     display: flex !important;
     color: var(--accent);
@@ -1588,7 +1703,8 @@ body {
   cursor: pointer;
   transition:
     border-color 0.25s var(--ease),
-    color 0.25s var(--ease);
+    color 0.25s var(--ease),
+    transform 0.3s var(--ease);
 }
 .theme-toggle:hover {
   border-color: var(--accent);
@@ -1635,7 +1751,8 @@ body {
   user-select: none;
   transition:
     border-color 0.25s var(--ease),
-    color 0.25s var(--ease);
+    color 0.25s var(--ease),
+    transform 0.3s var(--ease);
 }
 .lang-switch summary::-webkit-details-marker {
   display: none;
@@ -1679,9 +1796,26 @@ body {
   margin: 0;
   padding: 6px;
   list-style: none;
-  background: rgb(var(--bg-rgb) / 0.98);
+  background: rgb(var(--bg-rgb) / 0.8);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid var(--line-strong);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.35);
+  transform-origin: top right;
+  transition:
+    opacity 0.22s var(--ease),
+    transform 0.32s cubic-bezier(0.2, 0.9, 0.25, 1),
+    filter 0.22s var(--ease);
+}
+:root[dir="rtl"] .lang-menu {
+  transform-origin: top left;
+}
+@starting-style {
+  .lang-switch[open] .lang-menu {
+    opacity: 0;
+    transform: scale(0.92) translateY(-4px);
+    filter: blur(6px);
+  }
 }
 .lang-menu a {
   display: flex;
@@ -2057,5 +2191,32 @@ html[lang="ar"] .site :is(em, i, span, p, strong) {
 @media (max-width: 350px) {
   .logo-text {
     display: none;
+  }
+}
+
+/* Reduced motion: keep the feedback, drop the travel. */
+@media (prefers-reduced-motion: reduce) {
+  .btn:active,
+  .theme-toggle:active,
+  .lang-switch summary:active,
+  .nav-toggle:active,
+  .project-tab:active,
+  .project-btn:active .project-img,
+  .lightbox-nav button:active,
+  .lightbox-close:active {
+    transform: none;
+  }
+  .lang-menu,
+  .nav-links.is-open,
+  .nav-links.is-open a {
+    transition: opacity 0.15s linear;
+  }
+  @starting-style {
+    .lang-switch[open] .lang-menu,
+    .nav-links.is-open,
+    .nav-links.is-open a {
+      transform: none;
+      filter: none;
+    }
   }
 }

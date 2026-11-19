@@ -163,6 +163,7 @@ export function ToolSheet({ uses }: { uses?: Record<string, string> }) {
         <li
           key={logo.name}
           className="tool-cell"
+          data-glow
           style={{ ["--n" as string]: i, ["--brand" as string]: logo.brand }}
         >
           <span className="tool-no">T-{String(i + 1).padStart(2, "0")}</span>

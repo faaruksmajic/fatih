@@ -1,0 +1,810 @@
+/*
+ * Apple-style design layer (preview).
+ *
+ * Same brand: the AF mark, the sand accent, Archivo and the ink-blue night /
+ * tracing-paper themes. What changes is the language around it:
+ *   - type: mixed case, heavier, tight tracking on large sizes, loose on small
+ *   - surfaces: rounded cards on soft materials instead of ruled lines
+ *   - layout: bento grids, a horizontal projects rail, a hero that settles
+ *     into a card as you scroll
+ *   - motion: things arrive as materials (blur + scale + rise), respond on
+ *     press, and catch light where the pointer is
+ * Loaded after globals.css; remove its import in [lang]/layout.tsx to compare.
+ */
+
+.site {
+  /* Mono annotations become text: one family, hierarchy from weight and size. */
+  --font-mono: var(--font-sans);
+  --r-xl: 32px;
+  --r-lg: 24px;
+  --r-md: 18px;
+  --r-sm: 12px;
+  --surface: rgb(var(--text-rgb) / 0.045);
+  --surface-2: rgb(var(--text-rgb) / 0.07);
+  --hairline: rgb(var(--text-rgb) / 0.08);
+  --spring: cubic-bezier(0.2, 0.9, 0.25, 1);
+  font-size: 17px;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+}
+
+/* ───────── Type ───────── */
+
+.site h1,
+.site h2,
+.site h3 {
+  text-transform: none;
+  font-stretch: 112%;
+  text-wrap: balance;
+}
+.site h2 {
+  font-size: clamp(40px, 5.4vw, 80px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+.site h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+}
+/* Eyebrows: a quiet coloured label, no numbering look, no tracking games. */
+.eyebrow {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin-bottom: 14px;
+}
+.section-head,
+.services-head,
+.tools-head {
+  max-width: 920px;
+}
+.section-head {
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+/* ───────── Controls ───────── */
+
+.btn {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  transition:
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    transform 0.35s var(--spring);
+}
+.btn-outline {
+  border: 0;
+  background: var(--surface-2);
+}
+.btn-outline:hover {
+  background: rgb(var(--text-rgb) / 0.14);
+  color: var(--text);
+}
+.text-link {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* Nav: same material as before, rounder controls. */
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: rgb(var(--text-rgb) / 0.82);
+}
+.nav-links a:hover {
+  color: var(--text);
+}
+.nav-cta {
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+.theme-toggle,
+.lang-switch summary {
+  border: 0;
+  background: var(--surface-2);
+  border-radius: 999px;
+}
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+}
+.lang-switch summary {
+  min-height: 40px;
+  font-size: 13px;
+}
+.theme-toggle:hover,
+.lang-switch summary:hover,
+.lang-switch[open] summary {
+  background: rgb(var(--text-rgb) / 0.12);
+  color: var(--text);
+}
+.lang-menu {
+  border-radius: var(--r-md);
+  padding: 8px;
+  border-color: var(--hairline);
+}
+.lang-menu a {
+  border-radius: var(--r-sm);
+}
+.logo-sub {
+  letter-spacing: 0;
+}
+
+/* ───────── Hero ───────── */
+
+.hero-title {
+  font-size: clamp(56px, 10.5vw, 168px);
+  font-weight: 600 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 0.92 !important;
+}
+.hero-title bdi {
+  max-width: none;
+}
+.hero-title span {
+  margin-top: 20px;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.hero-lead {
+  font-size: clamp(17px, 1.35vw, 21px);
+  line-height: 1.5;
+  max-width: 40ch;
+}
+.hero-actions {
+  gap: 20px;
+}
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgb(var(--bg-rgb) / 0.82) 0%, rgb(var(--bg-rgb) / 0.4) 50%, rgb(var(--bg-rgb) / 0) 100%),
+    linear-gradient(0deg, rgb(var(--bg-rgb) / 0.75) 0%, rgb(var(--bg-rgb) / 0) 45%);
+}
+
+/* As you scroll on, the full-bleed hero settles back into a rounded card —
+   the page "picks up" the image instead of just sliding it away. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      transform-origin: 50% 0%;
+      animation: hero-settle linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 70%;
+    }
+    .hero-content {
+      animation: hero-content-out linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 45%;
+    }
+  }
+}
+@keyframes hero-settle {
+  to {
+    transform: scale(0.9);
+    border-radius: 40px;
+  }
+}
+@keyframes hero-content-out {
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+    filter: blur(8px);
+  }
+}
+
+/* ───────── Surfaces that react to the pointer ───────── */
+
+[data-glow] {
+  position: relative;
+  isolation: isolate;
+}
+[data-glow]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(var(--accent-rgb) / 0.14),
+    transparent 60%
+  );
+  opacity: var(--glow, 0);
+  transition: opacity 0.4s var(--ease);
+  pointer-events: none;
+}
+
+/* ───────── About ───────── */
+
+.about {
+  gap: clamp(12px, 1.4vw, 20px);
+}
+.about-panel {
+  grid-column: 1 / 8;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  padding: clamp(32px, 4.4vw, 64px);
+  gap: 18px;
+  align-self: stretch;
+  justify-content: center;
+}
+.about-panel h2 {
+  margin-bottom: 8px;
+}
+.about-panel p:not(.eyebrow) {
+  font-size: clamp(17px, 1.25vw, 19px);
+  max-width: 52ch;
+}
+.about-img {
+  grid-column: 8 / 13;
+  border-radius: var(--r-xl);
+}
+.about-img img {
+  transition: filter 0.8s var(--ease), transform 1.2s var(--spring);
+}
+/* A little delight: colour comes back when you look. */
+.about-img:hover img {
+  filter: grayscale(0);
+  transform: scale(1.03);
+}
+
+/* ───────── Stats ───────── */
+
+.stats {
+  gap: clamp(12px, 1.4vw, 20px);
+  border-top: 0;
+  margin-top: clamp(12px, 1.4vw, 20px);
+}
+.stat,
+.stat:first-child {
+  padding: clamp(22px, 2.4vw, 32px);
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+}
+.stat-value {
+  font-weight: 600;
+  font-stretch: 112%;
+  letter-spacing: -0.04em;
+  font-size: clamp(48px, 5vw, 76px);
+}
+.stat-label {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--text-2);
+}
+
+/* ───────── Services: bento ───────── */
+
+.services-band {
+  background: none;
+  padding-block: 0;
+}
+.services-head {
+  display: block;
+}
+.services-head > p {
+  justify-self: auto;
+  margin-top: 18px;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.45;
+  max-width: 40ch;
+}
+.services {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: clamp(12px, 1.4vw, 20px);
+}
+.service,
+.service:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: clamp(220px, 20vw, 300px);
+  padding: clamp(28px, 3vw, 44px);
+  border: 0;
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  overflow: hidden;
+  transition: transform 0.5s var(--spring), background-color 0.3s var(--ease);
+}
+.service:first-child {
+  grid-row: span 2;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(var(--accent-rgb) / 0.22), transparent 60%),
+    var(--surface);
+}
+.service:hover {
+  transform: translateY(-4px);
+}
+.service:active {
+  transform: scale(0.985);
+  transition-duration: 120ms;
+}
+.service-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: auto;
+  padding-bottom: 24px;
+  box-sizing: content-box;
+}
+.service:first-child .service-icon {
+  width: 72px;
+  height: 72px;
+}
+.service h3 {
+  font-size: clamp(24px, 2.2vw, 34px);
+  margin-bottom: 10px;
+}
+.service:first-child h3 {
+  font-size: clamp(32px, 3.4vw, 52px);
+  letter-spacing: -0.035em;
+}
+.service p {
+  font-size: 16px;
+}
+.service:first-child p {
+  font-size: clamp(17px, 1.4vw, 20px);
+  max-width: 34ch;
+}
+
+/* ───────── Projects: segmented control + rail ───────── */
+
+.projects-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(20px, 2.4vw, 32px);
+}
+.project-tabs {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin: 0;
+  padding: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.project-tabs::-webkit-scrollbar {
+  display: none;
+}
+/* The thumb slides between segments; slight overshoot because a tap carried it. */
+.project-tabs-thumb {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--thumb-w, 0);
+  transform: translateX(var(--thumb-x, 0));
+  border-radius: 999px;
+  background: var(--text);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.18);
+  transition:
+    transform 0.45s cubic-bezier(0.3, 1.25, 0.45, 1),
+    width 0.45s cubic-bezier(0.3, 1.25, 0.45, 1);
+}
+.project-tab {
+  position: relative;
+  z-index: 1;
+  padding: 9px 18px;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--text-2);
+  transition: color 0.3s var(--ease), transform 0.3s var(--spring);
+}
+.project-tab[aria-pressed="true"] {
+  color: var(--bg);
+  border: 0;
+}
+.project-tab-count {
+  font-weight: 500;
+  opacity: 0.6;
+}
+.project-tab[aria-pressed="true"] .project-tab-count {
+  color: inherit;
+}
+
+.rail-nav {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.rail-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    opacity 0.25s var(--ease),
+    transform 0.35s var(--spring);
+}
+.rail-btn:hover:not(:disabled) {
+  background: rgb(var(--text-rgb) / 0.14);
+}
+.rail-btn:active:not(:disabled) {
+  transform: scale(0.9);
+  transition-duration: 80ms;
+}
+.rail-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+.rail-btn .arrow {
+  width: 16px;
+  height: 16px;
+}
+.rail-prev .arrow {
+  transform: scaleX(-1);
+}
+:root[dir="rtl"] .rail-btn .arrow {
+  transform: scaleX(-1);
+}
+:root[dir="rtl"] .rail-prev .arrow {
+  transform: none;
+}
+
+/* The rail bleeds to the window edges; cards snap to the content column. */
+.projects-rail {
+  --edge: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  margin-inline: calc(-1 * var(--edge));
+  padding-inline: var(--edge);
+  scroll-padding-inline: var(--edge);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.projects-rail::-webkit-scrollbar {
+  display: none;
+}
+/* While a spring or the pointer drives the scroll, snapping would fight it. */
+.projects-rail.is-gliding {
+  scroll-snap-type: none;
+}
+.projects-rail.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+.projects-rail.is-dragging .project-btn {
+  pointer-events: none;
+}
+.projects-rail .projects {
+  display: flex;
+  gap: clamp(12px, 1.4vw, 20px);
+  width: max-content;
+  grid-template-columns: none;
+  grid-auto-rows: auto;
+}
+.projects-rail .project,
+.projects-rail .project:nth-child(n) {
+  flex: none;
+  width: clamp(280px, 44vw, 660px);
+  aspect-ratio: 4 / 3.2;
+  grid-column: auto;
+  grid-row: auto;
+  scroll-snap-align: start;
+}
+.projects-rail .project:last-child {
+  margin-inline-end: var(--edge);
+}
+.project-btn {
+  border-radius: var(--r-xl);
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* clip children to the radius in Safari */
+}
+.project-img {
+  transition: transform 0.9s var(--spring);
+}
+.project-btn:hover .project-img {
+  transform: scale(1.04);
+}
+.projects-rail .project-btn:active .project-img {
+  transform: scale(1.01);
+}
+.project-btn:active {
+  transform: scale(0.985);
+}
+.project-btn {
+  transition: transform 0.35s var(--spring);
+}
+.project-shade {
+  background: linear-gradient(to top, rgba(10, 12, 15, 0.78) 0%, rgba(10, 12, 15, 0.18) 42%, transparent 65%);
+}
+.project-frame,
+.project-no {
+  display: none;
+}
+.project-top {
+  top: 18px;
+  left: 18px;
+  right: 18px;
+}
+/* Category as a glass chip over the photograph. */
+.project-cat {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgb(20 22 26 / 0.38);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  backdrop-filter: blur(16px) saturate(180%);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.project-bottom {
+  left: clamp(22px, 2.4vw, 36px);
+  right: clamp(22px, 2.4vw, 36px);
+  bottom: clamp(22px, 2.4vw, 32px);
+}
+.project-title,
+.projects-rail .project:nth-child(1) .project-title {
+  font-size: clamp(24px, 2.4vw, 36px);
+  font-weight: 600;
+  font-stretch: 112%;
+  letter-spacing: -0.03em;
+}
+.project-link {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.projects-more {
+  display: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .project-cat {
+    background: rgb(20 22 26 / 0.85);
+    backdrop-filter: none;
+  }
+}
+
+/* ───────── Tools: bento tiles ───────── */
+
+.tools-head {
+  gap: 16px;
+}
+/* The head sits in a narrow column beside the tiles: a step smaller. */
+.tools-head h2 {
+  font-size: clamp(36px, 3.8vw, 60px);
+}
+.tools-head > p {
+  font-size: 17px;
+}
+.tools-next {
+  border-top: 0;
+  padding: 18px 20px;
+  border-radius: var(--r-md);
+  background: var(--surface);
+}
+.tool-sheet {
+  gap: clamp(10px, 1vw, 14px);
+  border: 0;
+  background: none;
+}
+.tool-cell,
+.tool-cell:nth-child(3n),
+.tool-cell:nth-last-child(-n + 3) {
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  padding: clamp(26px, 2.8vw, 40px) 14px clamp(20px, 2.2vw, 28px);
+  transition:
+    background-color 0.3s var(--ease),
+    transform 0.5s var(--spring);
+}
+.tool-cell:hover {
+  background-color: var(--surface-2);
+  transform: translateY(-3px);
+}
+.tool-cell:hover .tool-drawing {
+  transform: scale(1.08);
+}
+.tool-no {
+  display: none;
+}
+.tool-name {
+  font-size: clamp(16px, 1.35vw, 19px);
+  font-weight: 600;
+  font-stretch: 105%;
+  letter-spacing: -0.02em;
+}
+.tool-use {
+  font-size: 13px;
+  letter-spacing: -0.005em;
+}
+
+/* ───────── Contact / footer ───────── */
+
+.site-footer {
+  gap: clamp(12px, 1.4vw, 20px);
+  padding: clamp(12px, 1.4vw, 20px);
+  border-top: 0;
+}
+.footer-photo {
+  border-radius: var(--r-xl);
+}
+.footer-tick {
+  display: none;
+}
+.footer-content {
+  border-radius: var(--r-xl);
+  background: var(--surface);
+  padding-inline: clamp(24px, 4vw, 64px);
+}
+.contact-lead {
+  font-size: clamp(17px, 1.3vw, 20px);
+}
+.contact-steps li {
+  border-radius: var(--r-md);
+}
+.contact-step-no {
+  font-weight: 600;
+}
+.footer-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.footer-social :is(a, span) {
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
+  transition:
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.35s var(--spring);
+}
+.footer-social a:hover {
+  background: rgb(var(--text-rgb) / 0.14);
+}
+.footer-social a:active {
+  transform: scale(0.92);
+}
+.footer-info {
+  border-top-color: var(--hairline);
+}
+
+/* ───────── Project page ───────── */
+
+.gallery-btn,
+.pd-page {
+  border-radius: var(--r-lg);
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+.gallery-btn img {
+  transition: transform 0.9s var(--spring);
+}
+.gallery-btn:hover img {
+  transform: scale(1.03);
+}
+.lightbox-nav button,
+.lightbox-close {
+  border: 0;
+  border-radius: 999px;
+  background: rgb(var(--text-rgb) / 0.12);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* ───────── Entrances: content arrives as a material ───────── */
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  filter: blur(10px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.9s var(--spring),
+    filter 0.7s var(--ease);
+  transition-delay: calc(var(--i, 0) * 70ms);
+}
+.reveal-ready [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+/* Cards that are already visible keep their own hover/press transforms. */
+.reveal-ready .service[data-reveal].is-in,
+.reveal-ready .stat[data-reveal].is-in {
+  transition-delay: 0s;
+}
+
+/* ───────── Smaller screens ───────── */
+
+@media (max-width: 1023px) {
+  .about-panel,
+  .about-img {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .about-img {
+    aspect-ratio: 4 / 5;
+    max-height: 640px;
+  }
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .services {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .service:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .site h2 {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .service,
+  .service:first-child {
+    min-height: 0;
+  }
+  .projects-bar {
+    flex-wrap: wrap;
+  }
+  .rail-nav {
+    display: none;
+  }
+  .projects-rail .project,
+  .projects-rail .project:nth-child(n) {
+    width: 84vw;
+    aspect-ratio: 4 / 5;
+  }
+  .tool-sheet {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal] {
+    transform: none;
+    filter: none;
+    transition: opacity 0.3s linear;
+  }
+  .service:hover,
+  .tool-cell:hover,
+  .project-btn:hover .project-img,
+  .about-img:hover img,
+  .gallery-btn:hover img {
+    transform: none;
+  }
+  .project-tabs-thumb {
+    transition: none;
+  }
+}
