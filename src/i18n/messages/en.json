@@ -166,6 +166,10 @@
   "notFound": {
     "title": "Page not found",
     "body": "The page you are looking for does not exist or has moved.",
-    "home": "Back to the home page"
+    "home": "Back to the home page",
+    "eyebrow": "Error 404",
+    "plan": "Room not on the plan",
+    "projects": "See the projects",
+    "suggest": "Maybe you were looking for"
   }
 }

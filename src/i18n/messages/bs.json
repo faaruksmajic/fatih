@@ -166,6 +166,10 @@
   "notFound": {
     "title": "Stranica nije pronađena",
     "body": "Stranica koju tražite ne postoji ili je premještena.",
-    "home": "Nazad na početnu"
+    "home": "Nazad na početnu",
+    "eyebrow": "Greška 404",
+    "plan": "Prostorija nije u planu",
+    "projects": "Pogledaj projekte",
+    "suggest": "Možda ste tražili"
   }
 }

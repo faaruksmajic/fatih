@@ -166,6 +166,10 @@
   "notFound": {
     "title": "Seite nicht gefunden",
     "body": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
-    "home": "Zur Startseite"
+    "home": "Zur Startseite",
+    "eyebrow": "Fehler 404",
+    "plan": "Raum nicht im Plan",
+    "projects": "Projekte ansehen",
+    "suggest": "Vielleicht suchten Sie"
   }
 }

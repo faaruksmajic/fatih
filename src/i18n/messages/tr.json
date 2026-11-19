@@ -166,6 +166,10 @@
   "notFound": {
     "title": "Sayfa bulunamadı",
     "body": "Aradığınız sayfa mevcut değil veya taşınmış.",
-    "home": "Ana sayfaya dön"
+    "home": "Ana sayfaya dön",
+    "eyebrow": "Hata 404",
+    "plan": "Bu oda planda yok",
+    "projects": "Projeleri gör",
+    "suggest": "Belki bunu arıyordunuz"
   }
 }
