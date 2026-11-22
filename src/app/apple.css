@@ -694,16 +694,24 @@
 
 /* ───────── Project page ───────── */
 
-.gallery-btn,
 .pd-page {
   border-radius: var(--r-lg);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
-.gallery-btn img {
-  transition: transform 0.9s var(--spring);
+/* No mask here: it would clip the shadow that lifts each photo off the pile. */
+.pile-card {
+  border-radius: var(--r-lg);
 }
-.gallery-btn:hover img {
-  transform: scale(1.03);
+.pile-count {
+  font-stretch: 112%;
+}
+.pile-hint {
+  font-size: 15px;
+}
+.pile-nav button {
+  border: 0;
+  border-radius: 999px;
+  background: var(--surface-2);
 }
 .lightbox-nav button,
 .lightbox-close {
@@ -807,8 +815,7 @@
   .service:hover,
   .tool-cell:hover,
   .project-btn:hover .project-img,
-  .about-img:hover img,
-  .gallery-btn:hover img {
+  .about-img:hover img {
     transform: none;
   }
   .project-tabs-thumb {

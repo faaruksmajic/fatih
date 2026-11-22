@@ -1,7 +1,9 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import type { Category } from "@/lib/categories";
+import { IconAlert } from "../../icons";
 import { saveCategoryAction, type CategoryFormState } from "./actions";
 
 /** Bosnian first: it is required and every other language falls back to it. */
@@ -20,35 +22,47 @@ export function CategoryForm({ category }: { category?: Category }) {
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-4 max-w-xl">
+    <form action={formAction} className="a-form">
       {category && <input type="hidden" name="id" value={category.id} />}
-      {state.error && <p className="text-sm text-red-600">{state.error}</p>}
-      <p className="text-sm text-ink/60">
-        Empty translations show the Bosnian name on that language&apos;s page.
-      </p>
-      {FIELDS.map(({ lang, label, hint }) => (
-        <label key={lang} className="flex flex-col gap-1 text-sm">
-          <span>
-            {label} <span className="text-ink/50">· {hint}</span>
-          </span>
-          <input
-            name={lang}
-            defaultValue={category?.names[lang] ?? ""}
-            required={lang === "bs"}
-            maxLength={80}
-            dir={lang === "ar" ? "rtl" : undefined}
-            placeholder={lang === "bs" ? "npr. Tehnički crteži" : undefined}
-            className="border border-ink/20 px-3 py-2"
-          />
-        </label>
-      ))}
-      <button
-        type="submit"
-        disabled={pending}
-        className="bg-ink text-paper font-semibold px-4 py-2 min-h-11 disabled:opacity-50"
-      >
-        {pending ? "Saving..." : "Save category"}
-      </button>
+      {state.error && (
+        <p className="a-banner" role="alert">
+          <IconAlert />
+          {state.error}
+        </p>
+      )}
+      <section className="a-group" aria-labelledby="cf-names">
+        <h2 id="cf-names" className="a-group-title">
+          Name
+        </h2>
+        <p className="a-group-note">Empty translations show the Bosnian name on that language&apos;s page.</p>
+        {FIELDS.map(({ lang, label, hint }) => (
+          <label key={lang} className="a-field">
+            <span className="a-label">
+              {label} <small>{hint}</small>
+            </span>
+            <input
+              name={lang}
+              defaultValue={category?.names[lang] ?? ""}
+              required={lang === "bs"}
+              maxLength={80}
+              dir={lang === "ar" ? "rtl" : undefined}
+              placeholder={lang === "bs" ? "npr. Tehnički crteži" : undefined}
+              className="a-input"
+            />
+          </label>
+        ))}
+      </section>
+      <div className="a-savebar">
+        <span className="a-savebar-status">{category ? "Editing category" : "New category"}</span>
+        <span className="a-savebar-actions">
+          <Link href="/categories" className="a-btn a-btn-plain">
+            Cancel
+          </Link>
+          <button type="submit" disabled={pending} className="a-btn a-btn-primary">
+            {pending ? "Saving…" : "Save category"}
+          </button>
+        </span>
+      </div>
     </form>
   );
 }

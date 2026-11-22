@@ -1,3 +1,4 @@
+import { PageHead } from "../../../../PageHead";
 import { notFound } from "next/navigation";
 import { getCategory } from "@/db/queries";
 import { CategoryForm } from "../../CategoryForm";
@@ -10,9 +11,9 @@ export default async function EditCategoryPage({ params }: { params: Promise<{ i
   if (!category) notFound();
 
   return (
-    <div>
-      <h1 className="font-display text-2xl mb-6">EDIT CATEGORY</h1>
+    <>
+      <PageHead title={category.names.bs} back={{ href: "/categories", label: "Categories" }} />
       <CategoryForm category={category} />
-    </div>
+    </>
   );
 }

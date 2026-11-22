@@ -1,10 +1,11 @@
+import { PageHead } from "../../../PageHead";
 import { CategoryForm } from "../CategoryForm";
 
 export default function NewCategoryPage() {
   return (
-    <div>
-      <h1 className="font-display text-2xl mb-6">NEW CATEGORY</h1>
+    <>
+      <PageHead title="New category" back={{ href: "/categories", label: "Categories" }} />
       <CategoryForm />
-    </div>
+    </>
   );
 }

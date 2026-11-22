@@ -161,7 +161,10 @@
     "label": "{title} gallery",
     "prev": "Previous image",
     "next": "Next image",
-    "close": "Close"
+    "close": "Close",
+    "openAll": "Open gallery",
+    "position": "Image {n} of {count}",
+    "hint": "Swipe to flip through, tap to open."
   },
   "notFound": {
     "title": "Page not found",

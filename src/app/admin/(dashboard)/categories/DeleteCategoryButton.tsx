@@ -1,5 +1,7 @@
 "use client";
 
+import { IconTrash } from "../../icons";
+
 export function DeleteCategoryButton({
   action,
   name,
@@ -14,8 +16,8 @@ export function DeleteCategoryButton({
         if (!confirm(`Delete the category "${name}"?`)) e.preventDefault();
       }}
     >
-      <button type="submit" className="text-sm text-red-600 underline min-h-10 px-1">
-        Delete
+      <button type="submit" className="a-icon-btn is-danger" aria-label={`Delete ${name}`}>
+        <IconTrash />
       </button>
     </form>
   );

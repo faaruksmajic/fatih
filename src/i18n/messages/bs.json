@@ -161,7 +161,10 @@
     "label": "Galerija: {title}",
     "prev": "Prethodna slika",
     "next": "Sljedeća slika",
-    "close": "Zatvori"
+    "close": "Zatvori",
+    "openAll": "Otvori galeriju",
+    "position": "Slika {n} od {count}",
+    "hint": "Prevuci da listaš, dodirni da otvoriš."
   },
   "notFound": {
     "title": "Stranica nije pronađena",

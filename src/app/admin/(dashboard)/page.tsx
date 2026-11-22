@@ -1,48 +1,111 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProjects } from "@/db/queries";
+import { getCategories, getCvUrl, getProjects } from "@/db/queries";
+import { SITE_URL } from "@/lib/seo";
+import { IconExternal, IconPhoto, IconPlus } from "../icons";
 import { deleteProjectAction } from "./actions";
 import { DeleteProjectButton } from "./DeleteProjectButton";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminProjectsPage() {
-  const allProjects = await getProjects();
+  const [allProjects, categories, cvUrl] = await Promise.all([
+    getProjects(),
+    getCategories(),
+    getCvUrl(),
+  ]);
 
   return (
-    <div>
-      <div className="flex items-center justify-between gap-4 mb-6">
-        <h1 className="font-display text-2xl">PROJECTS</h1>
-        <Link href="/projects/new" className="bg-ink text-paper px-4 py-2 min-h-11 flex items-center text-sm font-semibold shrink-0">
-          + New Project
+    <>
+      <header className="a-head">
+        <div>
+          <h1 className="a-title">Projects</h1>
+          <p className="a-sub">Shown on the home page in this order. Open one to edit it.</p>
+        </div>
+        <Link href="/projects/new" className="a-btn a-btn-primary">
+          <IconPlus />
+          New project
+        </Link>
+      </header>
+
+      {/* Status at a glance: what is on the site right now. */}
+      <div className="a-stats">
+        <div className="a-stat">
+          <span className="a-stat-value">{allProjects.length}</span>
+          <span className="a-stat-label">{allProjects.length === 1 ? "Project" : "Projects"}</span>
+        </div>
+        <Link href="/categories" className="a-stat">
+          <span className="a-stat-value">{categories.length}</span>
+          <span className="a-stat-label">{categories.length === 1 ? "Category" : "Categories"}</span>
+        </Link>
+        <Link href="/cv" className="a-stat">
+          <span className={`a-stat-value ${cvUrl ? "a-stat-ok" : "a-stat-missing"}`}>
+            {cvUrl ? "Live" : "Missing"}
+          </span>
+          <span className="a-stat-label">CV</span>
         </Link>
       </div>
+
       {allProjects.length === 0 ? (
-        <p className="text-ink/60">No projects yet.</p>
+        <div className="a-empty">
+          <IconPhoto />
+          <p>No projects yet. Add the first one and it appears on the home page.</p>
+          <Link href="/projects/new" className="a-btn a-btn-primary">
+            <IconPlus />
+            New project
+          </Link>
+        </div>
       ) : (
-        <ul className="flex flex-col gap-4">
+        <ul className="a-grid">
           {allProjects.map((project) => {
-            const deleteThisProject = deleteProjectAction.bind(null, project.id);
+            const edit = `/projects/${project.id}/edit`;
+            const photos = project.images.length + 1;
             return (
-              <li key={project.id} className="flex flex-wrap items-center gap-x-4 gap-y-2 border border-ink/10 p-3 sm:p-4">
-                <div className="relative w-20 h-14 sm:w-24 sm:h-16 shrink-0">
-                  <Image src={project.coverImage} alt={project.title} fill className="object-cover" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold truncate">{project.title}</p>
-                  <p className="text-sm text-ink/60">{project.categoryNames?.bs ?? `${project.category} (no category linked)`}</p>
-                </div>
-                <div className="flex items-center gap-4 w-full justify-end sm:w-auto">
-                  <Link href={`/projects/${project.id}/edit`} className="text-sm underline min-h-10 flex items-center px-1">
-                    Edit
-                  </Link>
-                  <DeleteProjectButton action={deleteThisProject} projectTitle={project.title} />
+              <li key={project.id} className="a-card">
+                <Link href={edit} className="a-card-img" aria-label={`Edit ${project.title}`}>
+                  <Image
+                    src={project.coverImage}
+                    alt=""
+                    fill
+                    sizes="(min-width: 900px) 320px, 100vw"
+                    className="object-cover"
+                  />
+                  <span className="a-card-badge">
+                    {photos} {photos === 1 ? "photo" : "photos"}
+                  </span>
+                </Link>
+                <div className="a-card-body">
+                  <div className="a-card-text">
+                    <Link href={edit} className="a-card-title">
+                      {project.title}
+                    </Link>
+                    {project.categoryNames?.bs ? (
+                      <p className="a-card-meta">{project.categoryNames.bs}</p>
+                    ) : (
+                      <p className="a-card-meta is-warning">No category linked</p>
+                    )}
+                  </div>
+                  <div className="a-card-actions">
+                    <a
+                      href={`${SITE_URL}/bs/projects/${project.id}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="a-icon-btn"
+                      aria-label={`View ${project.title} on the site`}
+                    >
+                      <IconExternal />
+                    </a>
+                    <DeleteProjectButton
+                      action={deleteProjectAction.bind(null, project.id)}
+                      projectTitle={project.title}
+                    />
+                  </div>
                 </div>
               </li>
             );
           })}
         </ul>
       )}
-    </div>
+    </>
   );
 }

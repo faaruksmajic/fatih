@@ -161,7 +161,10 @@
     "label": "Galerie: {title}",
     "prev": "Vorheriges Bild",
     "next": "Nächstes Bild",
-    "close": "Schließen"
+    "close": "Schließen",
+    "openAll": "Galerie öffnen",
+    "position": "Bild {n} von {count}",
+    "hint": "Wischen zum Blättern, tippen zum Öffnen."
   },
   "notFound": {
     "title": "Seite nicht gefunden",

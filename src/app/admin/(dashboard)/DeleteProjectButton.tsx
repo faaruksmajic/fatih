@@ -1,5 +1,7 @@
 "use client";
 
+import { IconTrash } from "../icons";
+
 export function DeleteProjectButton({
   action,
   projectTitle,
@@ -16,8 +18,8 @@ export function DeleteProjectButton({
         }
       }}
     >
-      <button type="submit" className="text-sm text-red-600 underline min-h-10 px-1">
-        Delete
+      <button type="submit" className="a-icon-btn is-danger" aria-label={`Delete ${projectTitle}`}>
+        <IconTrash />
       </button>
     </form>
   );

@@ -1,3 +1,4 @@
+import { PageHead } from "../../PageHead";
 import { getCvUrl } from "@/db/queries";
 import { CvUploadForm } from "./CvUploadForm";
 
@@ -7,9 +8,9 @@ export default async function CvPage() {
   const currentCvUrl = await getCvUrl();
 
   return (
-    <div>
-      <h1 className="font-display text-2xl mb-6">CV</h1>
+    <>
+      <PageHead title="CV" sub="The PDF behind the “Download CV” button on the site." />
       <CvUploadForm currentCvUrl={currentCvUrl} />
-    </div>
+    </>
   );
 }

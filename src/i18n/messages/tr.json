@@ -161,7 +161,10 @@
     "label": "{title} galerisi",
     "prev": "Önceki görsel",
     "next": "Sonraki görsel",
-    "close": "Kapat"
+    "close": "Kapat",
+    "openAll": "Galeriyi aç",
+    "position": "{count} görselden {n}.",
+    "hint": "Gezmek için kaydır, açmak için dokun."
   },
   "notFound": {
     "title": "Sayfa bulunamadı",

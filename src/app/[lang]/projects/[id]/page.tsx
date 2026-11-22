@@ -215,12 +215,17 @@ export default async function ProjectPage({
         <ProjectGallery images={gallery} title={project.title} t={t.gallery} />
       </section>
 
-      {/* PREV / NEXT */}
+      {/* PREV / NEXT: labelled, so these read as other projects, not more images. */}
       {prev && next && (
-        <nav className="pd-pager container" aria-label={p.more}>
-          <PagerLink project={prev} label={p.prev} dir="prev" lang={lang} />
-          <PagerLink project={next} label={p.next} dir="next" lang={lang} />
-        </nav>
+        <section className="pd-more container" aria-labelledby="pd-more-title">
+          <h2 id="pd-more-title" className="pd-more-title">
+            {p.more}
+          </h2>
+          <nav className="pd-pager" aria-label={p.more}>
+            <PagerLink project={prev} label={p.prev} dir="prev" lang={lang} />
+            <PagerLink project={next} label={p.next} dir="next" lang={lang} />
+          </nav>
+        </section>
       )}
 
       <SiteFooter lang={lang} t={t} />

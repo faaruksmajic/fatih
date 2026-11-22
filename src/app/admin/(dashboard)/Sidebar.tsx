@@ -2,11 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AfMark } from "@/components/AfMark";
+import { SITE_URL } from "@/lib/seo";
+import { IconDoc, IconExternal, IconLogout, IconProjects, IconTag } from "../icons";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Projects" },
-  { href: "/categories", label: "Categories" },
-  { href: "/cv", label: "CV" },
+  { href: "/", label: "Projects", Icon: IconProjects },
+  { href: "/categories", label: "Categories", Icon: IconTag },
+  { href: "/cv", label: "CV", Icon: IconDoc },
 ];
 
 /** "/" is active on the project pages too; the rest match their own sub-pages. */
@@ -16,40 +19,60 @@ function isActive(pathname: string, href: string) {
 }
 
 /**
- * Phones: a sticky top bar with the brand, log out and a row of tabs.
- * From md up: the dark sidebar on the left.
+ * From 900px up: a translucent sidebar the page scrolls beside.
+ * Phones: a sticky top bar with the brand, and the sections as a segmented control.
  */
-export function Sidebar({ logout }: { logout: React.ReactNode }) {
+export function Sidebar({ logoutAction }: { logoutAction: () => Promise<void> }) {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-0 z-10 bg-charcoal text-paper md:static md:w-56 md:shrink-0 md:min-h-screen md:flex md:flex-col md:justify-between md:px-6 md:py-8">
-      <div className="md:flex md:flex-col md:gap-10">
-        <div className="flex items-center justify-between px-4 pt-3 md:p-0">
-          <Link href="/" className="font-display text-lg">
-            FATIH ADMIN
-          </Link>
-          <div className="md:hidden">{logout}</div>
+    <aside className="a-side">
+      <div className="a-side-head">
+        <Link href="/" className="a-brand">
+          <AfMark line={18} />
+          <span className="a-brand-name">
+            Fatih Škrijelj
+            <small>Backoffice</small>
+          </span>
+        </Link>
+        <div className="a-top-actions">
+          <a href={SITE_URL} target="_blank" rel="noreferrer" className="a-icon-btn" aria-label="View site">
+            <IconExternal />
+          </a>
+          <form action={logoutAction}>
+            <button type="submit" className="a-icon-btn" aria-label="Log out">
+              <IconLogout />
+            </button>
+          </form>
         </div>
-        <nav className="flex gap-1 overflow-x-auto px-2 py-2 md:flex-col md:p-0">
-          {NAV_ITEMS.map((item) => {
-            const active = isActive(pathname, item.href);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className={`shrink-0 text-sm px-3 py-2 min-h-10 flex items-center transition-colors ${
-                  active ? "bg-paper text-ink font-semibold" : "text-paper/70 hover:text-paper"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
       </div>
-      <div className="hidden md:block">{logout}</div>
+
+      <nav className="a-nav" aria-label="Sections">
+        {NAV_ITEMS.map(({ href, label, Icon }) => (
+          <Link
+            key={href}
+            href={href}
+            aria-current={isActive(pathname, href) ? "page" : undefined}
+            className="a-nav-link"
+          >
+            <Icon />
+            {label}
+          </Link>
+        ))}
+      </nav>
+
+      <div className="a-side-foot">
+        <a href={SITE_URL} target="_blank" rel="noreferrer" className="a-nav-link">
+          <IconExternal />
+          View site
+        </a>
+        <form action={logoutAction}>
+          <button type="submit" className="a-nav-link">
+            <IconLogout />
+            Log out
+          </button>
+        </form>
+      </div>
     </aside>
   );
 }

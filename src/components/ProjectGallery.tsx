@@ -27,11 +27,18 @@ type Motion = {
   p: number;
 };
 
+/** Cards of the pile that are drawn; the last one waits hidden to slide in. */
+const PILE = 4;
+/** Resting tilt of each card in the pile, from the top card down. */
+const TILT = [0, -3.5, 2.5, 0];
+
 /**
- * Every image of a project in an editorial grid. Opening one grows it out of
- * its thumbnail; in the viewer images follow the finger 1:1, flick to the next
- * one with momentum, and a pull down sends the image back to where it came
- * from. Every motion is a spring and can be grabbed mid-flight.
+ * A project's images as one pile of photos, so the gallery reads as a single
+ * object rather than a wall of pictures. Flick the top photo away and it goes
+ * to the back of the pile; tap the pile and the photo grows out of it into a
+ * full-screen viewer. In the viewer images follow the finger 1:1, flick to
+ * the next one with momentum, and a pull down puts the photo back on the
+ * pile. Every motion is a spring and can be grabbed mid-flight.
  */
 export function ProjectGallery({
   images,
@@ -43,7 +50,8 @@ export function ProjectGallery({
   t: Dictionary["gallery"];
 }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
+  const pileRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
@@ -133,12 +141,12 @@ export function ProjectGallery({
     [count, run, settlePending],
   );
 
-  /** Measure the thumbnail of image `i` against the full-screen stage. */
-  const measureOrigin = (i: number) => {
+  /** Measure the top photo of the pile against the full-screen stage. */
+  const measureOrigin = () => {
     const stage = stageRef.current;
-    const thumb = listRef.current?.children[i]?.querySelector("button");
+    const thumb = pileRef.current?.querySelector<HTMLElement>(".pile-card[data-top]");
     if (!stage || !thumb) return;
-    // Bring the thumbnail into view behind the dialog, so "back" lands somewhere you can see.
+    // Bring the pile into view behind the dialog, so "back" lands somewhere you can see.
     const r = thumb.getBoundingClientRect();
     if (r.bottom < 0 || r.top > window.innerHeight) {
       thumb.scrollIntoView({ block: "center", behavior: "instant" });
@@ -165,8 +173,9 @@ export function ProjectGallery({
     indexRef.current = i;
     flushSync(() => setIndex(i));
     m.current = { x: 0, y: 0, p: 0 };
+    setOpen(true);
     if (!dialog.open) dialog.showModal();
-    measureOrigin(i);
+    measureOrigin();
     render();
     run("p", 1, { damping: 1, response: 0.4, precision: 0.002 });
   };
@@ -181,7 +190,7 @@ export function ProjectGallery({
       springs.current.x?.stop();
       // Re-anchor to the thumbnail of the image being shown now.
       const { p } = m.current;
-      measureOrigin(indexRef.current);
+      measureOrigin();
       m.current.p = p;
       run("x", 0, { damping: 1, response: 0.35 });
       run("y", 0, { damping: 0.85, response: 0.35, velocity: velocityY });
@@ -331,6 +340,112 @@ export function ProjectGallery({
     if (m.current.y !== 0) run("y", 0, { damping: 1, response: 0.35 });
   };
 
+  // ── The pile: flick the top photo to the back, tap to open ──
+  const fling = useRef<Spring | null>(null);
+  const flingX = useRef(0);
+  const pileDrag = useRef<{ id: number; px: number; py: number; x0: number; axis: "x" | "y" | null } | null>(null);
+  /** Set when a press turned into a flick, so its click does not open the viewer. */
+  const swallowClick = useRef(false);
+
+  const topCard = () => pileRef.current?.querySelector<HTMLElement>(".pile-card[data-top]") ?? null;
+
+  /** The top photo follows the finger and tilts toward where it is being thrown. */
+  const renderFling = () => {
+    const card = topCard();
+    const w = pileRef.current?.clientWidth || 1;
+    if (!card) return;
+    const x = flingX.current;
+    card.style.setProperty("--dx", `${x}px`);
+    card.style.setProperty("--drot", `${(x / w) * 10}deg`);
+  };
+
+  /** Hand the photo back to the pile's CSS so it eases into its new place. */
+  const releaseCard = (card = topCard()) => {
+    if (!card) return;
+    card.classList.remove("is-moving");
+    card.style.removeProperty("--dx");
+    card.style.removeProperty("--drot");
+    flingX.current = 0;
+  };
+
+  /** Move through the pile by `delta` photos without opening the viewer. */
+  const shift = (delta: number) => {
+    if (count < 2) return;
+    fling.current?.stop();
+    const card = topCard();
+    const next = (indexRef.current + delta + count) % count;
+    indexRef.current = next;
+    // Re-order and release in the same frame, so the photo eases from where
+    // it was thrown into its new place instead of snapping back on top first.
+    flushSync(() => setIndex(next));
+    releaseCard(card);
+  };
+
+  const onPilePointerDown = (e: React.PointerEvent) => {
+    if (e.button !== 0) return;
+    swallowClick.current = false;
+    // Catch a photo that is still flying away, right where it is.
+    fling.current?.stop();
+    tracker.current.reset();
+    tracker.current.add(e.clientX, e.clientY);
+    pileDrag.current = { id: e.pointerId, px: e.clientX, py: e.clientY, x0: flingX.current, axis: null };
+  };
+
+  const onPilePointerMove = (e: React.PointerEvent) => {
+    const d = pileDrag.current;
+    if (!d || d.id !== e.pointerId) return;
+    tracker.current.add(e.clientX, e.clientY);
+    const dx = e.clientX - d.px;
+    const dy = e.clientY - d.py;
+    if (!d.axis) {
+      if (Math.hypot(dx, dy) < SLOP) return;
+      d.axis = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      // Vertical belongs to the page scroll.
+      if (d.axis === "y") {
+        pileDrag.current = null;
+        return;
+      }
+      swallowClick.current = true;
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
+      topCard()?.classList.add("is-moving");
+    }
+    let x = d.x0 + dx;
+    if (count < 2) x = rubberband(x, pileRef.current?.clientWidth ?? 1);
+    flingX.current = x;
+    renderFling();
+  };
+
+  const onPilePointerUp = (e: React.PointerEvent) => {
+    const d = pileDrag.current;
+    if (!d || d.id !== e.pointerId) return;
+    pileDrag.current = null;
+    if (d.axis !== "x") return;
+    const vx = tracker.current.velocity().x;
+    const w = pileRef.current?.clientWidth ?? 1;
+    // Decide from where the throw is going, not where the finger let go.
+    const projected = flingX.current + project(vx);
+    const away = count > 1 && Math.abs(projected) > w * 0.35;
+    const target = away ? Math.sign(projected) * w * 1.25 : 0;
+    fling.current = spring(
+      flingX.current,
+      target,
+      { damping: away ? 1 : 0.8, response: away ? 0.3 : 0.35, velocity: vx, precision: 0.5 },
+      (v) => {
+        flingX.current = v;
+        renderFling();
+      },
+      // Off the pile: it slides in at the back and the next photo comes up.
+      () => (away ? shift(1) : releaseCard()),
+    );
+  };
+
+  const pile = Array.from({ length: Math.min(PILE, count) }, (_, k) => ({
+    k,
+    i: (index + k) % count,
+  }));
+
   const slots =
     count > 1
       ? [-1, 0, 1].map((k) => {
@@ -342,29 +457,76 @@ export function ProjectGallery({
 
   return (
     <>
-      <ul className="gallery" ref={listRef}>
-        {images.map((src, i) => (
-          <li key={src} className="gallery-item" data-reveal>
-            <button
-              type="button"
-              className="gallery-btn"
-              onClick={() => openAt(i)}
-              aria-label={fmt(t.open, { n: i + 1, count })}
+      <div className="pile-wrap" data-reveal>
+        <button
+          ref={pileRef}
+          type="button"
+          className="pile"
+          data-open={open || undefined}
+          aria-label={fmt(t.open, { n: index + 1, count })}
+          onClick={() => {
+            if (swallowClick.current) {
+              swallowClick.current = false;
+              return;
+            }
+            openAt(indexRef.current);
+          }}
+          onPointerDown={onPilePointerDown}
+          onPointerMove={onPilePointerMove}
+          onPointerUp={onPilePointerUp}
+          onPointerCancel={onPilePointerUp}
+          onDragStart={(e) => e.preventDefault()}
+        >
+          {pile.map(({ k, i }) => (
+            <span
+              key={i}
+              className="pile-card"
+              data-top={k === 0 || undefined}
+              data-waiting={k === PILE - 1 || undefined}
+              style={{
+                ["--k" as string]: k,
+                ["--rot" as string]: `${TILT[k]}deg`,
+                zIndex: PILE - k,
+              }}
             >
               <Image
-                src={src}
-                alt={fmt(t.imageAlt, { title, n: i + 1 })}
+                src={images[i]}
+                alt={k === 0 ? fmt(t.imageAlt, { title, n: i + 1 }) : ""}
                 fill
-                sizes="(min-width: 681px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 60vw, 100vw"
                 className="object-cover"
+                draggable={false}
               />
-              <span className="gallery-no" aria-hidden>
-                {String(i + 1).padStart(2, "0")}
-              </span>
+            </span>
+          ))}
+        </button>
+
+        <div className="pile-meta">
+          <p className="pile-count" aria-live="polite">
+            <span className="sr-only">{fmt(t.position, { n: index + 1, count })}</span>
+            <span aria-hidden>
+              {String(index + 1).padStart(2, "0")}
+              <span className="pile-count-total"> / {String(count).padStart(2, "0")}</span>
+            </span>
+          </p>
+          {count > 1 && <p className="pile-hint">{t.hint}</p>}
+          <div className="pile-actions">
+            <button type="button" className="btn btn-solid" onClick={() => openAt(indexRef.current)}>
+              {t.openAll}
             </button>
-          </li>
-        ))}
-      </ul>
+            {count > 1 && (
+              <span className="pile-nav">
+                <button type="button" className="lightbox-prev" onClick={() => shift(-1)} aria-label={t.prev}>
+                  ←
+                </button>
+                <button type="button" className="lightbox-next" onClick={() => shift(1)} aria-label={t.next}>
+                  →
+                </button>
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
 
       <dialog
         ref={dialogRef}
@@ -375,6 +537,7 @@ export function ProjectGallery({
         }}
         onClose={() => {
           stopAll();
+          setOpen(false);
           closing.current = false;
         }}
       >

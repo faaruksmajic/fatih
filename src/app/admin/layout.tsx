@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import "./admin.css";
 import { fontVariables } from "@/app/fonts";
 
 export const metadata: Metadata = {
-  title: "Admin — Fatih Škrijelj",
+  title: "Backoffice — Fatih Škrijelj",
   robots: { index: false, follow: false },
 };
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function AdminRootLayout({ children }: LayoutProps<"/admin">) {
   return (
     <html lang="en" className={`${fontVariables} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-paper text-ink">{children}</body>
+      <body className="min-h-full">{children}</body>
     </html>
   );
 }
