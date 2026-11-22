@@ -9,9 +9,6 @@ import { fmt, localePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { VelocityTracker, project, rubberband, spring, type Spring } from "@/lib/motion";
 
-/** Cards that play the scroll-in entrance on first render. */
-const REVEALED = 3;
-
 /**
  * Projects as a horizontal rail of large cards, filtered by a segmented
  * control. Touch scrolls natively (with the platform's own momentum); a mouse
@@ -288,6 +285,9 @@ export function ProjectGrid({
       <div
         ref={railRef}
         className="projects-rail"
+        // The rail reveals as one piece: cards scrolled out sideways never
+        // intersect the viewport, so a per-card reveal would leave them hidden.
+        data-reveal
         onScroll={updateEdges}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -296,12 +296,10 @@ export function ProjectGrid({
         onDragStart={(e) => e.preventDefault()}
       >
         <div ref={trackRef} className="projects">
-          {projects.map((project, i) => (
+          {projects.map((project) => (
             <article
               key={`${active ?? "all"}-${project.id}`}
               className={`project ${filtered ? "is-swapped" : ""}`}
-              {...(i < REVEALED && !filtered ? { "data-reveal": true } : {})}
-              style={{ ["--i" as string]: Math.min(i, REVEALED) }}
             >
               <Link
                 href={localePath(lang, `/projects/${project.id}`)}
